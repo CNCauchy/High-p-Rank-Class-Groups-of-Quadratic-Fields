@@ -1,0 +1,249 @@
+NO-LOG terminal source-corrections independent replay
+=====================================================
+
+Scope and frozen Git boundary
+-----------------------------
+Date: 2026-08-13 Asia/Shanghai
+Expected base: 157331ec86dc64dbf0f99f6a545ed1be74926800
+
+$ git rev-parse HEAD
+157331ec86dc64dbf0f99f6a545ed1be74926800
+
+$ git branch --show-current
+deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-con/no-log-terminal-source-corre-e9ab0b7646
+
+No web request, new-paper search, curve search, or Lean command was run. The
+ST and KL originals were already present in the local temporary evidence cache
+from the prior independent review; BLT is the frozen project PDF.
+
+Original-source identities
+--------------------------
+$ shasum -a 256 /tmp/no-log-five-interface.uhK38L/stewart-top.pdf \
+    /tmp/no-log-five-interface.uhK38L/kulkarni-levin-arxiv.pdf \
+    'Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf'
+96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97  /tmp/no-log-five-interface.uhK38L/stewart-top.pdf
+26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae  /tmp/no-log-five-interface.uhK38L/kulkarni-levin-arxiv.pdf
+1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b  Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf
+
+Known byte/page identities:
+  Stewart--Top: 3510691 bytes, 31 pages, printed pp.943--973.
+  Kulkarni--Levin: 161972 bytes, 9 pages, arXiv:2111.15582v1.
+  BLT: 212239 bytes, 8 pages, Ramanujan J. 68 (2025), article 26.
+
+Deterministic page extraction
+-----------------------------
+$ evidence_dir=$(mktemp -d /tmp/no-log-terminal-pages.XXXXXX)
+$ for p in 6 7 8; do
+    gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=txtwrite \
+      -dFirstPage=$p -dLastPage=$p -sOutputFile="$evidence_dir/kl-$p.txt" \
+      /tmp/no-log-five-interface.uhK38L/kulkarni-levin-arxiv.pdf
+  done
+$ for p in 6 7 9 10 11; do
+    gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=txtwrite \
+      -dFirstPage=$p -dLastPage=$p -sOutputFile="$evidence_dir/st-$p.txt" \
+      /tmp/no-log-five-interface.uhK38L/stewart-top.pdf
+  done
+$ gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=txtwrite \
+    -dFirstPage=7 -dLastPage=7 -sOutputFile="$evidence_dir/blt-7.txt" \
+    'Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf'
+
+Anchors recovered from those pages:
+  KL p.6 Lemma 3.1:
+    N is any integer with N>1/epsilon;
+    psi(t)=(1-Nt)/(1+Nt), psi^{-1}(positive)=(-1/N,1/N);
+    because psi^{-1}(1)=0, take A=B=1 and only then choose M with
+    sufficiently high powers of the finite primes.
+  KL p.6 Theorem 1.2 proof:
+    tau=psi^{-1}; f(tau(X/Y))=F(X,Y)R(X,Y)^2;
+    T(x) is distinct squarefree t and one witness (a_t,b_t) is selected per t.
+  KL p.7:
+    alpha=phi(P)=tau(a_t/b_t), Q(P)=Q(sqrt(t));
+    |R(c^-1 x)| >= |T'(c^-1 x)|-2|Omega(x)|.
+  KL p.8:
+    |Disc Q(P)|<=c' B^(2g+2), c' depends on fixed f,M,N;
+    final paragraph chooses a fixed negative interval for imaginary fields.
+  ST printed p.948 (PDF p.6):
+    w is maximal in the fixed A,B mod M class before any height variable;
+    P_k counts pairs and R_k counts represented k-free integers.
+  ST printed p.951 (PDF p.9):
+    optional SL2 step is used only when leading/trailing coefficient vanishes;
+    printed new class uses the forward L action.
+  ST printed pp.952--953 (PDF pp.10--11):
+    T is a positive-box pair set; (10) is a pair lower bound;
+    (11)--(15) imply C21*u^2 distinct F-values with constants depending
+    only on F,M,k; the last line nevertheless prints R_k>=|T|.
+  BLT p.7:
+    C0:y^2=(5x+7)(128x^4+549x^3+1007x^2+936x+368);
+    published Magma input Jac(C0)(Q)_tors=Z/5Z x Z/10Z.
+
+Local factor-pattern replay:
+$ gp -q <<'GP'
+q=128*x^4+549*x^3+1007*x^2+936*x+368;
+print(factor(q));
+print(poldisc((5*x+7)*q));
+GP
+Mat([128*x^4 + 549*x^3 + 1007*x^2 + 936*x + 368, 1])
+625203093250768896000
+
+Thus the quartic is Q-irreducible and the odd quintic is squarefree; adjoining
+the infinity branch gives the projective factor-degree pattern 1+1+4 used in
+the review. PGL2 change of variables preserves those projective degrees.
+
+Prior independent counterexample boundary
+-----------------------------------------
+$ git show c9f980b13d9d818bbf978fe693ffa017e392fb4f:mathematics/worker/no-log-adversarial-five-interface-review.md
+$ git show c9f980b13d9d818bbf978fe693ffa017e392fb4f:mathematics/worker/no-log-adversarial-five-interface-replay.txt
+
+The prior review's pair/value and projective-collision tests were rerun and
+extended below. Its outcome was CANDIDATE; this review does not inherit that
+verdict without the new six-interface checks.
+
+Executable adversarial checks
+-----------------------------
+$ python3 - <<'PY'
+from fractions import Fraction
+from math import isqrt
+
+def q(u):
+    return 128*u**4 + 549*u**3 + 1007*u**2 + 936*u + 368
+def g(u):
+    return (5*u+7)*q(u)
+
+# Interface 1: a genuinely forbidden large N exists, but it is finite/avoidable.
+# Here -c+1/23=-7/5 is the C0 linear branch root.
+c = Fraction(7,5) + Fraction(1,23)
+forbidden=[]
+for n in range(21,201):
+    if g(-c+Fraction(1,n)) == 0 or g(-c-Fraction(1,n)) == 0:
+        forbidden.append(n)
+print('endpoint_test_c', c)
+print('endpoint_forbidden_N_21_200', forbidden)
+print('endpoint_first_allowed_after_20',
+      next(n for n in range(21,201) if n not in forbidden))
+assert forbidden == [23]
+
+# Interface 2: ST's printed forward residue class is wrong.
+mod=5; A,B=0,1
+# L=[[1,1],[0,1]], F=X, F_L(a,b)=a+b.
+Ap,Bp=(A+B)%mod,B%mod
+print('sl2_printed_new_class', (Ap,Bp))
+print('sl2_original_F_residue', A%mod)
+print('sl2_printed_FL_residue', (Ap+Bp)%mod)
+assert (Ap+Bp)%mod != A%mod
+Ai,Bi=(A-B)%mod,B%mod       # L^{-1}(A,B)
+print('sl2_inverse_new_class', (Ai,Bi))
+print('sl2_inverse_FL_residue', (Ai+Bi)%mod)
+assert (Ai+Bi)%mod == A%mod
+
+# Interface 3: many pairs can give one squarefree value.
+def squarefree_part(n):
+    sign=-1 if n<0 else 1
+    n=abs(n); t=1; p=2
+    while p*p<=n:
+        e=0
+        while n%p==0:
+            n//=p; e+=1
+        if e%2: t*=p
+        p+=1
+    return sign*t*n
+vals=[squarefree_part(n**6+n**6) for n in range(1,21)]
+print('diagonal_pairs',len(vals),'distinct_t',sorted(set(vals)))
+assert vals == [2]*20
+
+# Interface 4: degree six forces a square ratio on one projective ray.
+for m,n in [(2,1),(3,2),(5,3)]:
+    assert Fraction(m,n)**6 == Fraction(m**3,n**3)**2
+sqfree=[z for z in range(-80,81) if z and all(
+    z%(p*p) for p in range(2,isqrt(abs(z))+1)
+    if all(p%d for d in range(2,isqrt(p)+1)))]
+for i,t in enumerate(sqfree):
+    for u in sqfree[i+1:]:
+        if t*u>0:
+            z=abs(t*u)
+            assert isqrt(z)**2 != z
+print('projective_or_field_collision_found',False)
+
+# Interface 5: minimal point-to-field collision has exactly two conjugates.
+print('degree_two_fiber_points', ['+sqrt(t)','-sqrt(t)'])
+print('degree_two_fiber_distinct_fields',1)
+
+# Interface 6: raw C0 branch sextic Y*g(X/Y) has a fixed H^6 norm bound.
+# First, class-wise w cannot be replaced by a global fixed-square value.
+def v2(n):
+    e=0
+    while n and n%2==0:
+        n//=2; e+=1
+    return e
+assert (0**6+1**6) == 1               # class (0,1) mod 2 has w=1
+assert min(v2(a**6+b**6) for a in range(2,10,2)
+           for b in range(2,10,2)) == 6
+print('class_01_mod2_fixed_w',1)
+print('class_00_mod2_fixed_2primary_w',8)
+
+# Passing from a real H to floor(H) keeps an all-large-H quadratic bound.
+for twice_H in range(4,401):
+    H=Fraction(twice_H,2)
+    assert (twice_H//2)**2 >= H**2/4
+print('floor_all_large_H_constant_loss_at_most',4)
+
+# Coefficients are ordered by ascending X-power.
+lin=[7,5]
+quart=[368,936,1007,549,128]
+quint=[0]*(len(lin)+len(quart)-1)
+for i,a in enumerate(lin):
+    for j,b in enumerate(quart):
+        quint[i+j]+=a*b
+sext=quint+[0]             # multiply the homogenized quintic by Y
+C=sum(abs(x) for x in sext)
+print('C0_raw_branch_sextic_coefficients',sext)
+print('C0_raw_branch_coefficient_L1_bound',C)
+assert sext == [2576,8392,11729,8878,3641,640,0]
+print('raw_discriminant_bound_template',
+      'abs(Disc(Q(sqrt(t)))) <= 4*%d*H^6'%C)
+PY
+endpoint_test_c 166/115
+endpoint_forbidden_N_21_200 [23]
+endpoint_first_allowed_after_20 21
+sl2_printed_new_class (1, 1)
+sl2_original_F_residue 0
+sl2_printed_FL_residue 2
+sl2_inverse_new_class (4, 1)
+sl2_inverse_FL_residue 0
+diagonal_pairs 20 distinct_t [2]
+projective_or_field_collision_found False
+degree_two_fiber_points ['+sqrt(t)', '-sqrt(t)']
+degree_two_fiber_distinct_fields 1
+class_01_mod2_fixed_w 1
+class_00_mod2_fixed_2primary_w 8
+floor_all_large_H_constant_loss_at_most 4
+C0_raw_branch_sextic_coefficients [2576, 8392, 11729, 8878, 3641, 640, 0]
+C0_raw_branch_coefficient_L1_bound 35856
+raw_discriminant_bound_template abs(Disc(Q(sqrt(t)))) <= 4*35856*H^6
+
+Six-interface classification
+----------------------------
+1 N1 freedom/order/endpoints:
+  source explicit + additional elementary finite avoidance; PASSED.
+2 ST p.951 forward residue class:
+  source-explicit typo + immediate proof-path non-use; PASSED WITH CORRECTION.
+3 ST p.953 pairs/distinct values:
+  proof-level source explicit + object-name correction; PASSED WITH CORRECTION.
+4 thin space/projective/signed-squareclass injection:
+  source explicit + additional elementary homogeneity lemma; PASSED.
+5 conjugate points/repeated fields:
+  source-explicit field identity + degree-two correction; PASSED.
+6 fixed w/all H/sign/fields/discriminant:
+  source explicit combination + immediate deductions; PASSED.
+
+Falsification outcome and boundary
+----------------------------------
+Hypothesis attacked: one of the six interfaces fails through hidden quantifier,
+unavoidable endpoint, wrong SL2 residue direction, pair/value confusion, thin
+parameter collision, conjugate-field repetition, H-dependent w/constant, or
+subsequence-only height.
+
+Outcome: SURVIVED within this six-interface source scope. Three concrete traps
+were reproduced (forbidden N=23, the mod-5 forward-class error, and twenty
+diagonal pairs giving one t), but the explicitly recorded avoidance/corrections
+close them. The source interface status is CANDIDATE, not a kernel verification,
+not an unconditional whole-theorem certification, and not an EXP-EPS claim.
