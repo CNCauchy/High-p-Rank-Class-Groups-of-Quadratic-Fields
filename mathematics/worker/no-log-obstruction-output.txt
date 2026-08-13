@@ -1,0 +1,98 @@
+FORM F(a,b)=b(5a+7b)(128a^4+549a^3b+1007a^2b^2+936ab^3+368b^4)
+BOUNDARY b=0 and (a,b)=(-7,5) give F=0; (-2,1),(-3,2) give negative F
+FIXED_SQUARE raw_F all primitive classes mod 4 satisfy 4|F; primitive=12 p2_divisible=12; all 16 residue pairs checked; F(-2,1)=-540 is not divisible by 16
+GLOBAL_NORMALIZATION G(-2,1)=-135 G(-3,2)=-199 gcd_abs=1; maximal_global_w_with_w^2_dividing_every_F_value_is_w=2
+NORMALIZATION G(a,b)=F(a,b)/4 on primitive pairs; this is the Stewart-Top w^2 boundary
+LOCAL_SCOPE primes=[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43]; bad_primes=[2, 3, 5, 19]; p^2 for every listed prime, p^3 additionally for 2,3,5
+LOCAL p=2 e=2 input_mod=16 residue_mod=4 primitive=192 p2_divisible=96 eligible_not_p2=96 exact_v1=0 eligible_b_unit=64 all_covered_by_p2=False examples={'not_p2': (1, 2, 1), 'b_unit_not_p2': (1, 3, 1)}
+LOCAL p=2 e=3 input_mod=32 residue_mod=8 primitive=768 p2_divisible=384 eligible_not_p2=384 exact_v1=0 eligible_b_unit=256 all_covered_by_p2=False examples={'not_p2': (1, 2, 1), 'b_unit_not_p2': (1, 3, 1)}
+LOCAL p=3 e=2 input_mod=9 residue_mod=9 primitive=72 p2_divisible=42 eligible_not_p2=30 exact_v1=12 eligible_b_unit=18 all_covered_by_p2=False examples={'not_p2': (0, 1, 5), 'b_unit_not_p2': (0, 1, 5), 'v1': (1, 3, 3)}
+LOCAL p=3 e=3 input_mod=27 residue_mod=27 primitive=648 p2_divisible=378 eligible_not_p2=270 exact_v1=108 eligible_b_unit=162 all_covered_by_p2=False examples={'not_p2': (0, 1, 23), 'b_unit_not_p2': (0, 1, 23), 'v1': (1, 3, 12)}
+LOCAL p=5 e=2 input_mod=25 residue_mod=25 primitive=600 p2_divisible=100 eligible_not_p2=500 exact_v1=100 eligible_b_unit=500 all_covered_by_p2=False examples={'not_p2': (0, 1, 19), 'b_unit_not_p2': (0, 1, 19), 'v1': (1, 2, 10)}
+LOCAL p=5 e=3 input_mod=125 residue_mod=125 primitive=15000 p2_divisible=2500 eligible_not_p2=12500 exact_v1=2500 eligible_b_unit=12500 all_covered_by_p2=False examples={'not_p2': (0, 1, 19), 'b_unit_not_p2': (0, 1, 19), 'v1': (1, 2, 110)}
+LOCAL p=7 e=2 input_mod=49 residue_mod=49 primitive=2352 p2_divisible=84 eligible_not_p2=2268 exact_v1=504 eligible_b_unit=2016 all_covered_by_p2=False examples={'not_p2': (0, 1, 7), 'v1': (0, 1, 7), 'b_unit_not_p2': (0, 1, 7)}
+LOCAL p=11 e=2 input_mod=121 residue_mod=121 primitive=14520 p2_divisible=220 eligible_not_p2=14300 exact_v1=2200 eligible_b_unit=13200 all_covered_by_p2=False examples={'not_p2': (0, 1, 39), 'b_unit_not_p2': (0, 1, 39), 'v1': (1, 4, 66)}
+LOCAL p=13 e=2 input_mod=169 residue_mod=169 primitive=28392 p2_divisible=312 eligible_not_p2=28080 exact_v1=3744 eligible_b_unit=26208 all_covered_by_p2=False examples={'not_p2': (0, 1, 137), 'b_unit_not_p2': (0, 1, 137), 'v1': (1, 3, 156)}
+LOCAL p=17 e=2 input_mod=289 residue_mod=289 primitive=83232 p2_divisible=1088 eligible_not_p2=82144 exact_v1=17408 eligible_b_unit=77792 all_covered_by_p2=False examples={'not_p2': (0, 1, 66), 'b_unit_not_p2': (0, 1, 66), 'v1': (1, 9, 68)}
+LOCAL p=19 e=2 input_mod=361 residue_mod=361 primitive=129960 p2_divisible=684 eligible_not_p2=129276 exact_v1=18810 eligible_b_unit=123120 all_covered_by_p2=False examples={'not_p2': (0, 1, 283), 'b_unit_not_p2': (0, 1, 283), 'v1': (1, 2, 95)}
+LOCAL p=23 e=2 input_mod=529 residue_mod=529 primitive=279312 p2_divisible=3036 eligible_not_p2=276276 exact_v1=66792 eligible_b_unit=265144 all_covered_by_p2=False examples={'not_p2': (0, 1, 115), 'v1': (0, 1, 115), 'b_unit_not_p2': (0, 1, 115)}
+LOCAL p=29 e=2 input_mod=841 residue_mod=841 primitive=706440 p2_divisible=1624 eligible_not_p2=704816 exact_v1=45472 eligible_b_unit=682080 all_covered_by_p2=False examples={'not_p2': (0, 1, 644), 'b_unit_not_p2': (0, 1, 644), 'v1': (1, 20, 290)}
+LOCAL p=31 e=2 input_mod=961 residue_mod=961 primitive=922560 p2_divisible=1860 eligible_not_p2=920700 exact_v1=55800 eligible_b_unit=892800 all_covered_by_p2=False examples={'not_p2': (0, 1, 644), 'b_unit_not_p2': (0, 1, 644), 'v1': (1, 17, 527)}
+LOCAL p=37 e=2 input_mod=1369 residue_mod=1369 primitive=1872792 p2_divisible=2664 eligible_not_p2=1870128 exact_v1=95904 eligible_b_unit=1822176 all_covered_by_p2=False examples={'not_p2': (0, 1, 644), 'b_unit_not_p2': (0, 1, 644), 'v1': (1, 31, 666)}
+LOCAL p=41 e=2 input_mod=1681 residue_mod=1681 primitive=2824080 p2_divisible=3280 eligible_not_p2=2820800 exact_v1=131200 eligible_b_unit=2755200 all_covered_by_p2=False examples={'not_p2': (0, 1, 644), 'b_unit_not_p2': (0, 1, 644), 'v1': (1, 11, 1230)}
+LOCAL p=43 e=2 input_mod=1849 residue_mod=1849 primitive=3416952 p2_divisible=3612 eligible_not_p2=3413340 exact_v1=151704 eligible_b_unit=3337488 all_covered_by_p2=False examples={'not_p2': (0, 1, 644), 'b_unit_not_p2': (0, 1, 644), 'v1': (1, 30, 301)}
+LOCAL_SIGN_JOINT primes=[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43] search_box=|a|,b<=500 negative_witness=(-498, 1, -4845084379827991)
+COLLISION_SCOPE 1<=u,v<=25, gcd(u,v)=1; (a,b)=(-2u-3v,u+v), so -3<a/b<-2 and F<0
+COLLISION H=25 height=25
+COLLISION H=25 primitive=399
+COLLISION H=25 zeros=0
+COLLISION H=25 positive_values=0
+COLLISION H=25 negative_values=399
+COLLISION H=25 square_kernels=0
+COLLISION H=25 distinct_fields=399
+COLLISION H=25 negative_distinct_fields=399
+COLLISION H=25 negative_parameters=399
+COLLISION H=25 max_multiplicity=1
+COLLISION H=25 maximal_buckets=[(-11177193485335, [(21, 25)]), (-8421668671615, [(18, 25)]), (-7639277509815, [(17, 25)]), (-6563100847359, [(19, 23)]), (-5929398002311, [(18, 23)])]
+COLLISION H=25 multiplicity_histogram={1: 399}
+COLLISION H=25 max_abs_form=58564054071040
+COLLISION H=25 height_six_bound_ratio=239878.36547497983
+COLLISION H=25 fundamental_shape_failures=0
+COLLISION H=25 distinct_per_primitive=1.0
+COLLISION_SCOPE 1<=u,v<=50, gcd(u,v)=1; (a,b)=(-2u-3v,u+v), so -3<a/b<-2 and F<0
+COLLISION H=50 height=50
+COLLISION H=50 primitive=1547
+COLLISION H=50 zeros=0
+COLLISION H=50 positive_values=0
+COLLISION H=50 negative_values=1547
+COLLISION H=50 square_kernels=0
+COLLISION H=50 distinct_fields=1547
+COLLISION H=50 negative_distinct_fields=1547
+COLLISION H=50 negative_parameters=1547
+COLLISION H=50 max_multiplicity=1
+COLLISION H=50 maximal_buckets=[(-756910093853671, [(45, 49)]), (-673490886254079, [(46, 47)]), (-604301799081039, [(49, 44)]), (-582554848917639, [(50, 43)]), (-557614664102191, [(42, 47)])]
+COLLISION H=50 multiplicity_histogram={1: 1547}
+COLLISION H=50 max_abs_form=3915927206429040
+COLLISION H=50 height_six_bound_ratio=250619.34121145855
+COLLISION H=50 fundamental_shape_failures=0
+COLLISION H=50 distinct_per_primitive=1.0
+COLLISION_SCOPE 1<=u,v<=100, gcd(u,v)=1; (a,b)=(-2u-3v,u+v), so -3<a/b<-2 and F<0
+COLLISION H=100 height=100
+COLLISION H=100 primitive=6087
+COLLISION H=100 zeros=0
+COLLISION H=100 positive_values=0
+COLLISION H=100 negative_values=6087
+COLLISION H=100 square_kernels=0
+COLLISION H=100 distinct_fields=6087
+COLLISION H=100 negative_distinct_fields=6087
+COLLISION H=100 negative_parameters=6087
+COLLISION H=100 max_multiplicity=1
+COLLISION H=100 maximal_buckets=[(-64034373989158135, [(99, 100)]), (-56121052033063615, [(93, 100)]), (-52659558276812935, [(99, 95)]), (-49035962826263215, [(87, 100)]), (-46681233881368831, [(99, 92)])]
+COLLISION H=100 multiplicity_histogram={1: 6087}
+COLLISION H=100 max_abs_form=256137495956632540
+COLLISION H=100 height_six_bound_ratio=256137.49595663254
+COLLISION H=100 fundamental_shape_failures=0
+COLLISION H=100 distinct_per_primitive=1.0
+COLLISION_SCOPE 1<=u,v<=200, gcd(u,v)=1; (a,b)=(-2u-3v,u+v), so -3<a/b<-2 and F<0
+COLLISION H=200 height=200
+COLLISION H=200 primitive=24463
+COLLISION H=200 zeros=0
+COLLISION H=200 positive_values=0
+COLLISION H=200 negative_values=24463
+COLLISION H=200 square_kernels=0
+COLLISION H=200 distinct_fields=24463
+COLLISION H=200 negative_distinct_fields=24463
+COLLISION H=200 negative_parameters=24463
+COLLISION H=200 max_multiplicity=1
+COLLISION H=200 maximal_buckets=[(-4019981568082029079, [(198, 199)]), (-3890252684726053471, [(195, 199)]), (-3880434158729019615, [(193, 200)]), (-3847788988149893559, [(194, 199)]), (-3751176948601463439, [(197, 196)])]
+COLLISION H=200 multiplicity_histogram={1: 24463}
+COLLISION H=200 max_abs_form=16571783308268364540
+COLLISION H=200 height_six_bound_ratio=258934.1141916932
+COLLISION H=200 fundamental_shape_failures=0
+COLLISION H=200 distinct_per_primitive=1.0
+UNABSORBED_FIXED_P2_OBSTRUCTION=not_refuted_within_scope
+SIGN_CONFLICT=not_refuted_within_scope
+FUNDAMENTAL_DISCRIMINANT_SHAPE=passed_by_exact_normalization_within_scope
+BOUNDED_COLLISION_OBSTRUCTION=not_refuted_within_scope
+THIN_SET_COMPATIBILITY=not_tested_global_obligation
+NO_LOG=not_proved
