@@ -1,34 +1,35 @@
 {
   "schema": "deepscientist.mathematics.named-theorem-receipt-manifest.v1",
-  "receiptId": "lean-b450b5f91e03836f8ae94187",
-  "checkId": "fixed-c0-rational-source-bridge",
+  "receiptId": "lean-be179a7b1c063b4bc53752a5",
+  "supersedesReceiptId": "lean-b450b5f91e03836f8ae94187",
+  "checkId": "repaired-rational-counting-bridge",
   "status": "kernel_verified",
   "verifier": "lean-kernel",
   "claim": "statement",
   "proofPath": "mathematics/formal/NoLogSourceBridge.lean",
-  "theoremName": "NoLogSourceBridge.no_log_of_fixed_c0_rational_source",
-  "statementHash": "cb1ee74c7c99eb77ea1b0ece80d485c4eb089bc8820675220b738e662463e4c4",
-  "theoremDeclarationHash": "6ae30555b15cd10c8065d08f25dcaaee8c271ba4752d58c9b90451a242f2bc99",
-  "proofHash": "0f31dee1984c9d575e1ec7f9e550fb13ef25c427538e75640e88cdcf878e5009",
-  "targetCommit": "4c2bea33640112c6cb8756ee1aa243126124b056",
+  "theoremName": "NoLogSourceBridge.no_log_of_rational_counting_bridge",
+  "statementHash": "a191d05bf703dfe1d019f7d1467d67552cdb01c2c1decb88b02a75277c14a20f",
+  "theoremDeclarationHash": "c003cdf7c0eb3ffd9c6b600fdd3c1ee827298abeb3e82f8d1ebe6f909a4d0619",
+  "proofHash": "a2f7350f7b474c6675db8b4c63eaeb5633e53f0ee2e327bf1a4b45b8b11f19e8",
+  "targetCommit": "f4760f9e864fc857d8590f474163475bd9cbc912",
   "statementBinding": "caller-bound-to-committed-declaration",
   "goalsRemaining": 0,
   "sorryCount": 0,
   "admitCount": 0,
   "axioms": [],
-  "checkedAt": 1786628050018,
-  "sessionId": "02f15581-42ea-4348-8e3b-b7f88bedb4b0",
+  "checkedAt": 1786630544310,
+  "sessionId": "dff043f3-4c9e-4522-941f-20268911f0eb",
   "source": {
     "tool": "lean_workspace",
     "action": "certify",
-    "runId": "sci_run_msrk7jrv_ef7b7c",
-    "reportTracePath": "mathematics/report-traces/verification-8015df0b7d1021d26913.json"
+    "runId": "sci_run_msrloz43_e23c79",
+    "reportTracePath": "mathematics/report-traces/verification-b34ae7378506e9b9add1.json"
   },
   "scope": {
-    "certifies": "The conditional implication FixedC0RationalSource N -> NoLogSourceBridge.CubicLowerBound N, including rational constant clearing and constructive sixth-root selection.",
+    "certifies": "The pure numerical implication RationalCountingBridge N -> NoLogSourceBridge.CubicLowerBound N, including rational constant clearing and constructive sixth-root selection.",
     "doesNotCertify": [
       "The Stewart-Top/Kulkarni-Levin source theorem inputs",
-      "Construction of the fixed-C0 goodCount finite sets",
+      "Construction or source interpretation of the fixed-C0 goodCount finite sets",
       "Existence of a positive rational lower bound below the source real Vinogradov constant",
       "The unconditional NO-LOG or EXP-EPS statements"
     ]

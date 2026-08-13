@@ -129,7 +129,8 @@
     "structure": "NoLogSourceBridge.RationalCountingBridge",
     "theorem": "NoLogSourceBridge.no_log_of_rational_counting_bridge",
     "statementHash": "a191d05bf703dfe1d019f7d1467d67552cdb01c2c1decb88b02a75277c14a20f",
-    "status": "alignment_repaired_locally_compiled_pending_new_receipt",
+    "status": "platform_kernel_verified_pending_narrow_independent_re_review",
+    "receiptId": "lean-be179a7b1c063b4bc53752a5",
     "supersededReceiptId": "lean-b450b5f91e03836f8ae94187",
     "repair": "Encode a positive rational p/q below the source real constant as p*T^2 <= q*goodCount(T); use T=qH, mainConstant=pq, discriminantConstant=Dq^6, and a kernel-constructed maximal sixth-root selector.",
     "remainingExternalInputs": [
@@ -152,7 +153,7 @@
       "thinParameterInjectionAndLocalRank": "tau(a/b) is outside Omega; the signed-squarefree injection and KL local theorem give a distinct imaginary quadratic field of 5-rank at least 2."
     },
     "status": "source_supported_human_instantiation_separated_from_numerical_kernel_theorem",
-    "kernelBoundary": "The repaired Lean theorem starts only from the natural p,q,D,H0 numerical ledger above. The historical receipt lean-b450b5f91e03836f8ae94187 is superseded for alignment purposes; a new receipt is pending. Neither theorem proves rational density, Archimedean ceiling choices, or the Stewart-Top/Kulkarni-Levin source facts."
+    "kernelBoundary": "Lean receipt lean-be179a7b1c063b4bc53752a5 starts only from the natural p,q,D,H0 numerical ledger above. The historical receipt lean-b450b5f91e03836f8ae94187 is superseded for alignment purposes. Neither receipt proves rational density, Archimedean ceiling choices, or the Stewart-Top/Kulkarni-Levin source facts."
   },
   "falsification": {
     "hypothesis": "The frozen strong KL lemma directly instantiates every field of NoLogInference.AnalyticBridge at the same box height.",

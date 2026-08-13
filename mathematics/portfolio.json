@@ -66,7 +66,7 @@
       "updatedAt": 1786628400000,
       "parentCommit": "4d67750593ca509a937bb5252377d4d86595bdbd",
       "targetCommit": "e48b21561b59ad7af04e121a5e376d5fcdbc452a",
-      "outcome": "形成 source-supported NO-LOG 人工证明候选；决定性来源接口经独立审阅 passed；完整条件推理与清分母后的 FixedC0RationalSource → CubicLowerBound 均取得命名 Lean receipt。常数缩放与六次选择器已内核认证，最后的冻结来源实例化审阅正在运行。"
+      "outcome": "形成 source-supported NO-LOG 人工证明候选；决定性来源接口经独立审阅 passed；完整条件推理与修复后的纯数值 RationalCountingBridge → CubicLowerBound 均取得命名 Lean receipt。旧接口的装饰性 Prop 对齐已被反例审阅并删除，来源账本的窄范围复审正在运行。"
     }
   ],
   "examples": [
@@ -274,11 +274,11 @@
       "problemId": "cl-no-log",
       "polarity": "supporting",
       "strength": "formal",
-      "scope": "条件蕴含 FixedC0RationalSource N → CubicLowerBound N；覆盖正有理常数清分母、固定高度缩放和离散六次根选择器，不认证 ST/KL 来源定理",
+      "scope": "纯数值条件蕴含 RationalCountingBridge N → CubicLowerBound N；覆盖正有理常数清分母、固定高度缩放和离散六次根选择器，不认证 ST/KL 来源定理",
       "method": "Lean 4.33 自包含命名定理平台内核认证与权威四元组 manifest",
       "inputRefs": [
         "mathematics/formal/NoLogSourceBridge.lean",
-        "statementHash:cb1ee74c7c99eb77ea1b0ece80d485c4eb089bc8820675220b738e662463e4c4"
+        "statementHash:a191d05bf703dfe1d019f7d1467d67552cdb01c2c1decb88b02a75277c14a20f"
       ],
       "outputRefs": [
         "mathematics/formal/no-log-source-bridge-receipt.json",
@@ -286,15 +286,15 @@
         "mathematics/worker/no-log-analytic-bridge-matrix.json"
       ],
       "evidenceIds": [
-        "lean-b450b5f91e03836f8ae94187",
+        "lean-be179a7b1c063b4bc53752a5",
         "lean-248d2a960ac200360eca55ad",
         "lean-5256a1ecaf957b87a8f17c35",
         "lean-b7ecf38e8e7f2004b576b1dc",
         "lean-54f3a4bbc17446595ea1f699"
       ],
-      "observed": "源桥命名定理 1/1 kernel_verified，四条归一化引理 4/4 kernel_verified；全部 0 goals/sorry/admit/axioms。来源集合到结构字段的独立审阅尚未完成。",
+      "observed": "修复后的纯数值桥命名定理 1/1 kernel_verified，四条归一化引理 4/4 kernel_verified；全部 0 goals/sorry/admit/axioms。旧装饰性来源字段已删除，来源账本仍待窄范围复审。",
       "reproducibility": "reproduced",
-      "commit": "9c5b0abad1c015d45b8876817b5870fbc01afc2b",
+      "commit": "f4760f9e864fc857d8590f474163475bd9cbc912",
       "command": "lean -q -t 0 mathematics/formal/NoLogSourceBridge.lean",
       "createdAt": 1786628400000
     }
@@ -335,14 +335,14 @@
     }
   ],
   "blockers": [
-    "清分母后的固定 C0 源桥已有匹配 Lean 回执，但 frozen strong-KL 的 post-deletion 集合到 FixedC0RationalSource 字段的最终独立来源审阅尚未完成，故无条件 NO-LOG 不得称 Verified。",
+    "修复后的纯数值计数桥已有匹配 Lean 回执，但 frozen strong-KL 的 post-deletion 集合到 RationalCountingBridge 三个数值义务的独立来源复审尚未完成，故无条件 NO-LOG 不得称 Verified。",
     "无条件 NO-LOG statementHash 234b34d9…806b0 尚无匹配内核回执与完整独立审查。",
     "EXP-EPS 的正指数增益仍未证明或反驳。"
   ],
   "nextActions": [
     {
       "id": "review-rational-source-bridge",
-      "label": "独立审阅 frozen strong-KL 到 FixedC0RationalSource 的逐字段实例化",
+      "label": "独立复审 frozen strong-KL 来源账本到 RationalCountingBridge 三个数值义务",
       "kind": "review",
       "priority": "now",
       "owner": "agent"

@@ -30,14 +30,19 @@ FOR EVERY N : Nat -> Nat, IF POSITIVE NATURALS p, q, AND D AND A THRESHOLD H0 GI
 
 `statementHash = a191d05bf703dfe1d019f7d1467d67552cdb01c2c1decb88b02a75277c14a20f`。
 
-## 平台认证状态
+## 平台认证
 
-新定理正在等待冻结提交后的平台认证。历史收据
-`lean-b450b5f91e03836f8ae94187` 只认证已被独立审阅否定为过宽对齐的旧声明
-`NoLogSourceBridge.no_log_of_fixed_c0_rational_source`，不得用于当前命名定理。
+- `receiptId = lean-be179a7b1c063b4bc53752a5`
+- `targetCommit = f4760f9e864fc857d8590f474163475bd9cbc912`
+- `proofHash = a2f7350f7b474c6675db8b4c63eaeb5633e53f0ee2e327bf1a4b45b8b11f19e8`
+- `theoremDeclarationHash = c003cdf7c0eb3ffd9c6b600fdd3c1ee827298abeb3e82f8d1ebe6f909a4d0619`
+- `status = kernel_verified`
+- `goalsRemaining/sorry/admit = 0`, `axioms = []`
 
-`no-log-source-bridge-receipt.json` 和内容寻址 trace 将在新收据取得后更新；在此之前
-当前状态仅为本地 Lean 重放通过，不称平台 `kernel_verified`。
+完整身份字段见 `no-log-source-bridge-receipt.json`；内容寻址 trace 为
+`mathematics/report-traces/verification-b34ae7378506e9b9add1.json`。历史收据
+`lean-b450b5f91e03836f8ae94187` 对旧的过宽来源对齐声明仍是历史事实，但已被
+当前纯数值接口收据取代，不得移用于当前定理。
 
 ## 精确重放
 

@@ -17,12 +17,13 @@ statementHash 为
 `AnalyticBridge N → CubicLowerBound N`；它不构造 `AnalyticBridge`，也不绑定
 无条件 NO-LOG 的 statementHash，因此 NO-LOG 总命题仍不得称为 `Verified`。
 
-本阶段又得到更贴近来源的接口：平台回执
-`lean-b450b5f91e03836f8ae94187` 认证
-`FixedC0RationalSource N → CubicLowerBound N`。该定理用正整数 `p,q` 表示
+独立审阅发现旧接口把四个未参与 Lean 证明的来源 `Prop` 写入自然语言声明，
+因而拒绝其 statement/declaration 对齐。该缺陷已经修复：平台回执
+`lean-be179a7b1c063b4bc53752a5` 认证纯数值接口
+`RationalCountingBridge N → CubicLowerBound N`。该定理用正整数 `p,q` 表示
 来源正有理主项常数，内核完成清分母、源高度 `qH` 重索引、判别式常数乘
-`q^6`、离散最大六次根选择器与最终三次不等式。它仍把 Stewart–Top/
-Kulkarni–Levin 的来源计数与域注入作为显式外部输入。
+`q^6`、离散最大六次根选择器与最终三次不等式。Stewart–Top/
+Kulkarni–Levin 的来源含义只保留在独立人工账本中，不冒充内核陈述。
 
 ## 论证依赖图
 
@@ -54,8 +55,8 @@ Kulkarni–Levin 的来源计数与域注入作为显式外部输入。
 | S6 | 显式解析假设到立方下界的完整推理 | `NoLogInference.lean` | conditional inference kernel_verified |
 | S7 | S6 的常数、注入、单调性和选择器方向 | `no-log-inference-local-independent-review.md` | semantic review passed；回执字段缺口已由权威 manifest 修复 |
 | S8 | 正有理常数清分母、固定缩放与六次选择器 | `NoLogNormalization.lean`、4 个平台收据 | 4/4 kernel_verified |
-| S9 | 固定 C0 有理来源接口到三次下界 | `NoLogSourceBridge.lean`、`lean-b450b5f…` | conditional kernel_verified；来源实例化待独立审阅 |
-| SF | NO-LOG 总命题 | S0–S9，但 ST/KL 到 `FixedC0RationalSource` 的最终来源对齐尚在审阅 | Candidate；非 Verified |
+| S9 | 纯数值有理计数桥到三次下界 | `NoLogSourceBridge.lean`、`lean-be179a7b…` | conditional kernel_verified；旧装饰性字段已删除 |
+| SF | NO-LOG 总命题 | S0–S9，但 ST/KL 到 `RationalCountingBridge` 三个数值义务的来源账本仍待窄范围复审 | Candidate；非 Verified |
 
 ## 支持线与反驳线
 
@@ -97,11 +98,13 @@ maximal \(w^2\)、二次强计数、线性 thin-set、good-to-field 注入、单
 方向正确；其发现的唯一证据缺口是通用 trace 未保存三个身份字段，现已由
 权威 verifier manifest 补齐。这个修复不构成 `AnalyticBridge` 的存在证明。
 
-平台回执 `lean-b450b5f91e03836f8ae94187` 进一步认证了
-`NoLogSourceBridge.no_log_of_fixed_c0_rational_source`。其冻结 statementHash 为
-`cb1ee74c…e4c4`，proof hash 为 `0f31dee1…5009`，target commit 为
-`4c2bea33…b056`，且 0 goals/sorry/admit/axioms。该收据覆盖清分母与选择器的
-构造，但不认证来源的具体 `goodCount` 集合或 ST/KL 定理。
+平台回执 `lean-be179a7b1c063b4bc53752a5` 进一步认证了
+`NoLogSourceBridge.no_log_of_rational_counting_bridge`。其冻结 statementHash 为
+`a191d05b…a20f`，声明 hash 为 `c003cdf7…0619`，proof hash 为
+`a2f7350f…19e8`，target commit 为 `f4760f9e…c912`，且
+0 goals/sorry/admit/axioms。该收据覆盖清分母与选择器的构造，但不认证来源的
+具体 `goodCount` 集合或 ST/KL 定理。历史收据 `lean-b450…` 仅保留为被审阅
+取代的旧声明记录。
 
 ## 重放
 
@@ -124,8 +127,8 @@ python3 -m json.tool mathematics/verification-trace.json >/dev/null
 
 ## 下一步
 
-常数归一化和高度选择器已经不再是接口阻塞。最高信息增益的下一步是完成正在
-运行的冻结独立审阅：逐字段确认 strong-KL 中的 post-deletion 集合
-`T_H` 在选定固定 `p,q,D,H0` 后就是 `FixedC0RationalSource.goodCount`，并且域
-注入与同一高度界一致。只有该来源实例化门也通过，才可能把条件回执与无条件
-NO-LOG statementHash 连接起来；在此之前结论保持 Candidate。
+常数归一化、高度选择器和装饰性字段对齐缺陷已经不再是接口阻塞。最高信息
+增益的下一步是完成窄范围冻结复审：确认 strong-KL 的 post-deletion 集合
+`T_H` 在固定 `p,q,D,H0` 后给出同一个 `RationalCountingBridge.goodCount`，
+同时支持二次计数、域注入和单调性。只有该来源账本也通过，才可能把条件收据与
+无条件 NO-LOG statementHash 连接起来；在此之前结论保持 Candidate。

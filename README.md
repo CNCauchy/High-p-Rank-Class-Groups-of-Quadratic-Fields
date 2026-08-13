@@ -18,10 +18,10 @@ N^-_{5,2}(X)=\#\{[K]_{\mathbf Q}:K/\mathbf Q\text{ 为虚二次域},
   bounded-witness/thin-set 删除——已通过独立冻结来源审阅。
 - 三条可分离代数小引理，以及从显式 `AnalyticBridge` 假设到立方下界的完整
   条件推理，已有 Lean 4.33 平台 `kernel_verified` 收据。
-- 新的 `FixedC0RationalSource → CubicLowerBound` 命名定理进一步在内核中完成
-  正有理常数清分母、固定高度缩放、离散六次根选择器和最终三次下界；来源
-  strong-KL 集合到该结构的逐字段实例化正在独立审阅，因此总结果仍是
-  **Candidate**，不是 `Verified`。
+- 独立审阅反驳了旧接口中的装饰性来源 `Prop` 对齐；修复后的纯数值定理
+  `RationalCountingBridge → CubicLowerBound` 已获新平台收据
+  `lean-be179a7b1c063b4bc53752a5`。来源 strong-KL 集合到三个数值义务的
+  单独账本正在窄范围复审，因此总结果仍是 **Candidate**，不是 `Verified`。
 
 ## 阅读与复现
 
@@ -37,5 +37,5 @@ N^-_{5,2}(X)=\#\{[K]_{\mathbf Q}:K/\mathbf Q\text{ 为虚二次域},
 - 平台收据：[mathematics/verification-trace.json](mathematics/verification-trace.json)
 
 最小重放命令记录在阶段报告中。当前只剩对冻结 strong-KL 集合到
-`FixedC0RationalSource` 的来源实例化做独立审阅；无条件 NO-LOG statementHash
-仍没有匹配内核回执。
+`RationalCountingBridge` 三个数值义务的来源账本做独立复审；无条件 NO-LOG
+statementHash 仍没有匹配内核回执。
