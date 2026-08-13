@@ -16,13 +16,16 @@
   },
   "normalizationIssue": {
     "id": "B-NORM-1",
-    "status": "open_elementary_lemma",
+    "status": "direct_interface_refuted_repair_arithmetic_kernel_verified",
     "claim": "The source lower bound #T_H >= c H^2 with arbitrary real c>0 does not directly imply 2*m*H^2 <= rawCount(H) for a positive natural m.",
     "failureSignal": "Taking the same box height H and m>=1 would demand at least 2H^2 distinct raw values, while the positive H-box contains at most H^2 parameter pairs.",
-    "requiredRepair": "Choose a fixed integer scale L with cL^2 sufficiently large, define all counts at source height LH, and multiply the discriminant constant by L^6. Enlarge thresholds and integer-ceil all O(H) constants coherently.",
+    "requiredRepair": "Choose a fixed integer scale L with cL^2 sufficiently large, define all counts at source height LH, and multiply the discriminant constant by L^6. The L^2/L^6 propagation is kernel verified; choosing L from the source real c and constructing the maximal selector remain explicit external elementary obligations.",
     "sourceRefs": [
       "mathematics/worker/strong-kl-no-log-lemma.md#step-6",
-      "mathematics/formal/NoLogInference.lean#strongSquarefreeCount"
+      "mathematics/formal/NoLogInference.lean#strongSquarefreeCount",
+      "mathematics/formal/NoLogNormalization.lean",
+      "lean-248d2a960ac200360eca55ad",
+      "lean-5256a1ecaf957b87a8f17c35"
     ]
   },
   "fieldMappings": [
@@ -70,7 +73,7 @@
     },
     {
       "field": "strongSquarefreeCount",
-      "status": "blocked_on_B-NORM-1",
+      "status": "source_supported_after_fixed_scale_choice",
       "source": "ST positive-box count before thin deletion.",
       "risk": "The current natural coefficient is not obtained at the unscaled source height."
     },
@@ -103,15 +106,15 @@
     },
     {
       "field": "mainConstant,thinConstant,discriminantConstant,H0",
-      "status": "blocked_on_B-NORM-1",
+      "status": "external_real_to_natural_choice_after_kernel_verified_propagation",
       "source": "Natural-number normalization of the real Vinogradov and O-constants after fixed height scaling."
     },
     {
       "field": "selectedHeight,selectorLarge,selectorFits,selectorCompares,X0,comparisonConstant",
-      "status": "external_elementary_selector_lemma",
+      "status": "comparison_kernel_verified_maximal_selector_existence_external_elementary",
       "source": "Choose a sixth-root height for the normalized integer discriminant constant; maximality gives both-sided comparison after enlarging X0.",
       "risk": "The same selector must satisfy both inequalities. A convenient natural construction is the maximal H with D*H^6<=X; then (H+1)^6 controls X by a fixed multiple of H^6.",
-      "refs": ["strong-kl-no-log-lemma.md:195-196", "NoLogInference.lean:103-112"]
+      "refs": ["strong-kl-no-log-lemma.md:195-196", "NoLogInference.lean:103-112", "lean-b7ecf38e8e7f2004b576b1dc", "lean-54f3a4bbc17446595ea1f699"]
     }
   ],
   "minimalSourceAlignedInterface": {
@@ -120,6 +123,20 @@
     "theorem": "NoLogBridge.no_log_of_fixed_c0_post_deletion_bridge",
     "purpose": "The published strong KL lemma is already stated after thin deletion, so this interface avoids inventing pre-deletion counts when only the post-deletion quadratic family is needed.",
     "boundary": "It remains conditional on a normalized post-deletion quadratic count, field injection, monotonicity and a two-sided sixth-degree selector."
+  },
+  "rationalSourceInterface": {
+    "path": "mathematics/formal/NoLogSourceBridge.lean",
+    "structure": "NoLogSourceBridge.FixedC0RationalSource",
+    "theorem": "NoLogSourceBridge.no_log_of_fixed_c0_rational_source",
+    "statementHash": "cb1ee74c7c99eb77ea1b0ece80d485c4eb089bc8820675220b738e662463e4c4",
+    "status": "locally_kernel_compiled_pending_platform_receipt_and_independent_review",
+    "repair": "Encode a positive rational p/q below the source real constant as p*T^2 <= q*goodCount(T); use T=qH, mainConstant=pq, discriminantConstant=Dq^6, and a kernel-constructed maximal sixth-root selector.",
+    "remainingExternalInputs": [
+      "The source-supported post-deletion strong KL lower bound and its uniform quantifiers",
+      "Existence of a positive rational p/q below the positive real Vinogradov constant",
+      "The fixed-C0 goodCount object and source injection into desired fields",
+      "Monotonicity of the intended field-count function"
+    ]
   },
   "falsification": {
     "hypothesis": "The frozen strong KL lemma directly instantiates every field of NoLogInference.AnalyticBridge at the same box height.",

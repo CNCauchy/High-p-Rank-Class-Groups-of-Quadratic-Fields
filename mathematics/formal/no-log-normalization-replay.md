@@ -29,6 +29,20 @@ IF H > 0, discriminantConstant * H^6 <= X, AND X < discriminantConstant * (H+1)^
 - `sixth_selector_compares`: `0ab2e44e0be0df0349f73f21cf246c86decd7438ff72d2aefcc5f26234e259fd`
 - `sixth_selector_bounds`: `1073b17aa77f7be1710fc17c17819cf93641475c7f28f2bb09b34ea96639c09a`
 
+## 平台认证
+
+四条命名引理在冻结提交
+`f16893fb25f022fb4e7735ccaf289fce85b9de1a` 上批量认证通过，共用
+`proofHash = 978cf8635edd6c2bab25f5388c8492af7b75e74b634a1b86fdce4d113a47bd5d`：
+
+- `lean-248d2a960ac200360eca55ad`
+- `lean-5256a1ecaf957b87a8f17c35`
+- `lean-b7ecf38e8e7f2004b576b1dc`
+- `lean-54f3a4bbc17446595ea1f699`
+
+四项均为 `kernel_verified`，且 `goalsRemaining/sorry/admit = 0`、`axioms = []`。
+完整声明哈希与身份字段见 `no-log-normalization-receipts.json`。
+
 ## 重放命令
 
 ```bash
