@@ -17,9 +17,11 @@ N^-_{5,2}(X)=\#\{[K]_{\mathbf Q}:K/\mathbf Q\text{ 为虚二次域},
 - 两个决定性解析接口——KL 端点有限避让与 Stewart–Top 正盒
   bounded-witness/thin-set 删除——已通过独立冻结来源审阅。
 - 三条可分离代数小引理，以及从显式 `AnalyticBridge` 假设到立方下界的完整
-  条件推理，已有 Lean 4.33 平台 `kernel_verified` 收据；
-  `AnalyticBridge` 尚未由 Stewart–Top、Kulkarni–Levin 与 thin-set 渐近构造，
-  因此总结果状态仍是 **Candidate**，不是 `Verified`。
+  条件推理，已有 Lean 4.33 平台 `kernel_verified` 收据。
+- 新的 `FixedC0RationalSource → CubicLowerBound` 命名定理进一步在内核中完成
+  正有理常数清分母、固定高度缩放、离散六次根选择器和最终三次下界；来源
+  strong-KL 集合到该结构的逐字段实例化正在独立审阅，因此总结果仍是
+  **Candidate**，不是 `Verified`。
 
 ## 阅读与复现
 
@@ -30,8 +32,10 @@ N^-_{5,2}(X)=\#\{[K]_{\mathbf Q}:K/\mathbf Q\text{ 为虚二次域},
 - Lean 源码：[mathematics/formal/NoLogAlgebra.lean](mathematics/formal/NoLogAlgebra.lean)
 - 条件推理：[mathematics/formal/NoLogInference.lean](mathematics/formal/NoLogInference.lean)
 - 条件回执：[mathematics/formal/no-log-inference-receipt.json](mathematics/formal/no-log-inference-receipt.json)
+- 有理来源桥：[mathematics/formal/NoLogSourceBridge.lean](mathematics/formal/NoLogSourceBridge.lean)
+- 有理来源桥回执：[mathematics/formal/no-log-source-bridge-receipt.json](mathematics/formal/no-log-source-bridge-receipt.json)
 - 平台收据：[mathematics/verification-trace.json](mathematics/verification-trace.json)
 
-最小重放命令记录在阶段报告中。下一阶段是逐字段构造固定 `C0` 的
-`AnalyticBridge`，并独立审查来源命题到接口假设的映射；无条件 NO-LOG
-statementHash 仍没有匹配内核回执。
+最小重放命令记录在阶段报告中。当前只剩对冻结 strong-KL 集合到
+`FixedC0RationalSource` 的来源实例化做独立审阅；无条件 NO-LOG statementHash
+仍没有匹配内核回执。

@@ -60,16 +60,21 @@ Kulkarni–Levin 局部化相结合的完整人工证明候选。KL 端点有限
 `NoLogInference.no_log_of_strong_kl_interface` 已认证完整的条件蕴含
 `AnalyticBridge N → CubicLowerBound N`，独立审阅确认其常数、不等式、注入、
 单调性和高度选择器方向正确。其 statementHash `796fae5b…384` 严格不同于
-无条件 NO-LOG hash；由于尚未形式化构造 `AnalyticBridge`，本结果仍是
-**Candidate**，不得称为 `Verified`，也不支持 `EXP-EPS`。
+无条件 NO-LOG hash。现已另行认证
+`NoLogSourceBridge.no_log_of_fixed_c0_rational_source`：它从一个清分母后的固定
+`C0` 来源接口出发，在 Lean 内部完成固定高度缩放和离散六次根选择器，收据为
+`lean-b450b5f91e03836f8ae94187`。冻结 strong-KL 集合到该结构的逐字段来源
+实例化尚待独立审阅，因此本结果仍是 **Candidate**，不得称为 `Verified`，也
+不支持 `EXP-EPS`。
 
 ## 下一条最高信息增益路线
 
 对 BLT 的显式 genus-2 曲线 `C0`，相关次数 6 二元型已核对为 `1+1+4` 次因子，并取得模 7 无重根证书。这使 Stewart–Top 强平方自由值定理成为去掉 `(log X)^2` 的具体候选入口。
 
-下一阶段逐字段构造固定 `C0` 的 `AnalyticBridge`，把已审阅的
-Stewart–Top/Kulkarni–Levin 输入连接到已认证的接口定理，并对这个来源到接口的
-桥接做独立复核。完成该门后才回到多参数或 `D5` 扩张等 `EXP-EPS` 路线。
+当前阶段已经把常数清分母、固定缩放、阈值传递与六次高度选择器形式化；下一门
+是逐字段独立复核 frozen strong-KL 命题确实提供 `FixedC0RationalSource` 的同一
+post-deletion `goodCount`、固定自然常数与域注入。完成该门后才回到多参数或
+`D5` 扩张等 `EXP-EPS` 路线。
 即使 `NO-LOG` 最终成立，它也不
 提供 `EXP-EPS` 的正指数增益。
 
@@ -85,4 +90,7 @@ Stewart–Top/Kulkarni–Levin 输入连接到已认证的接口定理，并对�
 - 条件推理 Lean 源码：`mathematics/formal/NoLogInference.lean`
 - 条件推理权威收据：`mathematics/formal/no-log-inference-receipt.json`
 - 条件推理独立语义审阅：`mathematics/worker/no-log-inference-local-independent-review.md`
+- 有理来源桥 Lean 源码：`mathematics/formal/NoLogSourceBridge.lean`
+- 有理来源桥权威收据：`mathematics/formal/no-log-source-bridge-receipt.json`
+- 来源字段矩阵：`mathematics/worker/no-log-analytic-bridge-matrix.json`
 - 阶段报告：`reports/cohen-lenstra-no-log-stage.md`

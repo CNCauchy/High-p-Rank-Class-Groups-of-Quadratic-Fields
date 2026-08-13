@@ -139,6 +139,21 @@
       "Monotonicity of the intended field-count function"
     ]
   },
+  "sourceInstantiationLedger": {
+    "quantifierOrder": "After fixing C0 and the localization data, choose once and for all c>0, real H_source>0 and real C_delta>0 from the strong KL lemma; then choose positive naturals p,q with p/q<=c, a natural H0>=H_source, and a positive natural D>=C_delta. These constants precede every natural height T and discriminant bound X.",
+    "goodCountDefinition": "For natural T, goodCount(T) is the finite cardinality of the already post-thin-deletion set T_T in strong-kl-no-log-lemma.md; its elements are distinct negative squarefree t with a fixed-class bounded witness and tau(a/b) outside Omega.",
+    "rationalCountDerivation": "For every natural T>=H0, #T_T>=c*T^2 and p/q<=c imply p*T^2<=q*#T_T after multiplying the real inequality by q and using that both sides are natural numbers.",
+    "heightDerivation": "Every t in T_T gives a distinct desired field with absolute discriminant <=C_delta*T^6<=D*T^6, so goodCount(T)<=N(D*T^6).",
+    "monotonicityDerivation": "N(x)<=N(y) for x<=y by inclusion of the field sets defined by the discriminant cutoff.",
+    "fixedSourceObligations": {
+      "positiveConeAndFixedCongruence": "Built into the definition of T_T through positive bounded witnesses in one fixed residue class.",
+      "classWiseMaximalFixedSquare": "The t in T_T satisfy F(a,b)=t*w^2 for the maximal w of that same fixed residue class.",
+      "boundedWitnessForEachSquarefreeValue": "Each counted t has a witness 1<=a,b<=T from the same Stewart-Top positive box.",
+      "thinParameterInjectionAndLocalRank": "tau(a/b) is outside Omega; the signed-squarefree injection and KL local theorem give a distinct imaginary quadratic field of 5-rank at least 2."
+    },
+    "status": "source_supported_human_instantiation_pending_independent_review",
+    "kernelBoundary": "Lean receipt lean-b450b5f91e03836f8ae94187 starts from the natural p,q,D,H0 ledger above; it does not prove rational density, Archimedean ceiling choices, or the Stewart-Top/Kulkarni-Levin source facts."
+  },
   "falsification": {
     "hypothesis": "The frozen strong KL lemma directly instantiates every field of NoLogInference.AnalyticBridge at the same box height.",
     "test": "Compare the coefficient domains and literal cardinality bounds before defining counts; reject direct instantiation if the natural main coefficient forces more values than the H-box can contain.",
