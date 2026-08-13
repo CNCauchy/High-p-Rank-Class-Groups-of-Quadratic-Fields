@@ -1,0 +1,215 @@
+{
+  "schema": "deepscientist.mathematics.formalization-intake.v1",
+  "assignmentId": "cl-intake-formalization-v1",
+  "workflowId": "science.mathematics.v1",
+  "laneId": "formalization",
+  "problemId": "cohen-lenstra-imaginary-quadratic-5-rank-at-least-2",
+  "generatedAt": "2026-08-13T05:34:01Z",
+  "status": "formalized_candidate_not_proved",
+  "kernelVerification": {
+    "status": "unavailable",
+    "reason": "Lean was unavailable in the shared preflight; no Lean source or kernel receipt was produced."
+  },
+  "sources": [
+    {
+      "path": "Research Plan.pdf",
+      "sha256": "af39b83d353d68de98f6db718313c5dea2c03b28cdc6be593119b111f716cb46",
+      "pageCount": 3,
+      "anchors": [
+        {"pdfPage": 1, "text": "For a prime p, define the p-rank"},
+        {"pdfPage": 1, "text": "We focus on imaginary quadratic fields and define"},
+        {"pdfPage": 1, "text": "Theorem 1 (Bartz–Levin–Thamminana, 2025)"},
+        {"pdfPage": 2, "text": "Problem 1. Improve the quantitative lower bound"},
+        {"pdfPage": 2, "text": "A first possible level of progress"},
+        {"pdfPage": 2, "text": "Research Goal 1. Prove that there exists an explicit δ > 0"}
+      ]
+    },
+    {
+      "path": "Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf",
+      "sha256": "1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b",
+      "pageCount": 8,
+      "anchors": [
+        {"pdfPage": 1, "printedPage": 1, "text": "5-rank at least 2"},
+        {"pdfPage": 2, "printedPage": 2, "text": "we let N−(m^r; X) denote"},
+        {"pdfPage": 2, "printedPage": 2, "text": "Theorem 1.3 We have"},
+        {"pdfPage": 3, "printedPage": 3, "text": "Theorem 1.4 (Kulkarni–Levin)"},
+        {"pdfPage": 3, "printedPage": 3, "text": "in order to prove Theorem 1.3"},
+        {"pdfPage": 7, "printedPage": 7, "text": "combined with Theorem 1.4 finishes the proof of Theorem 1.3"}
+      ]
+    },
+    {
+      "path": "29_noncyclic_class57.pdf",
+      "sha256": "0b135b2651241d21d7b8f6bce9bf995d4f1fc4db1762bc64defb54bd014ee3cd",
+      "pageCount": 9,
+      "anchors": [
+        {"pdfPage": 1, "printedPage": 1, "text": "noncyclic 5 or 7-class group"},
+        {"pdfPage": 2, "printedPage": 2, "text": "Theorem 1.1 If g = 5 or 7"},
+        {"pdfPage": 2, "printedPage": 2, "text": "subgroup isomorphic to Z/gZ × Z/gZ"},
+        {"pdfPage": 7, "printedPage": 7, "text": "Proof of Theorem 1.1"}
+      ]
+    }
+  ],
+  "definitions": {
+    "fieldDomain": "Q-isomorphism classes of degree-2 extensions K/Q with no real embedding",
+    "height": "absolute field discriminant |Disc(K)|",
+    "rank5": "dim_F5(Cl(K)/5Cl(K))",
+    "countingFunction": "N_5,2^-(X) counts fields in fieldDomain with |Disc(K)| <= X and rank5 >= 2",
+    "landauLowerBound": "f(X) >> g(X) means there exist c > 0 and X_0 > 1 such that for every real X >= X_0, f(X) >= c*g(X)",
+    "noncyclic5ClassGroup": "the Sylow-5 subgroup of Cl(K) is noncyclic; for finite Cl(K), this is equivalent to rank5 >= 2 and to containing (Z/5Z)^2"
+  },
+  "statements": [
+    {
+      "id": "EXP-EPS",
+      "kind": "principal_research_goal",
+      "formalStatement": "There exists delta in Q_{>0} such that for every epsilon in R_{>0} there exist c_epsilon in R_{>0} and X_epsilon > 1 such that every real X >= X_epsilon satisfies N_5,2^-(X) >= c_epsilon X^(1/3+delta-epsilon).",
+      "normalized": "EXISTS delta IN Q_{>0} SUCH THAT FOR ALL epsilon IN R_{>0} THERE EXIST c_epsilon IN R_{>0} AND X_epsilon IN R_{>1} SUCH THAT FOR ALL X IN R WITH X >= X_epsilon, N_5,2^-(X) >= c_epsilon * X^(1/3 + delta - epsilon), WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49",
+      "alignment": {
+        "relation": "unknown",
+        "conditionalRelation": "equivalent",
+        "condition": "Interpret X^(1/3+delta-o(1)) as an arbitrary fixed epsilon loss in the exponent, allow lower-bound constants and thresholds to depend on epsilon, and interpret explicit delta as an exhibited fixed positive rational."
+      },
+      "sourceRefs": ["Research Plan.pdf#pdf-page=2#anchor=Research Goal 1"]
+    },
+    {
+      "id": "EXP-EFFECTIVE",
+      "kind": "stronger_ambiguous_candidate",
+      "formalStatement": "Produce positive rational delta and algorithms C,T computing positive constants and thresholds for every positive rational epsilon, with the same exponent-improved lower bound.",
+      "normalized": "PRODUCE delta IN Q_{>0} AND ALGORITHMS C AND T SUCH THAT FOR EVERY epsilon IN Q_{>0}, C(epsilon) IN Q_{>0}, T(epsilon) IN Q_{>1}, AND FOR ALL X IN R WITH X >= T(epsilon), N_5,2^-(X) >= C(epsilon) * X^(1/3 + delta - epsilon), WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "c1af02c5316e2c00d97adb1a00d9565821c7d602d3d24737f6e9729f703a8e0a",
+      "alignment": {"relation": "stronger", "reason": "The plan explicitly modifies delta but does not demand computability of every implicit constant and threshold."},
+      "sourceRefs": ["Research Plan.pdf#pdf-page=2#anchor=explicit δ"]
+    },
+    {
+      "id": "LOG-IMPROVEMENT",
+      "kind": "intermediate_goal",
+      "normalized": "EXISTS alpha IN R WITH alpha < 2, c IN R_{>0}, AND X_0 IN R_{>1} SUCH THAT FOR ALL X IN R WITH X >= X_0, N_5,2^-(X) >= c * X^(1/3) / (log X)^alpha, WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "48c7bda4e674f2bb3a12217eda782f843a012d88b867c1fe53ce66f428c5342e",
+      "alignment": {"relation": "equivalent", "scope": "the example alpha < 2 on Research Plan PDF page 2 under the standard meaning of >>"},
+      "sourceRefs": ["Research Plan.pdf#pdf-page=2#anchor=A first possible level of progress"]
+    },
+    {
+      "id": "NO-LOG",
+      "kind": "intermediate_goal",
+      "normalized": "EXISTS c IN R_{>0} AND X_0 IN R_{>1} SUCH THAT FOR ALL X IN R WITH X >= X_0, N_5,2^-(X) >= c * X^(1/3), WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+      "alignment": {"relation": "equivalent", "scope": "the more strongly example on Research Plan PDF page 2 under the standard meaning of >>"},
+      "sourceRefs": ["Research Plan.pdf#pdf-page=2#anchor=or, more strongly"]
+    },
+    {
+      "id": "CL-POSITIVE-FREQUENCY",
+      "kind": "heuristic_comparison",
+      "normalized": "liminf_{X->infinity} N_5,2^-(X) / Q^-(X) > 0, WHERE Q^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, AND |Disc(K)| <= X, AND N_5,2^-(X) COUNTS THE SUBSET SATISFYING dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "80cbdf9353b77ef10b9485c1a599618f3dba344579c515bc7c8c0b9ef30ebe15",
+      "alignment": {"relation": "weaker", "comparison": "weaker than asserting existence of a positive limiting density; the plan gives no exact density constant or limiting convention"},
+      "sourceRefs": ["Research Plan.pdf#pdf-page=1#anchor=positive frequency"]
+    },
+    {
+      "id": "BLT-BASELINE",
+      "kind": "published_theorem",
+      "normalized": "EXISTS c IN R_{>0} AND X_0 IN R_{>1} SUCH THAT FOR ALL X IN R WITH X >= X_0, N_5,2^-(X) >= c * X^(1/3) / (log X)^2, WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "824e395028a3a2df3d655ab1e8a32203acbc582c5458e6bfe69332f62e5f3aad",
+      "alignment": {"relation": "equivalent", "comparison": "equivalent to the plan baseline after reconciling N^-(5^2;X) with N^-_{5,2}(X) and the two rank definitions"},
+      "sourceRefs": [
+        "Research Plan.pdf#pdf-page=1#anchor=Theorem 1",
+        "Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf#pdf-page=2#anchor=Theorem 1.3"
+      ]
+    },
+    {
+      "id": "BYEON-BASELINE",
+      "kind": "published_theorem_restriction",
+      "normalized": "EXISTS c IN R_{>0} AND X_0 IN R_{>0} SUCH THAT FOR ALL X IN R WITH X >= X_0, N_5,2^-(X) >= c * X^(1/4), WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+      "statementHashAlgorithm": "sha256(UTF-8(normalized))",
+      "statementHash": "0a31f4b4a375e338f944fe1eab68561d79a5a3d424113d55d375a11b17123bec",
+      "alignment": {"relation": "equivalent", "scope": "equivalent after restricting Byeon Theorem 1.1 to g=5 and imaginary quadratic fields; the full theorem is broader"},
+      "sourceRefs": [
+        "Research Plan.pdf#pdf-page=1#anchor=Byeon established",
+        "29_noncyclic_class57.pdf#pdf-page=2#anchor=Theorem 1.1"
+      ]
+    }
+  ],
+  "relationshipGraph": [
+    "EXP-EPS implies NO-LOG",
+    "NO-LOG implies LOG-IMPROVEMENT",
+    "LOG-IMPROVEMENT implies BLT-BASELINE",
+    "BLT-BASELINE implies BYEON-BASELINE",
+    "CL-POSITIVE-FREQUENCY is a heuristic comparison and is not used as an assumption"
+  ],
+  "paperRelationship": [
+    {
+      "paper": "29_noncyclic_class57.pdf",
+      "mainTheorem": "Theorem 1.1",
+      "relation": "Its g=5 imaginary-quadratic restriction is BYEON-BASELINE; the (Z/5Z)^2 subgroup condition is equivalent to rank5 >= 2."
+    },
+    {
+      "paper": "Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf",
+      "mainTheorem": "Theorem 1.3",
+      "relation": "It is BLT-BASELINE and the plan's current benchmark. Theorem 1.4 supplies X^(1/(g+1))/(log X)^2; the constructed genus-2 curve yields exponent 1/3."
+    }
+  ],
+  "assumptionLedger": [
+    {"id": "A01", "statement": "Count Q-isomorphism classes of fields, not presentations.", "status": "explicit_normalization", "sourceRefs": ["Research Plan.pdf#pdf-page=1"]},
+    {"id": "A02", "statement": "Use absolute field discriminant and real X tending to infinity.", "status": "explicit", "sourceRefs": ["Research Plan.pdf#pdf-page=1", "Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf#pdf-page=2", "29_noncyclic_class57.pdf#pdf-page=2"]},
+    {"id": "A03", "statement": "rank5 means dim_F5(Cl(K)/5Cl(K)).", "status": "explicit", "sourceRefs": ["Research Plan.pdf#pdf-page=1"]},
+    {"id": "A04", "statement": "Noncyclic 5-class group means noncyclic Sylow-5 subgroup, equivalent to rank5 >= 2.", "status": "derived_terminology", "sourceRefs": ["29_noncyclic_class57.pdf#pdf-page=2"]},
+    {"id": "A05", "statement": "The lower-bound constant is independent of X and may depend on epsilon in EXP-EPS.", "status": "conventional_made_explicit", "sourceRefs": ["Research Plan.pdf#pdf-page=2"]},
+    {"id": "A06", "statement": "delta is fixed before X and is represented by an exhibited positive rational.", "status": "conservative_normalization", "sourceRefs": ["Research Plan.pdf#pdf-page=2"]},
+    {"id": "A07", "statement": "The exponent -o(1) means arbitrary fixed epsilon loss.", "status": "unresolved_convention", "sourceRefs": ["Research Plan.pdf#pdf-page=2"]},
+    {"id": "A08", "statement": "The target lower bound is unconditional.", "status": "explicit_by_context", "sourceRefs": ["Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf#pdf-page=2"]},
+    {"id": "A09", "statement": "log is natural logarithm; any fixed base changes only the implicit constant.", "status": "harmless_convention", "sourceRefs": ["Research Plan.pdf#pdf-page=1"]},
+    {"id": "A10", "statement": "Cohen-Lenstra positive frequency is a heuristic comparison, not a premise.", "status": "explicit", "sourceRefs": ["Research Plan.pdf#pdf-page=1"]},
+    {"id": "A11", "statement": "Explicit requires a concrete delta; computability of all implicit constants remains unresolved.", "status": "unresolved", "sourceRefs": ["Research Plan.pdf#pdf-page=2"]},
+    {"id": "A12", "statement": "This is an informal formalization without a Lean kernel receipt.", "status": "tool_boundary", "sourceRefs": []}
+  ],
+  "semanticFailureTests": [
+    {"id": "SFT-01", "mutation": "Replace rank5 >= 2 by 5 dividing the class number.", "outcome": "refuted", "witness": "A=Z/5Z has 5 | #A but dim_F5(A/5A)=1."},
+    {"id": "SFT-02", "mutation": "Replace noncyclic Sylow-5 subgroup by noncyclic whole class group.", "outcome": "refuted", "witness": "A=Z/2Z x Z/2Z is noncyclic but A/5A=0."},
+    {"id": "SFT-03", "mutation": "Swap forall epsilon exists c_epsilon into exists c forall epsilon.", "outcome": "refuted_as_equivalent", "witness": "f(X)=X^a/log X satisfies the former but not the latter, which forces f(X) >= c X^a by epsilon tending to zero."},
+    {"id": "SFT-04", "mutation": "Allow delta to depend on X.", "outcome": "refuted_as_exponent_improvement", "witness": "delta(X)=1/log X gives X^(1/3+delta(X))=e X^(1/3)."},
+    {"id": "SFT-05", "mutation": "Read N^-(5^2;X) as 25-rank.", "outcome": "refuted_by_source_definition", "witness": "BLT PDF page 2 defines N^-(m^r;X) by rank_m >= r."}
+  ],
+  "evidenceBalance": {
+    "statementId": "EXP-EPS",
+    "statementHash": "6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49",
+    "supporting": {
+      "status": "qualified",
+      "strength": "source_alignment_only",
+      "items": ["The plan, BLT definition and theorem, and Byeon subgroup condition agree after the recorded finite-abelian-group equivalence."]
+    },
+    "refuting": {
+      "status": "not_found",
+      "scope": "No counterexample search for the open number-theory lower bound was assigned or run; only semantic mutations were tested."
+    },
+    "decision": "inconclusive_open_goal"
+  },
+  "falsification": {
+    "hypothesis": "The assigned PDFs support a useful, source-anchored formalization with an assumption ledger and reproducible statement hashes.",
+    "test": "Extract all PDFs with Ghostscript; cross-check decisive formulas against per-page rendering; normalize the principal and comparison statements; recompute every SHA-256; run minimal semantic mutation tests.",
+    "failureSignal": "No precise statement could be aligned to the plan and paper theorems, a stored hash failed recomputation, or a semantic mutation was indistinguishable from the intended statement.",
+    "outcome": "survived",
+    "limitations": ["The principal number-theory claim itself remains open and was not computationally falsified.", "The alignment of -o(1) remains conditional on a convention not defined in the plan."]
+  },
+  "reproducibility": {
+    "cwd": "/Users/hao/Desktop/WestlakeNLP/algebraic number theory/.deepscientist/agent-worktrees/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-for/cl-intake-formalization-v1-4d2b2c4a00",
+    "tools": {"ghostscript": "10.07.0", "pdftoppm": "26.05.0", "git": "2.39.5 (Apple Git-154)"},
+    "textExtractionCommands": [
+      "gs -q -dNOPAUSE -dBATCH -sDEVICE=txtwrite -sOutputFile=/tmp/research-plan.txt 'Research Plan.pdf'",
+      "gs -q -dNOPAUSE -dBATCH -sDEVICE=txtwrite -sOutputFile=/tmp/counting-5rank.txt 'Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf'",
+      "gs -q -dNOPAUSE -dBATCH -sDEVICE=txtwrite -sOutputFile=/tmp/noncyclic-class57.txt '29_noncyclic_class57.pdf'"
+    ],
+    "hashCommand": "python3 -c 'import hashlib,json,pathlib; d=json.loads(pathlib.Path(\"mathematics/worker/formalization-intake.json\").read_text()); [(lambda h: print(s[\"id\"], h, h==s[\"statementHash\"]))(hashlib.sha256(s[\"normalized\"].encode()).hexdigest()) for s in d[\"statements\"]]'",
+    "jsonValidationCommand": "python3 -m json.tool mathematics/worker/formalization-intake.json >/dev/null"
+  },
+  "remainingAmbiguities": [
+    "Whether X^(1/3+delta-o(1)) has the EXP-EPS epsilon-loss meaning.",
+    "Whether explicit applies only to delta or also requires computable lower-bound constants and thresholds.",
+    "The exact Cohen-Lenstra density constant and whether positive frequency means liminf positivity or existence of a positive limit."
+  ],
+  "nextRecommendation": "Freeze EXP-EPS only after confirming its conditional alignment; then audit BLT Theorem 1.4 dependencies, separating the genus-driven exponent from the specialization-driven logarithmic loss."
+}
