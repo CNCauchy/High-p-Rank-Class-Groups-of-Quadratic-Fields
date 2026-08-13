@@ -1,0 +1,43 @@
+{
+  "schema": "deepscientist.mathematics.report_manifest.v1",
+  "problemId": "cohen-lenstra-imaginary-quadratic-5-rank-2",
+  "statementHash": "6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49",
+  "title": "Cohen–Lenstra 子问题：精确化与首轮研究路线",
+  "audience": "代数数论研究者与项目所有者",
+  "reportClass": "discovery",
+  "disposition": "partial",
+  "decisiveLane": "formalization-and-source-review",
+  "sourceCommit": "58c4fabfa6b16757f54ec29e3890506ab6515159",
+  "toolchainLockHash": "",
+  "claimIds": [
+    "claim-exact-problem",
+    "claim-known-baseline",
+    "claim-boundary-counterexample",
+    "claim-no-log-candidate"
+  ],
+  "evidenceIds": [
+    "ev-intake-formalization",
+    "ev-source-review",
+    "ev-finite-search",
+    "ev-pari-boundary",
+    "ev-route-audit",
+    "ev-lean-preflight"
+  ],
+  "verificationIds": [
+    "verify-statement-hashes",
+    "verify-finite-replay",
+    "verify-route-algebra",
+    "verify-pari-boundary",
+    "verify-lean-preflight"
+  ],
+  "reviewIds": [
+    "review-source-consistency"
+  ],
+  "figureIds": [],
+  "tableIds": [
+    "table-claim-evidence-matrix"
+  ],
+  "reportArtifactId": "report-cohen-lenstra-stage-intake",
+  "createdAt": "2026-08-13T16:20:00+08:00",
+  "updatedAt": "2026-08-13T16:20:00+08:00"
+}

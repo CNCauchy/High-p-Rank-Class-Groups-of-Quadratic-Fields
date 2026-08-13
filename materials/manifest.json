@@ -1,0 +1,32 @@
+{
+  "schema": "deepscientist.mathematics.input_manifest.v1",
+  "asOf": "2026-08-13",
+  "files": [
+    {
+      "path": "Research Plan.pdf",
+      "role": "research-plan",
+      "pages": 3,
+      "textLines": 91,
+      "sha256": "af39b83d353d68de98f6db718313c5dea2c03b28cdc6be593119b111f716cb46"
+    },
+    {
+      "path": "29_noncyclic_class57.pdf",
+      "role": "byeon-baseline",
+      "pages": 9,
+      "textLines": 322,
+      "sha256": "0b135b2651241d21d7b8f6bce9bf995d4f1fc4db1762bc64defb54bd014ee3cd"
+    },
+    {
+      "path": "Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf",
+      "role": "blt-baseline",
+      "pages": 8,
+      "textLines": 320,
+      "sha256": "1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b"
+    }
+  ],
+  "verification": {
+    "metadata": "pdfinfo",
+    "hash": "shasum -a 256",
+    "textExtraction": "Ghostscript txtwrite"
+  }
+}
