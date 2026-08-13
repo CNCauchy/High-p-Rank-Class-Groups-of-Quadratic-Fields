@@ -1,0 +1,116 @@
+NO-LOG KL/BLT lead source replay
+================================
+
+Date: 2026-08-13 Asia/Shanghai
+Project base: 6de3b6bcf1ab8d8c72f12a78e16e11f13cf93514
+
+Sources
+-------
+
+KL URL:
+  https://arxiv.org/pdf/2111.15582v1
+
+KL SHA-256:
+  26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae
+
+BLT path:
+  Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf
+
+BLT SHA-256:
+  1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b
+
+Identity checks
+---------------
+
+KL: arXiv:2111.15582v1; 9 PDF pages. Journal identity independently matched to
+Acta Arithmetica 205 (2022), no. 4, 371--380; DOI 10.4064/aa211224-22-9.
+
+BLT: Ramanujan Journal 68 (2025), article 26; DOI
+10.1007/s11139-025-01184-6; 8 PDF pages.
+
+Extraction command template
+---------------------------
+
+  gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=txtwrite \
+    -dFirstPage=P -dLastPage=P -sOutputFile=page-P.txt source.pdf
+
+KL anchors recovered
+--------------------
+
+PDF p.2:
+  Theorem 1.2 quantifies fixed C, phi, S, epsilon, Omega and gives constants
+  B0,c for every B>=B0; conclusion counts distinct quadratic fields.
+  Theorem 1.3 gives imaginary exponent 1/(g+1) with (log X)^-2.
+
+PDF p.4:
+  Theorem 2.1 defines S_k(x) as the number of k-free integers t having
+  positive bounded witnesses in a fixed residue class. It is the weak
+  Stewart--Top branch and carries (log x)^-2.
+
+PDF p.6:
+  Lemma 3.1 produces fixed psi,M,A,B for the fixed local neighborhoods.
+  Lemma 3.2 counts O(x) rational alpha in a fixed thin Omega with H(alpha)<x.
+  Proof of Theorem 1.2 defines T(x) as squarefree t, then chooses one
+  witness (a_t,b_t) for each t and defines T'(x).
+
+PDF p.7:
+  Equations (3.1)--(3.2) retain thin and local conditions.
+  The displayed field calculation gives Q(P)=Q(sqrt(t)).
+  The displayed count is
+    |R(c^-1 x)| >= |T'(c^-1 x)| - 2|Omega(x)|
+                   >= S_2((c^-1 x)^deg F) - 2|Omega(x)|.
+  Theorem 4.1 supplies the fixed thin set and class-rank inequality.
+
+PDF pp.7--8:
+  Proof of Theorem 1.3 fixes the bad-prime set and translation, forces all
+  bad primes to ramify, treats real and imaginary signs separately, and
+  derives |d_Q(P)| <= c' B^(2g+2), with c' depending on fixed f,M,N.
+
+BLT anchors recovered
+---------------------
+
+PDF p.2:
+  Definition of N^-(m^r;X) and m-rank; Theorems 1.1--1.3.
+
+PDF p.3:
+  Theorem 1.4 invokes Kulkarni--Levin for a hyperelliptic curve with a
+  rational Weierstrass point and Jacobian torsion m-rank r.
+
+PDF p.7:
+  Explicit C0 odd quintic equation and published Magma conclusion
+  Jac(C0)(Q)_tors = Z/5Z x Z/10Z.
+
+Adversarial checks
+------------------
+
+1. Parameter/value confusion:
+   Lemma 3.2 alone is insufficient. Theorem 1.2 proof first selects one
+   witness per distinct t and then performs the deletion. Passed after
+   preserving that step.
+
+2. Point/field confusion:
+   Two conjugate geometric points generate the same quadratic field, so the
+   literal pointwise-distinct wording is too strong. Counting distinct t, or
+   dividing point count by at most two, repairs the constant without changing
+   the exponent. This correction is recorded explicitly.
+
+3. Repeated fields:
+   Signed squarefree t1,t2 give the same quadratic field iff t1/t2 is a
+   rational square; unique signed squarefree representatives imply t1=t2.
+
+4. Thin-set parameter space:
+   Omega is in the phi-parameter Q. A fixed linear fractional transformation
+   changes height by a fixed constant only. For a degree-six homogeneous form,
+   one projective ratio determines one square class, so deletion is O(H).
+
+5. Sign and height:
+   KL pp.7--8 explicitly choose a fixed negative real neighborhood for the
+   imaginary case and give exponent 2g+2=6. Directly, |F(a,b)|=O(H^6) also
+   gives |Disc Q(sqrt t)|=O(H^6).
+
+Boundary
+--------
+
+This replay does not certify Stewart--Top's strong no-log theorem in the
+final congruence class or its bounded positive-box witnesses. Status remains
+CANDIDATE. No kernel verification or novelty claim is made.
