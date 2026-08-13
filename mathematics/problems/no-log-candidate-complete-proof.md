@@ -8,14 +8,10 @@
 N^-_{5,2}(X)\gg X^{1/3},
 \]
 
-but it is not yet a `PROVED` project result. Two final gates remain open:
-
-1. independent review of the endpoint-avoidance and source-text corrections in the
-   Stewart--Top/Kulkarni--Levin interface;
-2. independent reconstruction of the Bartz--Levin--Thamminana curve `C0` from their
-   Theorem 2.1 sample, sufficient to certify
-   \(\operatorname{rk}_5\operatorname{Jac}(C_0)(\mathbf Q)_{\rm tors}\ge 2\)
-   without relying on the stronger exact-torsion Magma output.
+but it is not yet a `PROVED` project result. The two former local gates are now
+closed: the endpoint/source-text corrections passed independent review, and the BLT
+Theorem 2.1 sample has been explicitly identified with `C0`. One final gate remains:
+an independent adversarial review of this updated complete proof.
 
 The conditional Lean theorem certifies only the final numerical inference once the
 analytic/arithmetic bridge below is supplied. It is not a kernel verification of this
@@ -68,11 +64,29 @@ degree is four, it is prime to five; hence the required conclusion is only
 \operatorname{rk}_5\operatorname{Jac}(C_0)(\mathbf Q)_{\rm tors}\ge2.
 \]
 
+For the sample \((t,u,z)=(2/3,-1/3,25)\), exact substitution in BLT's coefficient
+formulas gives the even model `C_even` and the explicit \(\mathbf Q\)-isomorphism
+
+\[
+x_0=\frac{2(1-2x)}{5x-1},\qquad
+y_0=\frac{59049y}{1024(5x-1)^3},
+\]
+
+with inverse
+
+\[
+x=\frac{x_0+2}{5x_0+4},\qquad
+y=\frac{1024y_0}{2187(5x_0+4)^3}.
+\]
+
+Coefficient-by-coefficient verification is recorded in
+`mathematics/worker/no-log-blt-c0-rank-replay.py`. Therefore the theorem-level
+5-rank conclusion for `C_even` applies to the displayed `C0`.
+
 BLT p.7 also reports the stronger Magma computation
 \(\operatorname{Jac}(C_0)(\mathbf Q)_{\rm tors}\cong
 \mathbf Z/5\mathbf Z\times\mathbf Z/10\mathbf Z\). The argument below does not need
-that exact group equality. The remaining independent BLT gate is the explicit
-identification of the Theorem 2.1 sample curve with the displayed odd model `C0`.
+that exact group equality.
 
 ## Two elementary bridge lemmas
 
@@ -270,23 +284,23 @@ fields have discriminant at most \(X\), and their number is
 \gg H^2\gg X^{1/3}.
 \]
 
-This proves the claimed lower bound once the two open gates at the start of this
-document are discharged.
+This proves the claimed lower bound, subject only to independent terminal review of
+the complete assembled argument.
 
 ## The ten requested obligations
 
 | # | Obligation | Evidence level and verdict |
 | --- | --- | --- |
 | 1 | Fixed admissible congruence class | **Source explicit:** ST p.948 fixes arbitrary `A,B,M,k`; Thm. 1 retains them. Passed. |
-| 2 | Positive box/cone keeps \(\gg H^2\) | **Proof-level explicit:** ST pp.951--953. Lemma A ensures the optional cone-changing `SL2` step is skipped. Pending final independent correction review. |
+| 2 | Positive box/cone keeps \(\gg H^2\) | **Proof-level explicit:** ST pp.951--953. Lemma A ensures the optional cone-changing `SL2` step is skipped. Passed independent correction review. |
 | 3 | Final-class maximal \(w^2\) | **Source explicit:** ST pp.948--949 defines `w` for the final class before height and uses maximality for positive local density. Passed; no global `w=2` substitution is used. |
 | 4 | Distinct squarefree values, not pairs | **Proof-level explicit:** ST p.953 (10)--(15) and the next paragraph pass from pairs to distinct values. Passed, with the source's final object-name typo corrected. |
 | 5 | Uniform representation multiplicity | **Source combination:** ST p.953 (13),(15) plus Stewart 1991 Cor. 1; fixed-content normalization changes only fixed constants. Passed. |
-| 6 | Thin set contributes only \(O(H)\) | **Source explicit + Lemma B:** KL Lemma 3.2 counts rational parameters; Lemma B injects chosen distinct values into that space. Passed subject to final independent review. |
+| 6 | Thin set contributes only \(O(H)\) | **Source explicit + Lemma B:** KL Lemma 3.2 counts rational parameters; Lemma B injects chosen distinct values into that space. Passed independent correction review. |
 | 7 | Deletion leaves distinct fields | **Source calculation + elementary correction:** KL p.7 identifies the field; distinct signed squarefree `t` give distinct fields. Count by `t`, not by both conjugate points. Passed. |
-| 8 | Imaginary sign preserves order | **Source proof + immediate sign transfer:** KL pp.7--8 fixes the real neighborhood; ST remains in the same positive cone; deleting \(O(H)\) from \(\gg H^2\) preserves the order. Passed subject to the cone review. |
+| 8 | Imaginary sign preserves order | **Source proof + immediate sign transfer:** KL pp.7--8 fixes the real neighborhood; ST remains in the same positive cone; deleting \(O(H)\) from \(\gg H^2\) preserves the order. Passed independent correction review. |
 | 9 | Uniform \(|\Delta_K|=O(H^6)\) | **Immediate:** fixed sextic bound and \(|\Delta_{\mathbf Q(\sqrt t)}|\le4|t|\); also agrees with KL p.8 exponent \(2g+2=6\). Passed. |
-| 10 | Exact ST/KL/BLT hypotheses | ST's `r=6,k=2,m=4` satisfies Thm. 1; KL local/thin hypotheses are kept. The BLT `C0` rank input remains under independent reconstruction, so the overall verdict is still CANDIDATE. |
+| 10 | Exact ST/KL/BLT hypotheses | ST's `r=6,k=2,m=4` satisfies Thm. 1; KL local/thin hypotheses are kept. BLT Theorem 2.1 supplies 5-rank 2, and the sample-to-`C0` model identification is proved by an explicit rational isomorphism. Passed. |
 
 ## Source-text corrections that must remain visible
 
