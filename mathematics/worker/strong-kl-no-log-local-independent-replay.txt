@@ -1,0 +1,159 @@
+Strong KL local frozen-source independent review replay
+=======================================================
+
+Scope
+-----
+No web search, remote download, or broad history scan was used.  The source
+boundary is the project-local frozen files named below at base commit
+bab963ed21c9dcab7483bbca74f8273ab2cf4297.
+
+1. Git boundary at start
+------------------------
+
+$ git rev-parse --show-toplevel
+/Users/hao/Desktop/WestlakeNLP/algebraic number theory/.deepscientist/agent-worktrees/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-con/stage-no-log-strong-kl-local-f4cbbb588b
+
+$ git rev-parse HEAD
+bab963ed21c9dcab7483bbca74f8273ab2cf4297
+
+$ git branch --show-current
+deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-con/stage-no-log-strong-kl-local-f4cbbb588b
+
+$ git status --short
+[no output]
+
+2. Local frozen file SHA-256 values
+----------------------------------
+
+$ shasum -a 256 mathematics/worker/strong-kl-no-log-lemma.md mathematics/worker/strong-kl-no-log-source-matrix.json mathematics/worker/no-log-independent-replay.txt mathematics/worker/no-log-independent-applicability-review.md mathematics/worker/no-log-obstruction-audit.md mathematics/worker/no-log-obstruction-output.txt mathematics/worker/verify-route-audit.py mathematics/worker/formalization-intake.json 'Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf'
+3fe2e8f755594821bababae2763049037beee0033b0d6c817a1b8e86c65f58c6  mathematics/worker/strong-kl-no-log-lemma.md
+7469dccb986c07644516465881664932deb1710c8a0effe5aeb38ee669957acb  mathematics/worker/strong-kl-no-log-source-matrix.json
+fd0877f1635d6c3681b3b13b467d4b71f3ab1665ffcfffd5bfc837d2b7b0e3a0  mathematics/worker/no-log-independent-replay.txt
+3a201841da10c05912ee2ea84bb3daa90445ea6300d5f111fa456c7136086036  mathematics/worker/no-log-independent-applicability-review.md
+688ee6523a3ff55f530300ec02c7f38ec76b1e3fde7e83e26bb9fd805cef4529  mathematics/worker/no-log-obstruction-audit.md
+25629a4921ab85bc07f5348a85a596322ee19c9325c397bad4a7a943ca2641c5  mathematics/worker/no-log-obstruction-output.txt
+f689861c7bd94243837dbebf7b28edd258c832095309e38ebc850f7ac5ba9d9e  mathematics/worker/verify-route-audit.py
+89c4a79392f0de335f790f7b003fc34338fd9ab37dc91f2a1ce39eef73fb215f  mathematics/worker/formalization-intake.json
+1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b  Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf
+
+Frozen KL/ST source hashes recorded in the committed source matrix:
+KL arXiv:2111.15582v1 = 26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae
+ST JAMS 8 (1995) = 96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97
+The KL/ST PDF files are absent from this Git tree; this review used the local
+committed frozen excerpts/replay rather than claiming a new direct PDF read.
+
+3. Git blob identities at the frozen base
+-----------------------------------------
+
+$ git ls-tree -r HEAD [listed input paths]
+100644 blob b5fbae108d49e134c51e85e561c04353e8aab07c  Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf
+100644 blob a5d2508379d4417c62c24e0a399d90d7afcee202  mathematics/worker/formalization-intake.json
+100644 blob 35e01d3974de20b587be730b60b616684485329a  mathematics/worker/no-log-independent-applicability-review.md
+100644 blob 75e27917bcd9e259f0f0e6f67f2c5fc490bf0fef  mathematics/worker/no-log-independent-replay.txt
+100644 blob b4d6d7c8f1335e58820b0b654f1797c6f138b822  mathematics/worker/no-log-obstruction-audit.md
+100644 blob 337b8f787c7ed6ef1622742bc3a0606fdc5f2490  mathematics/worker/no-log-obstruction-output.txt
+100644 blob 9e2e99c99a33f0f122f08d47ab2f69a45b3e0634  mathematics/worker/strong-kl-no-log-lemma.md
+100644 blob 258b0f96644893595802b9dc010c2b2ece42c721  mathematics/worker/strong-kl-no-log-source-matrix.json
+100644 blob 45992bfb8780cf8cd3138816676ffd94d86cbb91  mathematics/worker/verify-route-audit.py
+
+4. Main-branch algebra replay
+-----------------------------
+
+$ python3 mathematics/worker/verify-route-audit.py
+C0 factor identity: True; coefficients=[2576, 8392, 11729, 8878, 3641, 640]
+Byeon Lemma 4.2 degree: 8
+gcd(Byeon m, m') over F_7: [1]
+gcd(C0 f, f') over F_7: [1]
+gcd(Byeon quadratic, sextic) over F_3: [1]
+
+Interpretation: the C0 factor identity and modular squarefreeness check replayed.
+This bounded algebra check is not a verification of the analytic KL/ST proof.
+
+5. NO-LOG statement-hash replay
+--------------------------------
+
+$ python3 - <<'PY'
+import hashlib, json, pathlib
+p = pathlib.Path('mathematics/worker/formalization-intake.json')
+d = json.loads(p.read_text())
+s = next(x for x in d['statements'] if x['id'] == 'NO-LOG')
+actual = hashlib.sha256(s['normalized'].encode()).hexdigest()
+print('NO-LOG stored=', s['statementHash'])
+print('NO-LOG actual=', actual)
+print('NO-LOG match=', actual == s['statementHash'])
+print('NO-LOG normalized=', s['normalized'])
+PY
+NO-LOG stored= 234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0
+NO-LOG actual= 234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0
+NO-LOG match= True
+NO-LOG normalized= EXISTS c IN R_{>0} AND X_0 IN R_{>1} SUCH THAT FOR ALL X IN R WITH X >= X_0, N_5,2^-(X) >= c * X^(1/3), WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.
+
+6. Source-matrix syntax and anchor inspection
+---------------------------------------------
+
+$ python3 -m json.tool mathematics/worker/strong-kl-no-log-source-matrix.json >/dev/null
+[exit 0]
+
+Frozen anchors actually used:
+- KL p.6 Lemma 3.1: sufficiently-large free N1; psi(q)=(1-N1*q)/(1+N1*q),
+  tau=psi^{-1}; positive a,b in one fixed congruence class encode all fixed
+  finite/real local neighborhoods.
+- KL p.6 Lemma 3.2: O(H) thin rational parameters of height O(H).
+- ST printed p.948: class-specific maximal w and R_k count F(a,b)=t*w^k.
+- ST printed p.951: optional endpoint repair, avoided here before ST is invoked.
+- ST printed p.952: T uses 1<=a,b<=u, fixed congruences, and F(a,b)/w^2
+  squarefree.
+- ST printed p.953 equations (10)-(15): from that same T, at least C21*u^2
+  distinct quotient values; |F(a,b)|<=r*H_F*u^r converts to R_2(x).
+
+7. Independent logic checks
+---------------------------
+
+KL composition order:
+  s=(psi o phi)(P)=a/b
+  phi(P)=tau(a/b)
+  u(P)=tau(a/b)-N0/M0
+  tau(0)=1/N1, tau(infinity)=-1/N1
+Thus the branch endpoint avoidance equation in the frozen lemma matches the
+actual substitution into g.
+
+Universal H quantifier:
+  ST gives #values(T(u)) >= C21*u^2 for every sufficiently large integer u.
+  For real H, put u=floor(H).  If H>=2*u0, then u>=H/2 and T(u) is contained
+  in T(H), giving at least (C21/4)*H^2 values, each with a,b<=H.
+  This is a forall-sufficiently-large-H statement, not a subsequence claim.
+
+Thin deletion injection:
+  choose one bounded witness per distinct t and set q_t=tau(a_t/b_t).
+  If q_t=q_t', injectivity of tau gives equal projective ratios.  Degree-six
+  homogeneity makes the two F values differ by a rational square.  Since w is
+  fixed and t,t' are signed squarefree, t=t'.  Hence O(H) bad parameters delete
+  at most O(H) distinct t.
+
+8. Review verdict and issue list
+--------------------------------
+
+verdict=passed
+falsification_outcome=survived
+I1 class-specific maximal w: passed; do not replace it by global w=2.
+I2 nonzero endpoints without cone-changing ST repair: passed.
+I3 composition prose: minor clarification; write psi o phi and phi=tau(a/b).
+I4 bounded witness from proof-level T and (10)-(15): passed.
+I5 forall real H: minor clarification; use floor(H) and shrink constant.
+I6 projective parameter to signed squarefree class injection: passed.
+I7 scope: NO-LOG only; no Lean receipt; no EXP-EPS inference.
+
+9. Final verification commands
+------------------------------
+
+$ test -s mathematics/worker/strong-kl-no-log-local-independent-review.md
+$ test -s mathematics/worker/strong-kl-no-log-local-independent-replay.txt
+$ rg -n 'passed|changes_requested|refuted|inconclusive|234b34d9|psi\\circ\\phi|floor\(H\)|bounded witness|EXP-EPS|Lean' mathematics/worker/strong-kl-no-log-local-independent-review.md
+$ git diff --check
+$ test "$(git rev-parse HEAD^)" = bab963ed21c9dcab7483bbca74f8273ab2cf4297
+$ test "$(git diff-tree --no-commit-id --name-only -r HEAD | wc -l | tr -d ' ')" = 2
+$ test -z "$(git status --porcelain)"
+
+Expected before commit: exactly the two assigned artifacts are untracked.
+Expected after commit: the branch is clean, HEAD has the exact assigned base as
+parent, and HEAD changes exactly the two assigned artifacts.
