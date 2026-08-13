@@ -1,0 +1,27 @@
+sanity: h(-3)=1, h(-4)=1, Cl(-23) has order 3; status=passed
+HLP sample: equation(2.3) sides=-3125/2187; a=2048/243; status=passed
+scope: negative fundamental discriminants -50000 <= D < 0; count=15195
+rank>=2 records: count=9
+  D=-11199 h=100 |Cl[5]|=25 5-rank=2
+  D=-12451 h=25 |Cl[5]|=25 5-rank=2
+  D=-17944 h=50 |Cl[5]|=25 5-rank=2
+  D=-30263 h=150 |Cl[5]|=25 5-rank=2
+  D=-33531 h=50 |Cl[5]|=25 5-rank=2
+  D=-37363 h=25 |Cl[5]|=25 5-rank=2
+  D=-38047 h=75 |Cl[5]|=25 5-rank=2
+  D=-39947 h=50 |Cl[5]|=25 5-rank=2
+  D=-42871 h=150 |Cl[5]|=25 5-rank=2
+first_by_abs_discriminant: D=-11199
+25|h but 5-rank<2 records: count=445
+  D=-479 h=25 |Cl[5]|=5 5-rank=1
+  D=-599 h=25 |Cl[5]|=5 5-rank=1
+  D=-1367 h=25 |Cl[5]|=5 5-rank=1
+  D=-1799 h=50 |Cl[5]|=5 5-rank=1
+  D=-2887 h=25 |Cl[5]|=5 5-rank=1
+  D=-3215 h=50 |Cl[5]|=5 5-rank=1
+  D=-3851 h=25 |Cl[5]|=5 5-rank=1
+  D=-4399 h=50 |Cl[5]|=5 5-rank=1
+  D=-4436 h=50 |Cl[5]|=5 5-rank=1
+  D=-4703 h=75 |Cl[5]|=5 5-rank=1
+  ... 435 further records omitted
+finite_search_conclusion=not_refuted_within_scope
