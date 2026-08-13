@@ -3,11 +3,12 @@
 ## 目的与认证边界
 
 本文件把冻结人工引理 `strong-kl-no-log-lemma.md` 的集合
-\(\mathcal T_H\) 逐字段映射到
-`NoLogSourceBridge.FixedC0RationalSource`。Lean 回执
-`lean-b450b5f91e03836f8ae94187` 已认证该结构一旦存在就推出根号自由的三次
-下界；本文件是来源到结构的人工实例化候选，必须通过独立冻结审阅后才可作为
-NO-LOG 的最后来源链接。
+\(\mathcal T_H\) 映射到纯数值结构
+`NoLogSourceBridge.RationalCountingBridge`。来源语义保留在本账本中，不再作为
+对 Lean 证明无作用的装饰性 `Prop` 字段。历史回执
+`lean-b450b5f91e03836f8ae94187` 已因声明对齐过宽而被取代；修复后的命名定理
+正在等待新平台收据。本文件必须与数值定理分别接受独立冻结审阅，二者同时通过
+后才可作为 NO-LOG 的最后来源链接。
 
 ## 固定常数的量词顺序
 
@@ -51,10 +52,6 @@ goodCount(T) = card(T_T).
 | Lean 字段 | 冻结来源对象 | 论证 |
 | --- | --- | --- |
 | `H0,p,q,discriminantConstant` | 上节的 `H0,1,q,D` | 固定正自然数 |
-| `positiveConeAndFixedCongruence` | `T_T` 的正盒 witness 与固定 `(A,B) mod M` | strong-KL items 2–3 |
-| `classWiseMaximalFixedSquare` | 同一类内 maximal `w²` | strong-KL item 2；不得偷换全局 `w=2` |
-| `boundedWitnessForEachSquarefreeValue` | 每个 `t∈T_T` 有 `1≤a,b≤T` | strong-KL item 3 与 proof step 6 |
-| `thinParameterInjectionAndLocalRank` | `τ(a/b)∉Ω`、signed-squarefree 单射与 KL 秩结论 | strong-KL items 3–4、steps 7–8 |
 | `rationalQuadraticGoodCount` | `#T_T≥cT²` 与 `1/q≤c` | 上节清分母 |
 | `goodInjectsIntoFields` | `t↦Q(√t)` 的互异性与 `|Disc|≤CΔT⁶≤DT⁶` | strong-KL item 4 |
 | `fieldCountMonotone` | 判别式截断集合包含关系 | `x≤y` 时 `N(x)≤N(y)` |
@@ -63,9 +60,13 @@ goodCount(T) = card(T_T).
 \(\mathcal T_T\) 的基数。不能一个字段用 ST 删除前集合、另一个字段用 KL
 删除后集合。
 
+来源侧的正锥、固定同余类、类内 maximal `w²`、bounded witness、thin-set
+排除和局部秩结论不是 Lean 结构字段；它们共同支持上述两个数值不等式，且必须
+在本账本和来源审阅中保持可追踪。
+
 ## Lean 内部已经处理的步骤
 
-`NoLogSourceBridge.no_log_of_fixed_c0_rational_source` 取源高度 (T=qH)，
+`NoLogSourceBridge.no_log_of_rational_counting_bridge` 取源高度 (T=qH)，
 由 `T²≤q·goodCount(T)` 消去正因子 (q)，得到主常数 (q) 的新高度下界；
 判别式常数同步成为 (Dq^6)。该定理还递归构造最大适配六次高度，证明
 
@@ -75,8 +76,8 @@ Dq^6H^6\le X< Dq^6(H+1)^6
 X\le64Dq^6H^6,
 \]
 
-并推出 (B X\le A N(X)^3)。这些步骤已经由上述收据内核认证，不再是来源
-审阅义务。
+并推出 (B X\le A N(X)^3)。这些步骤已在本地 Lean 重放通过；取得新平台
+收据后才恢复为平台 `kernel_verified`。它们不再是来源审阅义务。
 
 ## 主动失败测试
 

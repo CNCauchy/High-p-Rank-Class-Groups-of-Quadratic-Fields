@@ -1,12 +1,13 @@
 import Std.Tactic
 
 /-!
-# A rational-constant source interface for the fixed-C0 NO-LOG route
+# A rational-constant numerical bridge for the fixed-C0 NO-LOG route
 
 This self-contained file clears a positive rational main-term constant by a
 fixed height rescaling, constructs a discrete sixth-root selector, and proves
 the root-free cubic lower bound.  The Stewart--Top/Kulkarni--Levin inputs are
-kept as explicit fields; they are not proved in this file.
+not encoded in this file: they belong to the separately reviewed source
+instantiation ledger.
 -/
 
 namespace NoLogSourceBridge
@@ -53,13 +54,13 @@ theorem sixthSelector_spec (D : Nat) (hD : 0 < D) : ∀ X : Nat,
         · omega
 
 /--
-The source-level fixed-C0 data after thin-set deletion.
+The numerical data needed after source-level thin-set deletion.
 
 The positive integers `p,q` encode a rational quadratic lower bound
 `p*T^2 ≤ q*goodCount(T)`.  This is the exact integer form obtained after
 choosing any positive rational number below the source real constant.
 -/
-structure FixedC0RationalSource (N : Nat → Nat) where
+structure RationalCountingBridge (N : Nat → Nat) where
   goodCount : Nat → Nat
   H0 : Nat
   p : Nat
@@ -69,16 +70,6 @@ structure FixedC0RationalSource (N : Nat → Nat) where
   qPositive : 0 < q
   discriminantConstantPositive : 0 < discriminantConstant
 
-  positiveConeAndFixedCongruence : Prop
-  positiveConeAndFixedCongruenceHolds : positiveConeAndFixedCongruence
-  classWiseMaximalFixedSquare : Prop
-  classWiseMaximalFixedSquareHolds : classWiseMaximalFixedSquare
-  boundedWitnessForEachSquarefreeValue : Prop
-  boundedWitnessForEachSquarefreeValueHolds :
-    boundedWitnessForEachSquarefreeValue
-  thinParameterInjectionAndLocalRank : Prop
-  thinParameterInjectionAndLocalRankHolds : thinParameterInjectionAndLocalRank
-
   rationalQuadraticGoodCount : ∀ T : Nat, H0 ≤ T →
     p * T ^ 2 ≤ q * goodCount T
   goodInjectsIntoFields : ∀ T : Nat, H0 ≤ T →
@@ -86,14 +77,14 @@ structure FixedC0RationalSource (N : Nat → Nat) where
   fieldCountMonotone : ∀ x y : Nat, x ≤ y → N x ≤ N y
 
 /--
-The explicit rational source interface implies the cubic lower bound.
+The rational counting interface implies the cubic lower bound.
 
 The proof uses source height `q*H`, hence natural main constant `p*q` and
 rescaled discriminant constant `D*q^6`.  The recursive selector supplies the
 same height in both discriminant inequalities, with comparison factor `64`.
 -/
-theorem no_log_of_fixed_c0_rational_source
-    {N : Nat → Nat} (h : FixedC0RationalSource N) :
+theorem no_log_of_rational_counting_bridge
+    {N : Nat → Nat} (h : RationalCountingBridge N) :
     CubicLowerBound N := by
   let D' := h.discriminantConstant * h.q ^ 6
   let Hbase := max h.H0 1
