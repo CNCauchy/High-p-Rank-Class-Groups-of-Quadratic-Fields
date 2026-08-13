@@ -171,4 +171,3 @@ argument 给至少 `cH^2` 个不同负 squarefree `t`，每个有同一盒内 wi
 ST 原文接口在加入有限避让、固定 content 正规化以及 E1/E2 两处显式校正后闭合；
 没有发现固定类、正盒、distinct value、representation multiplicity 或 `H`-uniformity
 方面的致命反例。由于独立敌对审阅尚未交付，项目状态暂不升级，仍为 **CANDIDATE**。
-
