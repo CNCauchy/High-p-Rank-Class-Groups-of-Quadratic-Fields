@@ -30,6 +30,18 @@ FOR EVERY N : Nat -> Nat, IF POSITIVE NATURALS p, q, AND D AND A THRESHOLD H0 GI
 
 `statementHash = cb1ee74c7c99eb77ea1b0ece80d485c4eb089bc8820675220b738e662463e4c4`。
 
+## 平台认证
+
+- `receiptId = lean-b450b5f91e03836f8ae94187`
+- `targetCommit = 4c2bea33640112c6cb8756ee1aa243126124b056`
+- `proofHash = 0f31dee1984c9d575e1ec7f9e550fb13ef25c427538e75640e88cdcf878e5009`
+- `theoremDeclarationHash = 6ae30555b15cd10c8065d08f25dcaaee8c271ba4752d58c9b90451a242f2bc99`
+- `status = kernel_verified`
+- `goalsRemaining/sorry/admit = 0`, `axioms = []`
+
+完整身份字段见 `no-log-source-bridge-receipt.json`；内容寻址 trace 为
+`mathematics/report-traces/verification-8015df0b7d1021d26913.json`。
+
 ## 精确重放
 
 ```bash

@@ -1,0 +1,36 @@
+{
+  "schema": "deepscientist.mathematics.named-theorem-receipt-manifest.v1",
+  "receiptId": "lean-b450b5f91e03836f8ae94187",
+  "checkId": "fixed-c0-rational-source-bridge",
+  "status": "kernel_verified",
+  "verifier": "lean-kernel",
+  "claim": "statement",
+  "proofPath": "mathematics/formal/NoLogSourceBridge.lean",
+  "theoremName": "NoLogSourceBridge.no_log_of_fixed_c0_rational_source",
+  "statementHash": "cb1ee74c7c99eb77ea1b0ece80d485c4eb089bc8820675220b738e662463e4c4",
+  "theoremDeclarationHash": "6ae30555b15cd10c8065d08f25dcaaee8c271ba4752d58c9b90451a242f2bc99",
+  "proofHash": "0f31dee1984c9d575e1ec7f9e550fb13ef25c427538e75640e88cdcf878e5009",
+  "targetCommit": "4c2bea33640112c6cb8756ee1aa243126124b056",
+  "statementBinding": "caller-bound-to-committed-declaration",
+  "goalsRemaining": 0,
+  "sorryCount": 0,
+  "admitCount": 0,
+  "axioms": [],
+  "checkedAt": 1786628050018,
+  "sessionId": "02f15581-42ea-4348-8e3b-b7f88bedb4b0",
+  "source": {
+    "tool": "lean_workspace",
+    "action": "certify",
+    "runId": "sci_run_msrk7jrv_ef7b7c",
+    "reportTracePath": "mathematics/report-traces/verification-8015df0b7d1021d26913.json"
+  },
+  "scope": {
+    "certifies": "The conditional implication FixedC0RationalSource N -> NoLogSourceBridge.CubicLowerBound N, including rational constant clearing and constructive sixth-root selection.",
+    "doesNotCertify": [
+      "The Stewart-Top/Kulkarni-Levin source theorem inputs",
+      "Construction of the fixed-C0 goodCount finite sets",
+      "Existence of a positive rational lower bound below the source real Vinogradov constant",
+      "The unconditional NO-LOG or EXP-EPS statements"
+    ]
+  }
+}

@@ -129,7 +129,8 @@
     "structure": "NoLogSourceBridge.FixedC0RationalSource",
     "theorem": "NoLogSourceBridge.no_log_of_fixed_c0_rational_source",
     "statementHash": "cb1ee74c7c99eb77ea1b0ece80d485c4eb089bc8820675220b738e662463e4c4",
-    "status": "locally_kernel_compiled_pending_platform_receipt_and_independent_review",
+    "status": "platform_kernel_verified_pending_independent_source_alignment_review",
+    "receiptId": "lean-b450b5f91e03836f8ae94187",
     "repair": "Encode a positive rational p/q below the source real constant as p*T^2 <= q*goodCount(T); use T=qH, mainConstant=pq, discriminantConstant=Dq^6, and a kernel-constructed maximal sixth-root selector.",
     "remainingExternalInputs": [
       "The source-supported post-deletion strong KL lower bound and its uniform quantifiers",
