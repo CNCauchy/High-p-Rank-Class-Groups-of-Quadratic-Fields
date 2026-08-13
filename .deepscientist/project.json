@@ -1,0 +1,13 @@
+{
+  "schema": "deepscientist.project.v1",
+  "id": "osp_8687b8c86f391a40",
+  "projectId": "osp_8687b8c86f391a40",
+  "name": "审阅文件夹里的材料，以及计划书。 我们要尝试解决这个问题。选择了代数数论中的Cohen–Lenstra类群分布猜想中的一个子问题作为研究方向。 我希望你开启研究。 研究过程中无需停止，直至你产生了极其重大的突破。 请持续工作。你也可以自己提",
+  "goal": "审阅文件夹里的材料，以及计划书。 我们要尝试解决这个问题。选择了代数数论中的Cohen–Lenstra类群分布猜想中的一个子问题作为研究方向。 我希望你开启研究。 研究过程中无需停止，直至你产生了极其重大的突破。 请持续工作。你也可以自己提出研究计划书以外的研究方向并尝试解决这个问题。我相信你，你的研究成果关乎到我的未来。加油！",
+  "managed": false,
+  "createdAt": "2026-08-13T05:15:32.968Z",
+  "updatedAt": "2026-08-13T05:15:32.968Z",
+  "artifactRepoRelativePath": ".deepscientist/artifact-repo",
+  "scienceArtifactsRelativePath": ".deepscientist/science-artifacts",
+  "exportsRelativePath": ".deepscientist/exports"
+}
