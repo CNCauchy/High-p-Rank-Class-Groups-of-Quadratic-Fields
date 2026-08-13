@@ -37,7 +37,7 @@ N^-_{5,2}(X)\ge c_\varepsilon X^{1/3+\delta-\varepsilon}.
 | --- | --- | --- | --- |
 | `BYEON-BASELINE` | `N^-_{5,2}(X) ≫ X^(1/4)` | `0a31f4b4a375e338f944fe1eab68561d79a5a3d424113d55d375a11b17123bec` | Byeon Theorem 1.1 支持 |
 | `BLT-BASELINE` | `N^-_{5,2}(X) ≫ X^(1/3)/(log X)^2` | `824e395028a3a2df3d655ab1e8a32203acbc582c5458e6bfe69332f62e5f3aad` | BLT Theorem 1.3 支持 |
-| `NO-LOG` | `N^-_{5,2}(X) ≫ X^(1/3)` | `234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0` | source-supported 人工证明候选；独立审阅通过；总命题非 Lean Verified |
+| `NO-LOG` | `N^-_{5,2}(X) ≫ X^(1/3)` | `234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0` | source-supported 人工证明候选；条件推理已 kernel_verified；总命题非 Lean Verified |
 | `EXP-EPS` | 固定正 `δ` 的指数增益 | `6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49` | 候选；未证明 |
 
 逻辑关系为 `EXP-EPS ⇒ NO-LOG ⇒ BLT-BASELINE`。BLT 的 `1/3` 与 `(log X)^-2` 已在其引用的 Kulkarni–Levin 定量专门化定理中出现；不能把 BLT 搜索得到的参数、曲线或同构类数量相加成不同二次域的计数。
@@ -56,18 +56,21 @@ Kulkarni–Levin 局部化相结合的完整人工证明候选。KL 端点有限
 裁决为 `passed`。审阅要求显式补出的 `ψ∘φ` 复合顺序和
 `u=floor(H)` 量词推导已写回主稿。
 
-三条可分离代数小引理已取得 Lean 4.33 平台内核回执，但解析计数输入与
-NO-LOG 总命题尚未整体形式化。因此本结果是 **Candidate**，不得称为
-`Verified`；它也不支持 `EXP-EPS`。
+三条可分离代数小引理已取得 Lean 4.33 平台内核回执。另一个命名定理
+`NoLogInference.no_log_of_strong_kl_interface` 已认证完整的条件蕴含
+`AnalyticBridge N → CubicLowerBound N`，独立审阅确认其常数、不等式、注入、
+单调性和高度选择器方向正确。其 statementHash `796fae5b…384` 严格不同于
+无条件 NO-LOG hash；由于尚未形式化构造 `AnalyticBridge`，本结果仍是
+**Candidate**，不得称为 `Verified`，也不支持 `EXP-EPS`。
 
 ## 下一条最高信息增益路线
 
 对 BLT 的显式 genus-2 曲线 `C0`，相关次数 6 二元型已核对为 `1+1+4` 次因子，并取得模 7 无重根证书。这使 Stewart–Top 强平方自由值定理成为去掉 `(log X)^2` 的具体候选入口。
 
-下一阶段继续绑定 `NO-LOG` 的 statementHash，将已审阅人工证明拆成 Lean
-接口定理：明确哪些解析输入作为假设，认证从这些输入到最终 `X^(1/3)` 计数的
-形式推导，并逐步缩小未形式化的 Stewart–Top/Kulkarni–Levin 部分。完成该门后
-才回到多参数或 `D5` 扩张等 `EXP-EPS` 路线。即使 `NO-LOG` 最终成立，它也不
+下一阶段逐字段构造固定 `C0` 的 `AnalyticBridge`，把已审阅的
+Stewart–Top/Kulkarni–Levin 输入连接到已认证的接口定理，并对这个来源到接口的
+桥接做独立复核。完成该门后才回到多参数或 `D5` 扩张等 `EXP-EPS` 路线。
+即使 `NO-LOG` 最终成立，它也不
 提供 `EXP-EPS` 的正指数增益。
 
 ## 可复现入口
@@ -79,5 +82,7 @@ NO-LOG 总命题尚未整体形式化。因此本结果是 **Candidate**，不�
 - 路线代数检查：`python3 mathematics/worker/verify-route-audit.py`
 - NO-LOG 人工证明：`mathematics/worker/strong-kl-no-log-lemma.md`
 - 独立审阅：`mathematics/worker/strong-kl-no-log-local-independent-review.md`
-- Lean 收据：`mathematics/verification-trace.json`
+- 条件推理 Lean 源码：`mathematics/formal/NoLogInference.lean`
+- 条件推理权威收据：`mathematics/formal/no-log-inference-receipt.json`
+- 条件推理独立语义审阅：`mathematics/worker/no-log-inference-local-independent-review.md`
 - 阶段报告：`reports/cohen-lenstra-no-log-stage.md`

@@ -7,12 +7,13 @@
   "reportClass": "discovery",
   "disposition": "candidate",
   "decisiveLane": "source-supported-proof-plus-independent-review",
-  "sourceCommit": "3e9d2d9e7554ca96ebd1069b961bad6ff3551afa",
+  "sourceCommit": "e48b21561b59ad7af04e121a5e376d5fcdbc452a",
   "toolchainLockHash": "",
   "claimIds": [
     "claim-no-log-candidate",
     "claim-strong-kl-review-passed",
-    "claim-three-local-lean-lemmas"
+    "claim-three-local-lean-lemmas",
+    "claim-no-log-conditional-inference"
   ],
   "evidenceIds": [
     "strong-kl-proof-candidate",
@@ -23,17 +24,23 @@
     "e-collision",
     "lean-a62ffa489032128067eb1563",
     "lean-028df156148361b0c4878378",
-    "lean-d45c165c534cca72abb0ce9f"
+    "lean-d45c165c534cca72abb0ce9f",
+    "lean-deb15db5d3c3746d573dba4f",
+    "inference-semantic-review",
+    "file:mathematics/formal/no-log-inference-receipt.json"
   ],
   "verificationIds": [
     "verify-route-algebra",
     "verify-local-certificate",
     "verify-obstruction-replay",
     "verify-no-log-hash",
-    "verify-three-local-lean-lemmas"
+    "verify-three-local-lean-lemmas",
+    "verify-no-log-conditional-inference",
+    "verify-no-log-receipt-identity"
   ],
   "reviewIds": [
-    "review-strong-kl-local"
+    "review-strong-kl-local",
+    "review-no-log-inference-semantics"
   ],
   "figureIds": [],
   "tableIds": [
@@ -41,5 +48,5 @@
   ],
   "reportArtifactId": "report-cohen-lenstra-no-log-stage",
   "createdAt": "2026-08-13T18:45:00+08:00",
-  "updatedAt": "2026-08-13T18:45:00+08:00"
+  "updatedAt": "2026-08-13T20:40:00+08:00"
 }

@@ -12,8 +12,10 @@ statementHash 为
 
 这比 Bartz–Levin–Thamminana 的
 \(X^{1/3}/(\log X)^2\) 下界去掉了对数损失，但没有给出
-`EXP-EPS` 所要求的任何正指数增益。NO-LOG 总命题尚无匹配 statementHash 的
-Lean 内核回执，因此不得称为 `Verified`。
+`EXP-EPS` 所要求的任何正指数增益。当前已有一个匹配冻结提交的 Lean 内核
+回执，认证显式条件接口
+`AnalyticBridge N → CubicLowerBound N`；它不构造 `AnalyticBridge`，也不绑定
+无条件 NO-LOG 的 statementHash，因此 NO-LOG 总命题仍不得称为 `Verified`。
 
 ## 论证依赖图
 
@@ -42,12 +44,14 @@ Lean 内核回执，因此不得称为 `Verified`。
 | S3 | 强 KL/ST 人工证明链闭合 | `strong-kl-no-log-lemma.md` | source-supported candidate |
 | S4 | 两个决定性量词接口 | `strong-kl-no-log-local-independent-review.md` | independent review passed |
 | S5 | 三条可分离代数小引理 | `NoLogAlgebra.lean`、`verification-trace.json` | 3/3 kernel_verified |
-| SF | NO-LOG 总命题 | 上述组合，但解析输入未整体形式化 | Candidate；非 Verified |
+| S6 | 显式解析假设到立方下界的完整推理 | `NoLogInference.lean` | conditional inference kernel_verified |
+| S7 | S6 的常数、注入、单调性和选择器方向 | `no-log-inference-local-independent-review.md` | semantic review passed；回执字段缺口已由权威 manifest 修复 |
+| SF | NO-LOG 总命题 | S0–S7，但 `AnalyticBridge` 尚未由 ST/KL 构造 | Candidate；非 Verified |
 
 ## 支持线与反驳线
 
-支持线包括原始来源逐页锚点、明确的强 KL 引理、独立审阅，以及三条 Lean
-小引理收据。独立审阅主动测试了复合顺序、端点修正是否破坏正锥、类内 \(w\)
+支持线包括原始来源逐页锚点、明确的强 KL 引理、独立审阅、三条 Lean
+小引理收据，以及完整条件推理的命名定理收据。独立审阅主动测试了复合顺序、端点修正是否破坏正锥、类内 \(w\)
 偷换、无界表示反推、只沿 subsequence 计数，以及 thin 参数的非单射风险；
 没有出现决定性失败信号。
 
@@ -59,7 +63,7 @@ Lean 内核回执，因此不得称为 `Verified`。
 
 ## Lean 验证边界
 
-平台 Lean 4.33 认证了三条命名定理：
+平台 Lean 4.33 认证了三条局部代数命名定理：
 
 - `NoLogAlgebra.c0_explicit_factor_expansion`；
 - `NoLogAlgebra.exists_large_nat_avoiding_finite_endpoints`；
@@ -68,6 +72,21 @@ Lean 内核回执，因此不得称为 `Verified`。
 三条检查均有 0 个开放目标、0 个 `sorry`、0 个 `admit` 和 0 个项目自设
 axiom。它们不认证 Stewart–Top 或 Kulkarni–Levin 的解析定理，也不认证
 NO-LOG 总命题。
+
+此外，平台回执 `lean-deb15db5d3c3746d573dba4f` 认证了
+`NoLogInference.no_log_of_strong_kl_interface`：在固定正锥同余类、类内
+maximal \(w^2\)、二次强计数、线性 thin-set、good-to-field 注入、单调性及
+六次高度选择器全部显式给出的前提下，推出
+
+\[
+\exists X_0,A,B>0\ \forall X\ge X_0,\quad B X\le A N(X)^3.
+\]
+
+回执四元组冻结在 `no-log-inference-receipt.json`：条件 statementHash 为
+`796fae5b…384`，声明 hash 为 `869535f2…0fe`，proof hash 为
+`f4d7c0ec…564`，target commit 为 `4371fcb4…1b3`。独立审阅确认全部机械语义
+方向正确；其发现的唯一证据缺口是通用 trace 未保存三个身份字段，现已由
+权威 verifier manifest 补齐。这个修复不构成 `AnalyticBridge` 的存在证明。
 
 ## 重放
 
@@ -80,13 +99,16 @@ python3 mathematics/worker/search_no_log_obstructions.py \
 cmp /tmp/no-log-obstruction-output.txt \
   mathematics/worker/no-log-obstruction-output.txt
 lean -q -t 0 mathematics/formal/NoLogAlgebra.lean
+lean -q -t 0 mathematics/formal/NoLogInference.lean
+python3 -m json.tool \
+  mathematics/formal/no-log-inference-receipt.json >/dev/null
 python3 -m json.tool mathematics/verification-trace.json >/dev/null
 ```
 
 ## 下一步
 
-最高信息增益的后续不是继续搜索曲线，而是建立 NO-LOG 的 Lean 接口蓝图：
-把 Stewart–Top 和 Kulkarni–Levin 当作明确声明的解析输入，先认证从这些输入到
-最终 \(X^{1/3}\) 计数结论的形式推导；随后再逐步形式化或外部复核这些解析输入。
-在取得匹配 NO-LOG statementHash 的内核回执和完整独立审查之前，结论保持
-Candidate。
+完整条件推理接口已经内核认证。最高信息增益的下一步是构造并审查固定
+\(C_0\) 的 `AnalyticBridge` 实例：逐字段把 Stewart–Top/Kulkarni–Levin 的
+来源命题连接到强计数、thin-set 删除、good-to-field 注入和六次高度选择器。
+只有该构造也被严格验证，才可能把条件回执与无条件 NO-LOG statementHash
+连接起来；在此之前结论保持 Candidate。

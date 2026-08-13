@@ -4,7 +4,7 @@
   "title": "虚二次域 5-rank≥2 的 Cohen–Lenstra 子问题",
   "stage": "review",
   "status": "needs_review",
-  "updatedAt": 1786617930063,
+  "updatedAt": 1786624800000,
   "projectRoot": "/Users/hao/Desktop/WestlakeNLP/algebraic number theory",
   "activeProblemId": "cl-no-log",
   "toolchain": {
@@ -31,7 +31,7 @@
         "ex-11199",
         "cx-479"
       ],
-      "updatedAt": 1786617930063,
+      "updatedAt": 1786624800000,
       "alignment": "unknown",
       "alignmentNote": "标准 ε-损失解释下条件等价；计划书字面 o(1) 量词未定义。"
     },
@@ -51,7 +51,7 @@
         "attempt-c0-strong-kl"
       ],
       "exampleIds": [],
-      "updatedAt": 1786617930063,
+      "updatedAt": 1786624800000,
       "alignment": "equivalent",
       "alignmentNote": "等价于计划书更强目标的无对数第一层进展，严格弱于 EXP-EPS。"
     }
@@ -63,10 +63,10 @@
       "strategy": "对 BLT 曲线 C0 以 Stewart–Top 强 Theorem 1 替换 Kulkarni–Levin 的带 log² 输入，并保留局部化、thin-set、高度与互异域接口。",
       "status": "candidate",
       "createdAt": 1786610203839,
-      "updatedAt": 1786617930063,
+      "updatedAt": 1786624800000,
       "parentCommit": "4d67750593ca509a937bb5252377d4d86595bdbd",
-      "targetCommit": "3e9d2d9e7554ca96ebd1069b961bad6ff3551afa",
-      "outcome": "形成 source-supported NO-LOG 人工证明候选；决定性 KL 端点避让与 ST bounded-witness/thin-delete 接口经独立冻结来源审阅 passed。"
+      "targetCommit": "e48b21561b59ad7af04e121a5e376d5fcdbc452a",
+      "outcome": "形成 source-supported NO-LOG 人工证明候选；决定性来源接口经独立审阅 passed；完整条件推理 AnalyticBridge N → CubicLowerBound N 已取得命名 Lean receipt，但 AnalyticBridge 构造仍未验证。"
     }
   ],
   "examples": [
@@ -220,6 +220,54 @@
       "commit": "d0a8897bd87b3974644ed957ca14bb53c4fd109b",
       "command": "platform lean_workspace certify batch",
       "createdAt": 1786618385705
+    },
+    {
+      "id": "ev-no-log-conditional-inference",
+      "problemId": "cl-no-log",
+      "polarity": "supporting",
+      "strength": "formal",
+      "scope": "条件蕴含 AnalyticBridge N → CubicLowerBound N；不包括 AnalyticBridge 构造或无条件 NO-LOG",
+      "method": "Lean 4.33 命名定理平台内核认证与权威四元组 manifest",
+      "inputRefs": [
+        "mathematics/formal/NoLogInference.lean",
+        "statementHash:796fae5b00f462089dce3a91b859d00069a1dd85374bc3325be27c92f19bb384"
+      ],
+      "outputRefs": [
+        "mathematics/formal/no-log-inference-receipt.json",
+        "mathematics/formal/no-log-inference-replay.md"
+      ],
+      "evidenceIds": [
+        "lean-deb15db5d3c3746d573dba4f"
+      ],
+      "observed": "NoLogInference.no_log_of_strong_kl_interface kernel_verified；0 goals/sorry/admit/axioms；receipt 绑定声明 hash、proof hash 与 target commit。",
+      "reproducibility": "reproduced",
+      "commit": "e48b21561b59ad7af04e121a5e376d5fcdbc452a",
+      "command": "lean -q -t 0 mathematics/formal/NoLogInference.lean",
+      "createdAt": 1786624800000
+    },
+    {
+      "id": "ev-no-log-inference-semantic-review",
+      "problemId": "cl-no-log",
+      "polarity": "supporting",
+      "strength": "supporting",
+      "scope": "条件推理的常数、不等式、注入、单调性、选择器方向及条件/无条件边界",
+      "method": "冻结提交独立语义审阅与主动证伪",
+      "inputRefs": [
+        "mathematics/formal/NoLogInference.lean@4371fcb4ede90c2e981b634d847b8b04c3cd41b3"
+      ],
+      "outputRefs": [
+        "mathematics/worker/no-log-inference-local-independent-review.md",
+        "mathematics/worker/no-log-inference-local-independent-replay.txt"
+      ],
+      "evidenceIds": [
+        "inference-semantic-review",
+        "inference-deterministic-replay"
+      ],
+      "observed": "全部数学语义义务 passed；唯一 changes_requested 是通用 trace 缺三个身份字段，已由权威 receipt manifest 修复且未改动证明源。",
+      "reproducibility": "independent",
+      "commit": "a95da99752ce02e89890374ab6f4663a955f990e",
+      "command": "lean -q -t 0 mathematics/formal/NoLogInference.lean",
+      "createdAt": 1786624800000
     }
   ],
   "verifications": [],
@@ -236,26 +284,43 @@
         "minor-psi-phi-order-resolved",
         "minor-real-H-floor-resolved"
       ],
-      "updatedAt": 1786617930063,
+      "updatedAt": 1786624800000,
       "reviewCommit": "731bc474ad3f9644d204b2bf4d2431f2708ac0a9"
+    },
+    {
+      "id": "review-no-log-inference-semantics",
+      "problemId": "cl-no-log",
+      "status": "changes_requested",
+      "targetCommit": "4371fcb4ede90c2e981b634d847b8b04c3cd41b3",
+      "statementHash": "796fae5b00f462089dce3a91b859d00069a1dd85374bc3325be27c92f19bb384",
+      "verdict": "changes_requested",
+      "summary": "条件定理的全部数学语义义务 passed；阻塞项仅为通用 trace 缺 receipt 身份字段，已在 e48b215 的权威 manifest 中机械修复。",
+      "issueIds": [
+        "receipt-statement-hash-resolved",
+        "receipt-declaration-hash-resolved",
+        "receipt-target-commit-resolved"
+      ],
+      "updatedAt": 1786624800000,
+      "reviewCommit": "ec08a0a562fd00acbe83a9c84bb9546ba8a0e7a2",
+      "resolutionCommit": "e48b21561b59ad7af04e121a5e376d5fcdbc452a"
     }
   ],
   "blockers": [
-    "NO-LOG 总命题尚无匹配 statementHash 的 Lean 内核回执，因此不得称 Verified。",
-    "Stewart–Top、Kulkarni–Levin 与 thin-set 渐近输入尚未在 Lean 中形式化。",
+    "条件推理已有匹配 Lean 回执，但固定 C0 的 AnalyticBridge 尚未从 Stewart–Top、Kulkarni–Levin 与 thin-set 输入构造，故无条件 NO-LOG 不得称 Verified。",
+    "无条件 NO-LOG statementHash 234b34d9…806b0 尚无匹配内核回执与完整独立审查。",
     "EXP-EPS 的正指数增益仍未证明或反驳。"
   ],
   "nextActions": [
     {
-      "id": "formalize-no-log-interface",
-      "label": "将强 KL 人工证明拆为 Lean 可验证接口定理并认证最终推导",
+      "id": "construct-analytic-bridge",
+      "label": "逐字段构造固定 C0 的 AnalyticBridge 并审查来源映射",
       "kind": "formalize",
       "priority": "now",
       "owner": "agent"
     },
     {
-      "id": "external-source-review",
-      "label": "对完整 NO-LOG 主稿进行逐页原始 PDF 外部复核",
+      "id": "review-analytic-bridge",
+      "label": "对 AnalyticBridge 构造和无条件 NO-LOG 对齐做独立冻结审查",
       "kind": "review",
       "priority": "next",
       "owner": "agent"
