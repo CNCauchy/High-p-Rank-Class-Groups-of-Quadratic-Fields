@@ -1,0 +1,37 @@
+{
+  "schema": "deepscientist.mathematics.named-theorem-receipt-manifest.v1",
+  "receiptId": "lean-e40e8e6ac2aaf53e098fa4bf",
+  "checkId": "fixed-c0-post-deletion-bridge",
+  "status": "kernel_verified",
+  "verifier": "lean-kernel",
+  "claim": "statement",
+  "proofPath": "mathematics/formal/NoLogBridge.lean",
+  "theoremName": "NoLogBridge.no_log_of_fixed_c0_post_deletion_bridge",
+  "statementHash": "15f96ab0d2ebb841449247742018013b767961c9cea4bdfc000e1e6b1084d99b",
+  "theoremDeclarationHash": "e965e131fef35e084e45f2203d30bafbc1242c96170f8bcc87b7643a20d6d76b",
+  "proofHash": "22155581091404f0ba4f42973dab2c49cb89d714c64b29339e4f6eb3ad16cb3d",
+  "targetCommit": "c9cf8f09bb42fc52784f8cc710b70b2bf604098f",
+  "statementBinding": "caller-bound-to-committed-declaration",
+  "goalsRemaining": 0,
+  "sorryCount": 0,
+  "admitCount": 0,
+  "axioms": [],
+  "checkedAt": 1786626398534,
+  "sessionId": "57c3d839-2a0f-43da-adf9-de2ac9b684cd",
+  "source": {
+    "tool": "lean_workspace",
+    "action": "certify",
+    "runId": "sci_run_msrj85l2_c4fda0",
+    "reportTracePath": "mathematics/report-traces/verification-d5235674491167ec7042.json"
+  },
+  "scope": {
+    "certifies": "The conditional implication FixedC0PostDeletionBridge N -> NoLogBridge.CubicLowerBound N.",
+    "doesNotCertify": [
+      "Construction of FixedC0PostDeletionBridge from Stewart-Top and Kulkarni-Levin",
+      "The fixed height-rescaling normalization recorded as B-NORM-1",
+      "Construction of the two-sided sixth-degree height selector",
+      "The unconditional NO-LOG statement with hash 234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+      "The EXP-EPS statement with hash 6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49"
+    ]
+  }
+}

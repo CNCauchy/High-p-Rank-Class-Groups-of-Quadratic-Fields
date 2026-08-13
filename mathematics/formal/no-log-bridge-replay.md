@@ -28,6 +28,18 @@ FOR EVERY N : Nat -> Nat, IF THERE EXISTS A FIXED-C0 POST-DELETION BRIDGE WITH A
 `statementHash = 15f96ab0d2ebb841449247742018013b767961c9cea4bdfc000e1e6b1084d99b`。
 该值由上述字节串直接重算，不含代码围栏与末尾换行。
 
+## 平台认证收据
+
+- `receiptId = lean-e40e8e6ac2aaf53e098fa4bf`
+- `targetCommit = c9cf8f09bb42fc52784f8cc710b70b2bf604098f`
+- `proofHash = 22155581091404f0ba4f42973dab2c49cb89d714c64b29339e4f6eb3ad16cb3d`
+- `theoremDeclarationHash = e965e131fef35e084e45f2203d30bafbc1242c96170f8bcc87b7643a20d6d76b`
+- `status = kernel_verified`
+- `goalsRemaining = 0`, `sorryCount = 0`, `admitCount = 0`, `axioms = []`
+
+完整身份字段冻结在 `no-log-bridge-receipt.json`，验证 trace 的内容寻址副本为
+`mathematics/report-traces/verification-d5235674491167ec7042.json`。
+
 ## 精确重放
 
 ```bash
