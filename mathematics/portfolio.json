@@ -1,0 +1,219 @@
+{
+  "schema": "deepscientist.mathematics.portfolio.v1",
+  "version": 1,
+  "title": "虚二次域 5-rank≥2 的 Cohen–Lenstra 子问题",
+  "stage": "proving",
+  "status": "running",
+  "updatedAt": 1786610203839,
+  "activeProblemId": "cl-no-log",
+  "toolchain": {
+    "lean": "4.33.0",
+    "mathlib": "not yet pinned",
+    "lake": "5.0.0"
+  },
+  "problems": [
+    {
+      "id": "cl-exp-eps",
+      "title": "固定正指数增益 EXP-EPS",
+      "informalStatement": "存在固定 δ>0，使 N^-_{5,2}(X) ≫_ε X^(1/3+δ-ε)。",
+      "formalStatement": "EXISTS delta IN Q_{>0} SUCH THAT FOR ALL epsilon > 0 THERE EXIST c_epsilon > 0 AND X_epsilon > 1 SUCH THAT FOR ALL X >= X_epsilon, N_5,2^-(X) >= c_epsilon * X^(1/3 + delta - epsilon).",
+      "assumptions": [
+        "虚二次 Q-同构类",
+        "|Disc K|≤X",
+        "5-rank≥2",
+        "δ 固定"
+      ],
+      "statementHash": "6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49",
+      "status": "candidate",
+      "attemptIds": [],
+      "exampleIds": [
+        "ex-11199",
+        "cx-479"
+      ],
+      "updatedAt": 1786610203839,
+      "alignment": "unknown",
+      "alignmentNote": "标准 ε-损失解释下条件等价；计划书字面 o(1) 量词未定义。"
+    },
+    {
+      "id": "cl-no-log",
+      "title": "去除 BLT 对数损失",
+      "informalStatement": "证明 N^-_{5,2}(X) ≫ X^(1/3)。",
+      "formalStatement": "EXISTS c > 0 AND X_0 > 1 SUCH THAT FOR ALL X >= X_0, N_5,2^-(X) >= c * X^(1/3).",
+      "assumptions": [
+        "沿用 EXP-EPS 计数对象",
+        "常数不依赖 X"
+      ],
+      "statementHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+      "status": "candidate",
+      "attemptIds": [
+        "attempt-c0"
+      ],
+      "exampleIds": [],
+      "updatedAt": 1786610203839,
+      "alignment": "equivalent",
+      "alignmentNote": "等价于计划书更强的第一层进展，弱于 EXP-EPS。"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "attempt-c0",
+      "problemId": "cl-no-log",
+      "strategy": "对 BLT 曲线 C0 应用 Stewart–Top 强平方自由值定理",
+      "status": "running",
+      "createdAt": 1786610203839,
+      "updatedAt": 1786610203839,
+      "outcome": "因子展开与无重根通过；局部同余、thin-set、高度与重数未决。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex-11199",
+      "problemId": "cl-exp-eps",
+      "kind": "positive",
+      "input": "D=-11199",
+      "scope": "15,195 个负基本判别式",
+      "evidenceIds": [
+        "math-ev-finite-search",
+        "math-ev-pari-boundary"
+      ],
+      "createdAt": 1786610203839,
+      "statement": "有限范围内 5-rank 2 正例。",
+      "result": "PARI/GP invariants [20,5]"
+    },
+    {
+      "id": "cx-479",
+      "problemId": "cl-exp-eps",
+      "kind": "counterexample",
+      "input": "D=-479; claim 25|h iff rank≥2",
+      "scope": "精确辅助命题",
+      "evidenceIds": [
+        "math-ev-finite-search",
+        "math-ev-pari-boundary"
+      ],
+      "createdAt": 1786610203839,
+      "statement": "反驳类数可除性简化。",
+      "result": "PARI/GP invariants [25], rank=1"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "pf-form",
+      "problemId": "cl-exp-eps",
+      "polarity": "supporting",
+      "strength": "reproduced",
+      "scope": "精确命题",
+      "method": "规范化与哈希重算",
+      "inputRefs": [
+        "三份 PDF"
+      ],
+      "outputRefs": [
+        "mathematics/worker/formalization-intake.json"
+      ],
+      "evidenceIds": [
+        "math-ev-intake-formalization"
+      ],
+      "observed": "7 个 hash 可复算。",
+      "reproducibility": "reproduced",
+      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
+      "command": "hash replay",
+      "createdAt": 1786610203839
+    },
+    {
+      "id": "pf-review",
+      "problemId": "cl-exp-eps",
+      "polarity": "context",
+      "strength": "supporting",
+      "scope": "Byeon/BLT 基线",
+      "method": "独立来源审阅",
+      "inputRefs": [
+        "三份 PDF"
+      ],
+      "outputRefs": [
+        "mathematics/worker/source-consistency-review.md"
+      ],
+      "evidenceIds": [
+        "math-ev-source-review"
+      ],
+      "observed": "两个单侧下界准确，计划书四点需修订。",
+      "reproducibility": "independent",
+      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
+      "command": "14-item review",
+      "createdAt": 1786610203839
+    },
+    {
+      "id": "pf-finite",
+      "problemId": "cl-exp-eps",
+      "polarity": "refuting",
+      "strength": "reproduced",
+      "scope": "-50000≤D<0",
+      "method": "有界穷举与 PARI 复验",
+      "inputRefs": [
+        "bound=50000"
+      ],
+      "outputRefs": [
+        "mathematics/worker/counterexample-finite-search-output.txt"
+      ],
+      "evidenceIds": [
+        "math-ev-finite-search",
+        "math-ev-pari-boundary"
+      ],
+      "observed": "主候选未被有限范围反驳；D=-479 反驳辅助命题。",
+      "reproducibility": "independent",
+      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
+      "command": "Python replay plus gp bnfinit",
+      "createdAt": 1786610203839
+    },
+    {
+      "id": "pf-route",
+      "problemId": "cl-no-log",
+      "polarity": "supporting",
+      "strength": "reproduced",
+      "scope": "C0 候选代数前提",
+      "method": "多项式与有限域 gcd",
+      "inputRefs": [
+        "BLT C0"
+      ],
+      "outputRefs": [
+        "mathematics/worker/verify-route-audit.py"
+      ],
+      "evidenceIds": [
+        "math-ev-route-audit"
+      ],
+      "observed": "分解与无重根通过，局部兼容未决。",
+      "reproducibility": "reproduced",
+      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
+      "command": "python3 mathematics/worker/verify-route-audit.py",
+      "createdAt": 1786610203839
+    }
+  ],
+  "verifications": [],
+  "reviews": [],
+  "blockers": [
+    "EXP-EPS 未证明或反驳。",
+    "NO-LOG 缺局部同余、thin-set 与高度/重数兼容证明。",
+    "没有命名定理 Lean 内核回执或通过的独立证明审查。"
+  ],
+  "nextActions": [
+    {
+      "id": "audit-no-log",
+      "label": "审计 C0 与 Stewart–Top 的局部兼容",
+      "kind": "search",
+      "priority": "now",
+      "owner": "agent"
+    },
+    {
+      "id": "formalize",
+      "label": "锁定 Mathlib 并认证代数引理",
+      "kind": "formalize",
+      "priority": "next",
+      "owner": "agent"
+    },
+    {
+      "id": "review",
+      "label": "证明闭合后独立审查",
+      "kind": "review",
+      "priority": "later",
+      "owner": "agent"
+    }
+  ]
+}
