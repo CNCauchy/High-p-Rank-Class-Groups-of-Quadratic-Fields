@@ -2,13 +2,14 @@
   "schema": "deepscientist.mathematics.portfolio.v1",
   "version": 1,
   "title": "虚二次域 5-rank≥2 的 Cohen–Lenstra 子问题",
-  "stage": "proving",
-  "status": "running",
-  "updatedAt": 1786610203839,
+  "stage": "review",
+  "status": "needs_review",
+  "updatedAt": 1786617930063,
+  "projectRoot": "/Users/hao/Desktop/WestlakeNLP/algebraic number theory",
   "activeProblemId": "cl-no-log",
   "toolchain": {
     "lean": "4.33.0",
-    "mathlib": "not yet pinned",
+    "mathlib": "unavailable",
     "lake": "5.0.0"
   },
   "problems": [
@@ -30,7 +31,7 @@
         "ex-11199",
         "cx-479"
       ],
-      "updatedAt": 1786610203839,
+      "updatedAt": 1786617930063,
       "alignment": "unknown",
       "alignmentNote": "标准 ε-损失解释下条件等价；计划书字面 o(1) 量词未定义。"
     },
@@ -41,28 +42,31 @@
       "formalStatement": "EXISTS c > 0 AND X_0 > 1 SUCH THAT FOR ALL X >= X_0, N_5,2^-(X) >= c * X^(1/3).",
       "assumptions": [
         "沿用 EXP-EPS 计数对象",
-        "常数不依赖 X"
+        "常数不依赖 X",
+        "Stewart–Top Theorem 1 与 Kulkarni–Levin 局部化接口按冻结来源适用"
       ],
       "statementHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
       "status": "candidate",
       "attemptIds": [
-        "attempt-c0"
+        "attempt-c0-strong-kl"
       ],
       "exampleIds": [],
-      "updatedAt": 1786610203839,
+      "updatedAt": 1786617930063,
       "alignment": "equivalent",
-      "alignmentNote": "等价于计划书更强的第一层进展，弱于 EXP-EPS。"
+      "alignmentNote": "等价于计划书更强目标的无对数第一层进展，严格弱于 EXP-EPS。"
     }
   ],
   "attempts": [
     {
-      "id": "attempt-c0",
+      "id": "attempt-c0-strong-kl",
       "problemId": "cl-no-log",
-      "strategy": "对 BLT 曲线 C0 应用 Stewart–Top 强平方自由值定理",
-      "status": "running",
+      "strategy": "对 BLT 曲线 C0 以 Stewart–Top 强 Theorem 1 替换 Kulkarni–Levin 的带 log² 输入，并保留局部化、thin-set、高度与互异域接口。",
+      "status": "candidate",
       "createdAt": 1786610203839,
-      "updatedAt": 1786610203839,
-      "outcome": "因子展开与无重根通过；局部同余、thin-set、高度与重数未决。"
+      "updatedAt": 1786617930063,
+      "parentCommit": "4d67750593ca509a937bb5252377d4d86595bdbd",
+      "targetCommit": "3e9d2d9e7554ca96ebd1069b961bad6ff3551afa",
+      "outcome": "形成 source-supported NO-LOG 人工证明候选；决定性 KL 端点避让与 ST bounded-witness/thin-delete 接口经独立冻结来源审阅 passed。"
     }
   ],
   "examples": [
@@ -73,8 +77,8 @@
       "input": "D=-11199",
       "scope": "15,195 个负基本判别式",
       "evidenceIds": [
-        "math-ev-finite-search",
-        "math-ev-pari-boundary"
+        "ev-finite-search",
+        "ev-pari-boundary"
       ],
       "createdAt": 1786610203839,
       "statement": "有限范围内 5-rank 2 正例。",
@@ -87,8 +91,7 @@
       "input": "D=-479; claim 25|h iff rank≥2",
       "scope": "精确辅助命题",
       "evidenceIds": [
-        "math-ev-finite-search",
-        "math-ev-pari-boundary"
+        "ev-pari-boundary"
       ],
       "createdAt": 1786610203839,
       "statement": "反驳类数可除性简化。",
@@ -97,53 +100,83 @@
   ],
   "evidence": [
     {
-      "id": "pf-form",
-      "problemId": "cl-exp-eps",
+      "id": "ev-no-log-proof",
+      "problemId": "cl-no-log",
       "polarity": "supporting",
-      "strength": "reproduced",
-      "scope": "精确命题",
-      "method": "规范化与哈希重算",
+      "strength": "supporting",
+      "scope": "NO-LOG 完整人工证明候选",
+      "method": "Stewart–Top/Kulkarni–Levin 来源逐义务拼接",
       "inputRefs": [
-        "三份 PDF"
+        "Stewart–Top JAMS 8 (1995) pp.948–954",
+        "Kulkarni–Levin arXiv:2111.15582v1",
+        "BLT C0"
       ],
       "outputRefs": [
-        "mathematics/worker/formalization-intake.json"
+        "mathematics/worker/strong-kl-no-log-lemma.md",
+        "mathematics/worker/strong-kl-no-log-source-matrix.json"
       ],
       "evidenceIds": [
-        "math-ev-intake-formalization"
+        "strong-kl-proof-candidate"
       ],
-      "observed": "7 个 hash 可复算。",
-      "reproducibility": "reproduced",
-      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
-      "command": "hash replay",
-      "createdAt": 1786610203839
+      "observed": "端点避让、类内 w、正盒有界 witness、thin-set 删除、H^6 高度和互异域计数形成闭合链。",
+      "reproducibility": "independent",
+      "commit": "bab963ed21c9dcab7483bbca74f8273ab2cf4297",
+      "command": "python3 mathematics/worker/verify-route-audit.py",
+      "createdAt": 1786617930063
     },
     {
-      "id": "pf-review",
+      "id": "ev-no-log-review",
+      "problemId": "cl-no-log",
+      "polarity": "supporting",
+      "strength": "supporting",
+      "scope": "KL 端点避让与 ST bounded-witness/thin-delete 两个决定性接口",
+      "method": "冻结来源独立审阅与主动反驳",
+      "inputRefs": [
+        "mathematics/worker/strong-kl-no-log-lemma.md@bab963ed21c9dcab7483bbca74f8273ab2cf4297"
+      ],
+      "outputRefs": [
+        "mathematics/worker/strong-kl-no-log-local-independent-review.md",
+        "mathematics/worker/strong-kl-no-log-local-independent-replay.txt"
+      ],
+      "evidenceIds": [
+        "strong-kl-local-review",
+        "strong-kl-local-replay"
+      ],
+      "observed": "verdict passed；两项 minor clarification 已在 Lead 主稿补入。",
+      "reproducibility": "independent",
+      "commit": "3e9d2d9e7554ca96ebd1069b961bad6ff3551afa",
+      "command": "python3 mathematics/worker/verify-route-audit.py",
+      "createdAt": 1786617930063
+    },
+    {
+      "id": "ev-local-boundary",
+      "problemId": "cl-no-log",
+      "polarity": "refuting",
+      "strength": "reproduced",
+      "scope": "坏素数局部类与 H≤200 碰撞搜索",
+      "method": "局部穷举与有限碰撞审计",
+      "inputRefs": [
+        "C0 六次型"
+      ],
+      "outputRefs": [
+        "mathematics/worker/no-log-local-certificate-output.txt",
+        "mathematics/worker/no-log-obstruction-output.txt"
+      ],
+      "evidenceIds": [
+        "c0-local-output",
+        "e-fixed-square",
+        "e-collision"
+      ],
+      "observed": "发现固定平方因子 4（需类内 w 处理）；归一化后未在声明范围找到阻碍，有限结果不证明渐近命题。",
+      "reproducibility": "reproduced",
+      "commit": "bc662ddd8d04ac6a1c4377ed9ae478688467f091",
+      "command": "python3 mathematics/worker/search_no_log_obstructions.py",
+      "createdAt": 1786617930063
+    },
+    {
+      "id": "ev-finite-search",
       "problemId": "cl-exp-eps",
       "polarity": "context",
-      "strength": "supporting",
-      "scope": "Byeon/BLT 基线",
-      "method": "独立来源审阅",
-      "inputRefs": [
-        "三份 PDF"
-      ],
-      "outputRefs": [
-        "mathematics/worker/source-consistency-review.md"
-      ],
-      "evidenceIds": [
-        "math-ev-source-review"
-      ],
-      "observed": "两个单侧下界准确，计划书四点需修订。",
-      "reproducibility": "independent",
-      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
-      "command": "14-item review",
-      "createdAt": 1786610203839
-    },
-    {
-      "id": "pf-finite",
-      "problemId": "cl-exp-eps",
-      "polarity": "refuting",
       "strength": "reproduced",
       "scope": "-50000≤D<0",
       "method": "有界穷举与 PARI 复验",
@@ -154,8 +187,8 @@
         "mathematics/worker/counterexample-finite-search-output.txt"
       ],
       "evidenceIds": [
-        "math-ev-finite-search",
-        "math-ev-pari-boundary"
+        "ev-finite-search",
+        "ev-pari-boundary"
       ],
       "observed": "主候选未被有限范围反驳；D=-479 反驳辅助命题。",
       "reproducibility": "independent",
@@ -164,54 +197,73 @@
       "createdAt": 1786610203839
     },
     {
-      "id": "pf-route",
+      "id": "ev-three-local-lean-receipts",
       "problemId": "cl-no-log",
       "polarity": "supporting",
-      "strength": "reproduced",
-      "scope": "C0 候选代数前提",
-      "method": "多项式与有限域 gcd",
+      "strength": "formal",
+      "scope": "三个可分离代数小引理；不包括 NO-LOG 总命题",
+      "method": "Lean 4.33 平台批量内核认证",
       "inputRefs": [
-        "BLT C0"
+        "mathematics/formal/NoLogAlgebra.lean"
       ],
       "outputRefs": [
-        "mathematics/worker/verify-route-audit.py"
+        "mathematics/verification-trace.json",
+        "mathematics/report-traces/verification-ecf1b5f130bdeb497a82.json"
       ],
       "evidenceIds": [
-        "math-ev-route-audit"
+        "lean-a62ffa489032128067eb1563",
+        "lean-028df156148361b0c4878378",
+        "lean-d45c165c534cca72abb0ce9f"
       ],
-      "observed": "分解与无重根通过，局部兼容未决。",
+      "observed": "三条命名定理 3/3 kernel_verified；均为 0 open goals/sorry/admit/项目 axioms。",
       "reproducibility": "reproduced",
-      "commit": "4d67750593ca509a937bb5252377d4d86595bdbd",
-      "command": "python3 mathematics/worker/verify-route-audit.py",
-      "createdAt": 1786610203839
+      "commit": "d0a8897bd87b3974644ed957ca14bb53c4fd109b",
+      "command": "platform lean_workspace certify batch",
+      "createdAt": 1786618385705
     }
   ],
   "verifications": [],
-  "reviews": [],
+  "reviews": [
+    {
+      "id": "review-strong-kl-local",
+      "problemId": "cl-no-log",
+      "status": "passed",
+      "targetCommit": "bab963ed21c9dcab7483bbca74f8273ab2cf4297",
+      "statementHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+      "verdict": "passed",
+      "summary": "两个决定性接口通过冻结来源独立审阅；未对完整解析链作 Lean 形式化。",
+      "issueIds": [
+        "minor-psi-phi-order-resolved",
+        "minor-real-H-floor-resolved"
+      ],
+      "updatedAt": 1786617930063,
+      "reviewCommit": "731bc474ad3f9644d204b2bf4d2431f2708ac0a9"
+    }
+  ],
   "blockers": [
-    "EXP-EPS 未证明或反驳。",
-    "NO-LOG 缺局部同余、thin-set 与高度/重数兼容证明。",
-    "没有命名定理 Lean 内核回执或通过的独立证明审查。"
+    "NO-LOG 总命题尚无匹配 statementHash 的 Lean 内核回执，因此不得称 Verified。",
+    "Stewart–Top、Kulkarni–Levin 与 thin-set 渐近输入尚未在 Lean 中形式化。",
+    "EXP-EPS 的正指数增益仍未证明或反驳。"
   ],
   "nextActions": [
     {
-      "id": "audit-no-log",
-      "label": "审计 C0 与 Stewart–Top 的局部兼容",
-      "kind": "search",
+      "id": "formalize-no-log-interface",
+      "label": "将强 KL 人工证明拆为 Lean 可验证接口定理并认证最终推导",
+      "kind": "formalize",
       "priority": "now",
       "owner": "agent"
     },
     {
-      "id": "formalize",
-      "label": "锁定 Mathlib 并认证代数引理",
-      "kind": "formalize",
+      "id": "external-source-review",
+      "label": "对完整 NO-LOG 主稿进行逐页原始 PDF 外部复核",
+      "kind": "review",
       "priority": "next",
       "owner": "agent"
     },
     {
-      "id": "review",
-      "label": "证明闭合后独立审查",
-      "kind": "review",
+      "id": "return-exp-eps",
+      "label": "NO-LOG 发布门闭合后回到正指数增益路线",
+      "kind": "search",
       "priority": "later",
       "owner": "agent"
     }

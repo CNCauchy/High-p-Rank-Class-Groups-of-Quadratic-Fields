@@ -37,7 +37,7 @@ N^-_{5,2}(X)\ge c_\varepsilon X^{1/3+\delta-\varepsilon}.
 | --- | --- | --- | --- |
 | `BYEON-BASELINE` | `N^-_{5,2}(X) ≫ X^(1/4)` | `0a31f4b4a375e338f944fe1eab68561d79a5a3d424113d55d375a11b17123bec` | Byeon Theorem 1.1 支持 |
 | `BLT-BASELINE` | `N^-_{5,2}(X) ≫ X^(1/3)/(log X)^2` | `824e395028a3a2df3d655ab1e8a32203acbc582c5458e6bfe69332f62e5f3aad` | BLT Theorem 1.3 支持 |
-| `NO-LOG` | `N^-_{5,2}(X) ≫ X^(1/3)` | `234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0` | 候选；未证明 |
+| `NO-LOG` | `N^-_{5,2}(X) ≫ X^(1/3)` | `234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0` | source-supported 人工证明候选；独立审阅通过；总命题非 Lean Verified |
 | `EXP-EPS` | 固定正 `δ` 的指数增益 | `6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49` | 候选；未证明 |
 
 逻辑关系为 `EXP-EPS ⇒ NO-LOG ⇒ BLT-BASELINE`。BLT 的 `1/3` 与 `(log X)^-2` 已在其引用的 Kulkarni–Levin 定量专门化定理中出现；不能把 BLT 搜索得到的参数、曲线或同构类数量相加成不同二次域的计数。
@@ -48,17 +48,27 @@ N^-_{5,2}(X)\ge c_\varepsilon X^{1/3+\delta-\varepsilon}.
 
 反驳线：标准库精确搜索穷举所有 `-50000≤D<0` 的 15,195 个负基本判别式，找到 9 个 5-rank 至少 2 的例子；范围内首例是 `D=-11199`，其类群不变量由 PARI/GP 复算为 `[20,5]`。`D=-479` 的类群不变量为 `[25]`，因此反驳“`25|h(D)` 当且仅当 5-rank 至少 2”。有限搜索只提供声明范围内证据，不证明任何渐近结论或无界最小性。
 
+## NO-LOG 阶段性结果
+
+对 BLT 的显式 genus-2 曲线 `C0`，已形成 Stewart–Top 强 Theorem 1 与
+Kulkarni–Levin 局部化相结合的完整人工证明候选。KL 端点有限避让与 ST
+正盒 bounded-witness/thin-set 删除两个决定性接口已经过独立冻结来源审阅，
+裁决为 `passed`。审阅要求显式补出的 `ψ∘φ` 复合顺序和
+`u=floor(H)` 量词推导已写回主稿。
+
+三条可分离代数小引理已取得 Lean 4.33 平台内核回执，但解析计数输入与
+NO-LOG 总命题尚未整体形式化。因此本结果是 **Candidate**，不得称为
+`Verified`；它也不支持 `EXP-EPS`。
+
 ## 下一条最高信息增益路线
 
 对 BLT 的显式 genus-2 曲线 `C0`，相关次数 6 二元型已核对为 `1+1+4` 次因子，并取得模 7 无重根证书。这使 Stewart–Top 强平方自由值定理成为去掉 `(log X)^2` 的具体候选入口。
 
-下一阶段只绑定 `NO-LOG` 的 statementHash，逐项证明或否定以下兼容性：
-
-1. 固定平方因子与所需局部同余类可同时实现；
-2. 强平方自由值计数与 Kulkarni–Levin 的 thin-set 排除兼容；
-3. 参数高度到基本判别式高度的转换保持 `X^(1/3)` 且重数受控。
-
-若任一兼容性失败，记录精确障碍并转向多参数或 `D5` 扩张计数路线。即使 `NO-LOG` 成立，它也不提供 `EXP-EPS` 的正指数增益。
+下一阶段继续绑定 `NO-LOG` 的 statementHash，将已审阅人工证明拆成 Lean
+接口定理：明确哪些解析输入作为假设，认证从这些输入到最终 `X^(1/3)` 计数的
+形式推导，并逐步缩小未形式化的 Stewart–Top/Kulkarni–Levin 部分。完成该门后
+才回到多参数或 `D5` 扩张等 `EXP-EPS` 路线。即使 `NO-LOG` 最终成立，它也不
+提供 `EXP-EPS` 的正指数增益。
 
 ## 可复现入口
 
@@ -67,3 +77,7 @@ N^-_{5,2}(X)\ge c_\varepsilon X^{1/3+\delta-\varepsilon}.
 - 有限反例审计：`mathematics/worker/counterexample-boundary-audit.md`
 - 有限搜索重放：`python3 mathematics/worker/counterexample_finite_search.py --bound 50000`
 - 路线代数检查：`python3 mathematics/worker/verify-route-audit.py`
+- NO-LOG 人工证明：`mathematics/worker/strong-kl-no-log-lemma.md`
+- 独立审阅：`mathematics/worker/strong-kl-no-log-local-independent-review.md`
+- Lean 收据：`mathematics/verification-trace.json`
+- 阶段报告：`reports/cohen-lenstra-no-log-stage.md`

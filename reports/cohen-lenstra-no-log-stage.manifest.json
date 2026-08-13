@@ -1,0 +1,45 @@
+{
+  "schema": "deepscientist.mathematics.report_manifest.v1",
+  "problemId": "cl-no-log",
+  "statementHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+  "title": "NO-LOG 阶段：来源支持的证明候选",
+  "audience": "代数数论研究者与项目所有者",
+  "reportClass": "discovery",
+  "disposition": "candidate",
+  "decisiveLane": "source-supported-proof-plus-independent-review",
+  "sourceCommit": "3e9d2d9e7554ca96ebd1069b961bad6ff3551afa",
+  "toolchainLockHash": "",
+  "claimIds": [
+    "claim-no-log-candidate",
+    "claim-strong-kl-review-passed",
+    "claim-three-local-lean-lemmas"
+  ],
+  "evidenceIds": [
+    "strong-kl-proof-candidate",
+    "strong-kl-local-review",
+    "strong-kl-local-replay",
+    "c0-local-output",
+    "e-fixed-square",
+    "e-collision",
+    "lean-a62ffa489032128067eb1563",
+    "lean-028df156148361b0c4878378",
+    "lean-d45c165c534cca72abb0ce9f"
+  ],
+  "verificationIds": [
+    "verify-route-algebra",
+    "verify-local-certificate",
+    "verify-obstruction-replay",
+    "verify-no-log-hash",
+    "verify-three-local-lean-lemmas"
+  ],
+  "reviewIds": [
+    "review-strong-kl-local"
+  ],
+  "figureIds": [],
+  "tableIds": [
+    "table-no-log-claim-evidence-matrix"
+  ],
+  "reportArtifactId": "report-cohen-lenstra-no-log-stage",
+  "createdAt": "2026-08-13T18:45:00+08:00",
+  "updatedAt": "2026-08-13T18:45:00+08:00"
+}

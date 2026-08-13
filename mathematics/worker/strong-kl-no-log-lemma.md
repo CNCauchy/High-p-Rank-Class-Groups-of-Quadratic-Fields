@@ -123,6 +123,14 @@ squarefree binary form \(F\in\mathbf Z[X,Y]\)、整数 \(w\ge1\) 以及常数
    再取 \(A=B=1\) 及被各有限 \(p\in S\) 的充分高次幂整除的 \(M\)。于是
    \(a,b>0\) 且指定同余类推出所有 KL 局部邻域条件。
 
+   这里复合顺序固定为
+   \[
+   s=(\psi\circ\phi)(P)=a/b,
+   \qquad \phi(P)=\tau(a/b),
+   \]
+   其中 \(\tau=\psi^{-1}\)。因此回代到原参数时
+   \(u(P)=\tau(a/b)-N_0/M_0\)，与下述二元型恒等式的变量顺序一致。
+
    额外避开有限集合
    \[
    g\!\left(-N_0/M_0+1/N_1\right)
@@ -160,7 +168,10 @@ squarefree binary form \(F\in\mathbf Z[X,Y]\)、整数 \(w\ge1\) 以及常数
    至少 \(C_{21}u^2\) 个不同值，并在末段用
    \(|F(a,b)|\le rH_Fu^r\) 转为 \(R_2(x)\) 的界。因此存在 \(c_1,H_1>0\)，
    每个 \(H\ge H_1\) 在目标正盒和同余类中产生至少 \(c_1H^2\) 个不同
-   squarefree \(t\)，且每个都有 \(1\le a,b\le H\) 的 witness。
+   squarefree \(t\)，且每个都有 \(1\le a,b\le H\) 的 witness。这里 ST
+   的直接结论先对充分大的整数盒参数 \(u\) 成立；对充分大的实数 \(H\)，取
+   \(u=\lfloor H\rfloor\)。于是 \(T(u)\subseteq T(H)\)，且 \(u\ge H/2\)，
+   故将常数缩小至原来的四分之一即可得到上述对所有充分大实数 \(H\) 的结论。
 
 7. **thin set 删除的方向。** 对每个上述 \(t\) 固定一个 bounded witness，令
    \(q_t=\tau(a_t/b_t)\)。固定分式线性变换的高度不等式给
