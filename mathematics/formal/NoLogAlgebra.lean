@@ -54,26 +54,20 @@ theorem exists_large_nat_avoiding_finite_endpoints
           Nat.lt_of_le_of_lt (Nat.le_max_right bound endpoint) hn
         simp [Nat.ne_of_gt hendpoint, hrest]
 
-/-- Two integers are in the same (integral) square class when the second is
-the first multiplied by an integer square.  This one-way relation is exactly
-the strength needed for homogeneous rescaling below. -/
-def SameIntegralSquareClass (u v : Int) : Prop :=
-  ∃ q : Int, v = u * q ^ 2
-
 /-- If an integer-valued binary form is homogeneous of degree six, scaling
-both inputs by `d` changes its value by the square `(d^3)^2`.
+both inputs by a nonzero `d` changes its value by the nonzero square `(d^3)^2`.
 
 This is the even-degree algebraic fact used in the thin-set injectivity
 argument.  No assertion that an arbitrary function is homogeneous is hidden:
 the degree-six scaling law is an explicit premise.
 -/
-theorem degree_six_homogeneous_scaling_same_square_class
+theorem degree_six_homogeneous_scaling_is_nonzero_square_multiple
     (F : Int → Int → Int)
     (hHomogeneous : ∀ d a b : Int,
       F (d * a) (d * b) = d ^ 6 * F a b)
-    (d a b : Int) :
-    SameIntegralSquareClass (F a b) (F (d * a) (d * b)) := by
-  refine ⟨d ^ 3, ?_⟩
+    (d a b : Int) (hd : d ≠ 0) :
+    ∃ q : Int, q ≠ 0 ∧ F (d * a) (d * b) = F a b * q ^ 2 := by
+  refine ⟨d ^ 3, Int.pow_ne_zero hd, ?_⟩
   rw [hHomogeneous]
   simp [Int.pow_succ]
   ac_rfl
