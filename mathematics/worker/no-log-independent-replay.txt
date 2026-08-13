@@ -1,0 +1,139 @@
+NO-LOG independent applicability replay
+=======================================
+
+Assigned base commit:
+cacde3f788e1123f72d87813068df4563a815699
+
+Assigned branch:
+deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/stage-no-log-independent-app-9ed98ae7fc
+
+Assigned worktree:
+/Users/hao/Desktop/WestlakeNLP/algebraic number theory/.deepscientist/agent-worktrees/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/stage-no-log-independent-app-9ed98ae7fc
+
+1. Git boundary at start
+------------------------
+
+$ pwd
+/Users/hao/Desktop/WestlakeNLP/algebraic number theory/.deepscientist/agent-worktrees/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/stage-no-log-independent-app-9ed98ae7fc
+
+$ git rev-parse --show-toplevel
+/Users/hao/Desktop/WestlakeNLP/algebraic number theory/.deepscientist/agent-worktrees/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/stage-no-log-independent-app-9ed98ae7fc
+
+$ git rev-parse HEAD
+cacde3f788e1123f72d87813068df4563a815699
+
+$ git branch --show-current
+deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/stage-no-log-independent-app-9ed98ae7fc
+
+$ git status --short
+[no output]
+
+2. Existing Python route audit replay
+-------------------------------------
+
+$ python3 mathematics/worker/verify-route-audit.py
+C0 factor identity: True; coefficients=[2576, 8392, 11729, 8878, 3641, 640]
+Byeon Lemma 4.2 degree: 8
+gcd(Byeon m, m') over F_7: [1]
+gcd(C0 f, f') over F_7: [1]
+gcd(Byeon quadratic, sextic) over F_3: [1]
+
+Interpretation: exact integer expansion and finite-field Euclidean gcd checks
+passed. These are bounded algebra evidence, not a proof of NO-LOG.
+
+3. Independent PARI/GP replay
+-----------------------------
+
+$ gp -fq <<'GP'
+f=640*x^5+3641*x^4+8878*x^3+11729*x^2+8392*x+2576;
+q=128*x^4+549*x^3+1007*x^2+936*x+368;
+print("gp_version=",version());
+print("factor_f=",factor(f));
+print("factor_q=",factor(q));
+print("degree_f=",poldegree(f)," degree_q=",poldegree(q));
+print("gcd_Q=",gcd(f,deriv(f)));
+print("disc_f=",poldisc(f));
+print("gcd_F7=",lift(gcd(Mod(1,7)*f,Mod(1,7)*deriv(f))));
+quit
+GP
+gp_version=[2, 17, 4]
+factor_f=[5*x + 7, 1; 128*x^4 + 549*x^3 + 1007*x^2 + 936*x + 368, 1]
+factor_q=Mat([128*x^4 + 549*x^3 + 1007*x^2 + 936*x + 368, 1])
+degree_f=5 degree_q=4
+gcd_Q=1
+disc_f=625203093250768896000
+gcd_F7=6
+
+Interpretation: the quartic is irreducible over Q; gcd_F7=6 is a nonzero unit,
+so the modular gcd is constant. The affine quintic is separable in Q[x], and
+the binary sextic adds the distinct infinity factor because the leading
+coefficient is nonzero.
+
+4. Statement-hash alignment
+----------------------------
+
+$ python3 -c 'import hashlib,json,pathlib; d=json.loads(pathlib.Path("mathematics/worker/formalization-intake.json").read_text()); s=next(x for x in d["statements"] if x["id"]=="NO-LOG"); h=hashlib.sha256(s["normalized"].encode()).hexdigest(); print(s["statementHash"],h,h==s["statementHash"])'
+234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0 234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0 True
+
+5. Input/source hashes
+----------------------
+
+$ shasum -a 256 mathematics/worker/verify-route-audit.py 'Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf' mathematics/worker/formalization-intake.json
+f689861c7bd94243837dbebf7b28edd258c832095309e38ebc850f7ac5ba9d9e  mathematics/worker/verify-route-audit.py
+1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b  Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf
+89c4a79392f0de335f790f7b003fc34338fd9ab37dc91f2a1ce39eef73fb215f  mathematics/worker/formalization-intake.json
+
+$ curl -Ls 'https://arxiv.org/pdf/2111.15582v1' | shasum -a 256
+26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae  -
+
+$ curl -Ls 'https://uwaterloo.ca/pure-mathematics/sites/default/files/uploads/documents/s0894-0347-1995-1290234-5_0.pdf' | shasum -a 256
+96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97  -
+
+6. Original-source theorem anchors checked
+------------------------------------------
+
+Kulkarni-Levin arXiv:2111.15582v1:
+- Theorem 1.2: fixed local neighborhoods + thin-set exclusion yield
+  >> B^2/(log B)^2 distinct quadratic fields.
+- Theorem 2.1: their weak Stewart-Top variation.
+- Lemma 3.1: PGL2(Q) transformation encodes local conditions as a positive
+  congruence class a=A mod M, b=B mod M.
+- Lemma 3.2: O(B) thin rational numbers of height below B.
+- proof of Theorem 1.2: distinct squarefree t give distinct Q(sqrt(t)); thin
+  deletion is subtracted after choosing bounded witnesses.
+- Theorem 4.1 and proof of Theorem 1.3: local ramification, class-rank bound,
+  real/imaginary sign control, and |Disc| << B^(2g+2).
+
+Stewart-Top, JAMS 8 (1995), printed pp.948-954:
+- p.948: w is the maximal fixed kth-power divisor on the congruence class;
+  R_k counts k-free t with F(a,b)=t*w^k.
+- pp.950-951, Theorem 1: no-log lower bound R_k(x) >> x^(2/r) when the
+  binary form has nonzero discriminant and maximal factor degree m<=2k+1,
+  plus the k=2,m=6 boundary.
+- pp.951-954, proof: the counted distinct values arise from pairs satisfying
+  1<=a,b<=u and the fixed congruences, with u asymptotic to x^(1/r).
+- p.954, Theorem 2: the more general but weaker /(log x)^2 theorem; this is
+  not the theorem used for NO-LOG.
+
+7. lean_workspace verifier boundary
+------------------------------------
+
+Deferred MCP catalog resolution:
+- initial match count for logical tool lean_workspace: 0
+- one bounded retry after 2 seconds: match count 0
+
+Outcome: unavailable. No Lean CLI compilation was used as a substitute. There
+is no lean_workspace receipt, statementHash/proofHash/theoremDeclarationHash
+tuple, or kernel_verified claim.
+
+8. Final integrity commands (run after writing artifacts)
+---------------------------------------------------------
+
+$ test -s mathematics/worker/no-log-independent-applicability-review.md
+$ test -s mathematics/worker/no-log-independent-replay.txt
+$ rg -n 'passed|changes_requested|refuted|unavailable|234b34d9|EXP-EPS|kernel_verified|最便宜的下一决定性测试' mathematics/worker/no-log-independent-applicability-review.md
+$ git diff --check
+$ git status --short
+
+Expected before commit: exactly the two assigned artifacts are untracked.
+Expected after commit: clean status; HEAD and branch reported in Team delivery.
