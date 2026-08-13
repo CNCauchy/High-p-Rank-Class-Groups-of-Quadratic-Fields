@@ -1,0 +1,169 @@
+NO-LOG adversarial five-interface replay
+========================================
+
+Git boundary
+------------
+$ git rev-parse HEAD
+6de3b6bcf1ab8d8c72f12a78e16e11f13cf93514
+
+$ git branch --show-current
+deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-con/no-log-adversarial-five-inte-46a142b758
+
+Original-source identity
+------------------------
+Stewart--Top:
+  title: On Ranks of Twists of Elliptic Curves and Power-Free Values of Binary Forms
+  journal: Journal of the American Mathematical Society 8 (1995), 943-973
+  DOI: 10.1090/S0894-0347-1995-1290234-5
+  PDF URL: https://uwaterloo.ca/pure-mathematics/sites/default/files/uploads/documents/s0894-0347-1995-1290234-5_0.pdf
+  sha256: 96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97
+  bytes: 3510691
+  pages: 31
+
+Kulkarni--Levin:
+  title: Hilbert's Irreducibility Theorem and Ideal Class Groups of Quadratic Fields
+  journal: Acta Arithmetica 205 (2022), no. 4, 371-380
+  DOI: 10.4064/aa211224-22-9
+  arXiv: 2111.15582
+  PDF URL: https://arxiv.org/pdf/2111.15582
+  sha256: 26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae
+  bytes: 161972
+  pages: 9
+
+Self-contained source download and identity replay:
+$ source_dir=$(mktemp -d /tmp/no-log-five-source.XXXXXX)
+$ curl -L --fail --silent --show-error --max-time 180 'https://uwaterloo.ca/pure-mathematics/sites/default/files/uploads/documents/s0894-0347-1995-1290234-5_0.pdf' -o "$source_dir/stewart-top.pdf"
+$ curl -L --fail --silent --show-error --max-time 180 'https://arxiv.org/pdf/2111.15582' -o "$source_dir/kulkarni-levin.pdf"
+$ python3 - "$source_dir" <<'PY'
+from pathlib import Path
+import hashlib, subprocess, sys
+d=Path(sys.argv[1])
+expected={
+ 'stewart-top.pdf':('96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97',3510691,31),
+ 'kulkarni-levin.pdf':('26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae',161972,9)
+}
+for name,(want_hash,want_bytes,want_pages) in expected.items():
+    p=d/name; data=p.read_bytes()
+    got_hash=hashlib.sha256(data).hexdigest()
+    info=subprocess.check_output(['pdfinfo',str(p)],text=True)
+    pages=int(next(x.split(':',1)[1] for x in info.splitlines() if x.startswith('Pages:')))
+    assert (got_hash,len(data),pages)==(want_hash,want_bytes,want_pages)
+    print(name,got_hash,len(data),pages)
+PY
+stewart-top.pdf 96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97 3510691 31
+kulkarni-levin.pdf 26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae 161972 9
+
+Stewart--Top printed-page anchors
+---------------------------------
+The PDF page index is printed page minus 943.
+
+printed p.948:
+- w is defined before any height variable as the largest positive integer whose
+  kth power divides every F(a,b) in the fixed residue class A,B modulo M.
+- P_k counts bounded pairs; R_k counts k-free integers t represented as
+  F(a,b)=t*w^k. These are different counting functions.
+
+printed p.949, Lemma 2:
+- P_k(x)=C13*x^2 plus a lower-order error in the allowed factor-degree range.
+- C13 is positive from maximality of w; constants depend on F,M,k, not x.
+
+printed p.951, Theorem 1:
+- R_k(x) has lower bound C16*x^(2/r) for every sufficiently large real x.
+- R_k counts distinct integers, not pairs.
+
+printed pp.952-953, equations (7)-(15):
+- T consists of pairs 1<=a,b<=u in the fixed residue class, with F/w^k k-free.
+- (10) gives |T| bounded below by a positive constant times u^2.
+- (11)-(15) pass to primitive pairs and uniformly bound same-value multiplicity.
+- after (15), constants C20,C21 depend only on F,M,k and give at least
+  C21*u^2 distinct F-values for every u>C20.
+
+Kulkarni--Levin manuscript-page anchors
+---------------------------------------
+p.4, Theorem 2.1:
+- C(x) uses positive a,b bounded by x^(1/r) in a fixed residue class.
+- S_k(x) counts k-free integers t, and is lower bounded by
+  x^(2/r)/(log x)^2.
+
+pp.4-5, proof sketch:
+- explicitly says ST's original theorem lacked positive/bounded witnesses.
+- treats all three cases in ST Theorem 2 and obtains positive a,b with
+  max(|a|,|b|) bounded by a constant times x^(1/r).
+
+p.6, Lemma 3.1 and Lemma 3.2:
+- Lemma 3.1 fixes one fractional-linear transform and one residue class
+  preserving all specified local neighborhoods.
+- Lemma 3.2 counts O(x) rational alpha=phi(P) in a thin set with H(alpha)<x.
+- q=a/b=psi(alpha) is the ST parameter; fixed invertible psi gives a bijection
+  between q and alpha and comparable heights.
+
+pp.6-7, proof of Theorem 1.2:
+- T(x) is a set of distinct squarefree t; one bounded witness (a_t,b_t) is
+  selected per t.
+- the rational parameter is a_t/b_t, and the field chain ends at Q(sqrt(t)).
+- the final inequality subtracts at most 2*|Omega(x)| from |T'(x)|.
+
+Adversarial executable checks
+-----------------------------
+$ python3 - <<'PY'
+from math import gcd
+
+# Pair/value confusion witness inside a degree-six, nonzero-discriminant family.
+def F(a,b): return a**6+b**6
+def squarefree_part(n):
+    sign=-1 if n<0 else 1; n=abs(n); t=1; p=2
+    while p*p<=n:
+        e=0
+        while n%p==0: n//=p; e+=1
+        if e%2: t*=p
+        p+=1
+    return sign*t*n
+vals=[squarefree_part(F(n,n)) for n in range(1,21)]
+print('diagonal_pair_count',len(vals))
+print('distinct_squarefree_t',sorted(set(vals)))
+assert vals == [2]*20
+
+# The homogeneous even-degree collision calculation.
+# If (a',b')=lambda(a,b), then F(a',b')/F(a,b)=lambda^6=(lambda^3)^2.
+for lam_num,lam_den in [(2,1),(3,2),(5,3)]:
+    assert (lam_num**6)*(lam_den**6) == (lam_num**3*lam_den**3)**2
+print('same_projective_parameter_forces_same_signed_squareclass',True)
+
+# Distinct signed squarefree representatives cannot have square quotient.
+sqfree=[n for n in range(-50,51) if n and all(n%(p*p) for p in range(2,8) if p*p<=abs(n))]
+for i,t in enumerate(sqfree):
+    for u in sqfree[i+1:]:
+        # If t/u=(m/n)^2, signs agree and |t|*|u| is a square.
+        if t*u>0:
+            z=abs(t*u); q=int(z**0.5)
+            assert q*q != z
+print('distinct_signed_squarefree_field_collision_found',False)
+PY
+diagonal_pair_count 20
+distinct_squarefree_t [2]
+same_projective_parameter_forces_same_signed_squareclass True
+distinct_signed_squarefree_field_collision_found False
+
+Classification replay
+---------------------
+interface_1 source_explicit passed
+interface_2 source_explicit passed
+interface_3 immediate_deduction passed_with_scope_boundary
+interface_4 additional_lemma no_counterexample_found
+interface_5 source_explicit passed
+
+Falsification outcome
+---------------------
+hypothesis: at least one of the five source interfaces fails through pair/value
+confusion, an H-dependent fixed square, a subsequence-only box, a thin-set
+parameter collision, a repeated quadratic field, or missing uniform
+representation multiplicity.
+
+test: inspect the two original papers at the anchors above; exhibit a legal
+degree-six family with arbitrarily many pairs producing one t; then challenge
+parameter and field injectivity algebraically.
+
+outcome: survived within the five-interface scope. The pair/value trap is real
+but is handled by ST equations (13)-(15). No fatal witness was found. Interface
+4 remains an additional one-line homogeneity lemma rather than source-explicit.
+Final status: CANDIDATE, not kernel verification and not unconditional NO-LOG.
