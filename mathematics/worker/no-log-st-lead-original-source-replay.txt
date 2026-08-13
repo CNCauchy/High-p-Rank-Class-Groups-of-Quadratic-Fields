@@ -1,0 +1,97 @@
+NO-LOG Stewart--Top lead original-source replay
+================================================
+
+Date: 2026-08-13 Asia/Shanghai
+Project starting commit for this audit: 0ea7f8f471516b476bfe41e77e28f7840346253a
+
+Source identities
+-----------------
+
+Stewart--Top 1995:
+  DOI 10.1090/S0894-0347-1995-1290234-5
+  URL https://uwaterloo.ca/pure-mathematics/sites/default/files/uploads/documents/s0894-0347-1995-1290234-5_0.pdf
+  bytes 3510691
+  pages 31
+  SHA-256 96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97
+
+Stewart 1991:
+  DOI 10.1090/S0894-0347-1991-1119199-X
+  URL https://uwaterloo.ca/pure-mathematics/sites/default/files/uploads/documents/s0894-0347-1991-1119199-x_0.pdf
+  bytes 3998757
+  pages 43
+  SHA-256 8824ab3dbe963c8d070aad1f1d593ce6217fed686665ca99d422c192f0e9eba7
+
+Both PDFs passed pdfinfo and Ghostscript full-page parsing. A network transfer
+that appeared partial during progress output was not used until the final byte
+count, hash and parser checks all passed.
+
+Page mapping and anchors
+------------------------
+
+ST 1995 PDF p.6 = printed p.948:
+  fixed A,B,M,k; class-wise maximal w; definitions of P_k and R_k.
+
+ST 1995 PDF p.7 = printed p.949:
+  local density C13; maximality of w implies every local factor is positive;
+  Lemma 2 gives positive-box pair asymptotics for P_k.
+
+ST 1995 PDF pp.8-9 = printed pp.950-951:
+  Theorem 1; optional SL2 preprocessing only when leading/trailing coefficient
+  vanishes; U uses 1<=a,b<=u.
+
+ST 1995 PDF pp.10-11 = printed pp.952-953:
+  T uses the same positive box and residue class; (10) gives |T|>>u^2;
+  (11) primitive-pair reduction; (13) representation bound; (15) uniform
+  omega(g) bound; following paragraph gives C21 u^2 distinct values.
+
+ST 1995 PDF p.12 = printed p.954:
+  Theorem 2 is the weaker, more widely applicable S_k result with log^-2.
+
+Stewart 1991 PDF pp.3-5 = printed pp.795-797:
+  Theorem 1 and Corollary 1 give the primitive Thue representation bound used
+  in ST 1995 p.953.
+
+Deterministic extraction template
+---------------------------------
+
+  gs -q -dSAFER -dBATCH -dNOPAUSE -sDEVICE=txtwrite \
+    -dFirstPage=P -dLastPage=P -sOutputFile=page-P.txt source.pdf
+
+Falsification checks
+--------------------
+
+1. Pair/value confusion:
+   Refuted as a reading of the proof. ST first counts pairs, then (11)-(15)
+   bounds multiplicity and explicitly derives C21*u^2 distinct values.
+
+2. Unbounded representation multiplicity:
+   Refuted. Stewart 1991 Corollary 1 plus ST (15) gives a fixed bound.
+
+3. Global w substituted for final-class w:
+   Refuted. Printed p.948 defines w inside the fixed A,B mod M class.
+
+4. Positive cone silently changed:
+   A real risk for a general form because p.951 permits SL2 preprocessing.
+   For the C0 route, finite endpoint avoidance makes both endpoint coefficients
+   nonzero before ST is applied, so the preprocessing is skipped.
+
+5. Hidden subsequence in H:
+   Not found. The proof works for every sufficiently large real u; floor(H)
+   also supplies a direct all-large-real conversion.
+
+6. Residue-class direction in the optional SL2 line:
+   The printed forward action is algebraically wrong; the inverse action is
+   correct. A mod-5 counterexample is recorded in the audit. This line is not
+   used for C0 after endpoint avoidance.
+
+7. Final R_k >= |T| line:
+   T is a pair set, so the literal line is wrong. The immediately preceding
+   distinct-value conclusion supplies the correct set V and bound.
+
+Boundary
+--------
+
+The ST interface survives the source audit only with the finite-avoidance
+lemma and the two explicit proof-text corrections. An independent adversarial
+review remains pending. Current project status: CANDIDATE, not PROVED or
+VERIFIED. No novelty search was performed.
