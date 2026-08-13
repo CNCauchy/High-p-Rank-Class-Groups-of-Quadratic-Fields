@@ -1,0 +1,131 @@
+{
+  "schema": "deepscientist.mathematics.analytic-bridge-matrix.v1",
+  "candidateId": "fixed-c0-analytic-bridge-v1",
+  "sourceCommit": "d2901d425598e3d9e55d99e3c7f99081a4e0d143",
+  "conditionalReceiptId": "lean-deb15db5d3c3746d573dba4f",
+  "conditionalStatementHash": "796fae5b00f462089dce3a91b859d00069a1dd85374bc3325be27c92f19bb384",
+  "unconditionalNoLogHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+  "postDeletionBridgeStatementHash": "15f96ab0d2ebb841449247742018013b767961c9cea4bdfc000e1e6b1084d99b",
+  "disposition": "in_progress",
+  "scopeBoundary": "This matrix audits construction of the fixed-C0 analytic input. It does not claim an unconditional Lean proof of NO-LOG or any support for EXP-EPS.",
+  "sourceObjects": {
+    "beforeDeletion": "Distinct signed squarefree t=F(a,b)/w^2 with a bounded positive-box witness in the fixed congruence class.",
+    "badObjects": "Chosen witness parameters q_t=tau(a_t/b_t) lying in the KL thin set Omega.",
+    "afterDeletion": "Distinct negative squarefree t outside Omega, each yielding a distinct desired imaginary quadratic field.",
+    "fieldCount": "N(X)=N^-_{5,2}(X) restricted to natural discriminant bounds X."
+  },
+  "normalizationIssue": {
+    "id": "B-NORM-1",
+    "status": "open_elementary_lemma",
+    "claim": "The source lower bound #T_H >= c H^2 with arbitrary real c>0 does not directly imply 2*m*H^2 <= rawCount(H) for a positive natural m.",
+    "failureSignal": "Taking the same box height H and m>=1 would demand at least 2H^2 distinct raw values, while the positive H-box contains at most H^2 parameter pairs.",
+    "requiredRepair": "Choose a fixed integer scale L with cL^2 sufficiently large, define all counts at source height LH, and multiply the discriminant constant by L^6. Enlarge thresholds and integer-ceil all O(H) constants coherently.",
+    "sourceRefs": [
+      "mathematics/worker/strong-kl-no-log-lemma.md#step-6",
+      "mathematics/formal/NoLogInference.lean#strongSquarefreeCount"
+    ]
+  },
+  "fieldMappings": [
+    {
+      "field": "A,B,M,w",
+      "status": "source_supported",
+      "source": "Strong KL lemma existential fixed congruence class and its class-wise maximal fixed square.",
+      "refs": ["strong-kl-no-log-lemma.md:58-69", "source-matrix:A6,A9"]
+    },
+    {
+      "field": "modulusPositive,fixedSquarePositive",
+      "status": "elementary",
+      "source": "M is a positive product/divisible modulus; w>=1 by its maximal-fixed-square definition.",
+      "refs": ["strong-kl-no-log-lemma.md:130-161"]
+    },
+    {
+      "field": "positiveConeAndFixedCongruence",
+      "status": "source_supported_and_reviewed",
+      "source": "KL Lemma 3.1 plus finite endpoint avoidance in the free sufficiently-large N1 choice.",
+      "refs": ["source-matrix:A6,A7", "strong-kl-no-log-local-independent-review.md:38-89"]
+    },
+    {
+      "field": "classWiseMaximalFixedSquare",
+      "status": "source_supported_and_reviewed",
+      "source": "ST defines w inside the selected congruence class; it is not the global computational value 2.",
+      "refs": ["source-matrix:A9", "strong-kl-no-log-local-independent-review.md:91-96"]
+    },
+    {
+      "field": "boundedWitnessForEachSquarefreeValue",
+      "status": "source_supported_and_reviewed",
+      "source": "ST printed pp.952-953 constructs distinct values from the same positive box.",
+      "refs": ["source-matrix:A10", "strong-kl-no-log-local-independent-review.md:98-118"]
+    },
+    {
+      "field": "thinParameterInjectionAndLocalRank",
+      "status": "source_supported_and_reviewed",
+      "source": "KL Lemmas 3.2 and Theorem 4.1 plus the even-degree signed-squarefree injection argument.",
+      "refs": ["source-matrix:A4,A11,A12", "strong-kl-no-log-lemma.md:176-188"]
+    },
+    {
+      "field": "rawCount,thinCount,goodCount",
+      "status": "definition_required",
+      "source": "Finite cardinalities of the three sourceObjects sets, using one fixed bounded witness choice for each raw t.",
+      "risk": "Definitions must use the same scaled height and the same witness choice so deletePartition and the thin injection refer to identical objects."
+    },
+    {
+      "field": "strongSquarefreeCount",
+      "status": "blocked_on_B-NORM-1",
+      "source": "ST positive-box count before thin deletion.",
+      "risk": "The current natural coefficient is not obtained at the unscaled source height."
+    },
+    {
+      "field": "thinCountBound",
+      "status": "source_supported_after_normalization",
+      "source": "KL Lemma 3.2 gives O(H) bad rational parameters and the signed-squarefree map is injective.",
+      "risk": "The O-constant must be integer-ceiled after the same height scale L."
+    },
+    {
+      "field": "thinIsDominated",
+      "status": "elementary_after_normalization",
+      "source": "Enlarge H0 so the fixed linear exceptional term is at most the normalized quadratic main term."
+    },
+    {
+      "field": "deletePartition",
+      "status": "definitional_after_count_sets",
+      "source": "Every raw value is either outside Omega (good) or its chosen witness lies in Omega (thin)."
+    },
+    {
+      "field": "goodInjectsIntoFields",
+      "status": "source_supported_and_reviewed",
+      "source": "Outside Omega, KL Theorem 4.1 and the local sign conditions give 5-rank>=2 imaginary fields; signed squarefree t give distinct fields.",
+      "refs": ["source-matrix:A4,A5,A13,A14", "strong-kl-no-log-lemma.md:189-193"]
+    },
+    {
+      "field": "fieldCountMonotone",
+      "status": "definitional",
+      "source": "The set counted at discriminant bound x is included in that counted at y whenever x<=y."
+    },
+    {
+      "field": "mainConstant,thinConstant,discriminantConstant,H0",
+      "status": "blocked_on_B-NORM-1",
+      "source": "Natural-number normalization of the real Vinogradov and O-constants after fixed height scaling."
+    },
+    {
+      "field": "selectedHeight,selectorLarge,selectorFits,selectorCompares,X0,comparisonConstant",
+      "status": "external_elementary_selector_lemma",
+      "source": "Choose a sixth-root height for the normalized integer discriminant constant; maximality gives both-sided comparison after enlarging X0.",
+      "risk": "The same selector must satisfy both inequalities. A convenient natural construction is the maximal H with D*H^6<=X; then (H+1)^6 controls X by a fixed multiple of H^6.",
+      "refs": ["strong-kl-no-log-lemma.md:195-196", "NoLogInference.lean:103-112"]
+    }
+  ],
+  "minimalSourceAlignedInterface": {
+    "path": "mathematics/formal/NoLogBridge.lean",
+    "structure": "NoLogBridge.FixedC0PostDeletionBridge",
+    "theorem": "NoLogBridge.no_log_of_fixed_c0_post_deletion_bridge",
+    "purpose": "The published strong KL lemma is already stated after thin deletion, so this interface avoids inventing pre-deletion counts when only the post-deletion quadratic family is needed.",
+    "boundary": "It remains conditional on a normalized post-deletion quadratic count, field injection, monotonicity and a two-sided sixth-degree selector."
+  },
+  "falsification": {
+    "hypothesis": "The frozen strong KL lemma directly instantiates every field of NoLogInference.AnalyticBridge at the same box height.",
+    "test": "Compare the coefficient domains and literal cardinality bounds before defining counts; reject direct instantiation if the natural main coefficient forces more values than the H-box can contain.",
+    "outcome": "refuted_as_direct_instantiation",
+    "decisiveIssueId": "B-NORM-1",
+    "repairRoute": "fixed height rescaling plus a source-aligned post-deletion bridge"
+  }
+}
