@@ -1,0 +1,35 @@
+{
+  "schema": "deepscientist.mathematics.named-theorem-receipt-manifest.v1",
+  "receiptId": "lean-deb15db5d3c3746d573dba4f",
+  "checkId": "no-log-conditional-inference",
+  "status": "kernel_verified",
+  "verifier": "lean-kernel",
+  "claim": "statement",
+  "proofPath": "mathematics/formal/NoLogInference.lean",
+  "theoremName": "NoLogInference.no_log_of_strong_kl_interface",
+  "statementHash": "796fae5b00f462089dce3a91b859d00069a1dd85374bc3325be27c92f19bb384",
+  "theoremDeclarationHash": "869535f2ae43e82089764430f645a880687e7f0985f30fff16e4ddb41e0460fe",
+  "proofHash": "f4d7c0ecdac058a7b351eecea2ddb1513707d9584be954fbf6c20af974d6d564",
+  "targetCommit": "4371fcb4ede90c2e981b634d847b8b04c3cd41b3",
+  "statementBinding": "caller-bound-to-committed-declaration",
+  "goalsRemaining": 0,
+  "sorryCount": 0,
+  "admitCount": 0,
+  "axioms": [],
+  "checkedAt": 1786622433998,
+  "sessionId": "628ed4f8-9256-4ad1-b544-fa24e34a5538",
+  "source": {
+    "tool": "lean_workspace",
+    "action": "certify",
+    "runId": "sci_run_msrgv7rz_271489",
+    "reportTracePath": "mathematics/report-traces/verification-b4e3dba3ae390775b624.json"
+  },
+  "scope": {
+    "certifies": "The conditional implication AnalyticBridge N -> CubicLowerBound N.",
+    "doesNotCertify": [
+      "Construction of AnalyticBridge from the Stewart-Top and Kulkarni-Levin theorems",
+      "The unconditional NO-LOG statement with hash 234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+      "The EXP-EPS statement with hash 6c6e7cf3f3128a0423dd33cc64e4bd57bbcd622caf92d96776f76158edf02d49"
+    ]
+  }
+}

@@ -31,6 +31,17 @@ SHA-256：
 这不是 NO-LOG 非条件命题的 hash `234b34d9…806b0`。只有在进一步形式化并认证
 `AnalyticBridge` 的构造后，才可能把后者提升为 `kernel_verified`。
 
+权威命名定理 receipt 四元组已冻结在
+`mathematics/formal/no-log-inference-receipt.json`：
+
+- `statementHash = 796fae5b…384`；
+- `theoremDeclarationHash = 869535f2…60fe`；
+- `proofHash = f4d7c0ec…d564`；
+- `targetCommit = 4371fcb4…41b3`。
+
+该 manifest 来自 `lean_workspace(action="certify")` 的权威返回；通用 proof-trace
+只保存事件投影，不能替代这四个身份字段。
+
 ## 精确重放
 
 工具链：Lean `4.33.0`，导入仅 `Std.Tactic`。
@@ -51,4 +62,3 @@ lean --deps mathematics/formal/NoLogInference.lean
    `goodCount`；
 4. `selectorFits` 与 `selectorCompares` 的方向是否共同编码六次判别式高度转换；
 5. 接口是否清楚把解析输入作为假设，而没有把条件定理冒充 NO-LOG 非条件证明。
-
