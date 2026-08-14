@@ -1,0 +1,136 @@
+NO-LOG updated complete proof terminal replay
+=============================================
+
+Verdict: changes_requested
+Failure code: REVIEW_CHANGES_REQUESTED
+Frozen base: 3051a59286a9953a7f6d58057e9399a7d8d3f611
+Branch: deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/no-log-updated-complete-proo-290feacf8a
+
+Initial Git boundary
+--------------------
+
+$ git status --short --branch
+## deepscientist/agents/mathematics-research-team/019ff98c-0ec5-7d11-ac56-29cfbab47432/mathematics-research-team-worker-ver/no-log-updated-complete-proo-290feacf8a
+
+$ git rev-parse HEAD
+3051a59286a9953a7f6d58057e9399a7d8d3f611
+
+$ git merge-base --is-ancestor 3051a59286a9953a7f6d58057e9399a7d8d3f611 HEAD
+exit 0
+
+Primary-source hashes
+---------------------
+
+$ curl -fsSL 'https://uwaterloo.ca/pure-mathematics/sites/default/files/uploads/documents/s0894-0347-1995-1290234-5_0.pdf' | shasum -a 256
+96fb376bf0d8a4d3b70338a89b630a5e26c3cb0354be90da8cf2224d2603ba97  -
+
+KL arXiv:2111.15582v1 was reread through the arXiv primary PDF.  Its frozen
+project identity is:
+26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae
+
+$ shasum -a 256 'Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf'
+1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b  Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2.pdf
+
+BLT sample replay as committed
+------------------------------
+
+$ python3 mathematics/worker/no-log-blt-c0-rank-replay.py
+equation_2_3 -3125/2187
+sample_coefficients 2048/243 -10240/531441 20480/59049 182272/177147 31129600/531441
+odd_primitive_coefficients [1900000, 2280000, 1173375, 330700, 64860, 9216]
+odd_factor 4194304/16142520375
+affine_X 25/6 10/3
+normalizer 108/1953125
+square_ratio 16384000000/3486784401 = 128000/59049 ^2
+c0_coefficients [2576, 8392, 11729, 8878, 3641, 640]
+forward_x0 2*(1-2*x)/(5*x-1)
+forward_y0 59049*y/(1024*(5*x-1)^3)
+inverse_x (x0+2)/(5*x0+4)
+inverse_y 1024*y0/(2187*(5*x0+4)^3)
+PASS
+
+Independent exact curve-map and inverse check
+---------------------------------------------
+
+The check reconstructed the BLT even polynomial from the committed script,
+formed the exact polynomial identity for
+
+  x0 = 2*(1-2*x)/(5*x-1),
+  y0 = 59049*y/(1024*(5*x-1)^3),
+
+and composed the displayed inverse y-map.  Output:
+
+forward_curve_identity True
+claimed_inverse_y_composite_multiplier 1/8
+corrected_inverse_y_composite_multiplier 1
+INVERSE_FORMULA_REFUTED; corrected coefficient = 8192/2187
+
+The committed PASS is therefore incomplete: it checks only sample x-coordinate
+inversion and prints, rather than verifies, the inverse y-coordinate.
+
+Source-correction adversarial replay
+------------------------------------
+
+$ python3 <the exact checks from mathematics/worker/no-log-terminal-source-corrections-independent-replay.txt>
+endpoint_test_c 166/115
+endpoint_forbidden_N_21_200 [23]
+endpoint_first_allowed_after_20 21
+sl2_printed_new_class (1, 1)
+sl2_original_F_residue 0
+sl2_printed_FL_residue 2
+sl2_inverse_new_class (4, 1)
+sl2_inverse_FL_residue 0
+diagonal_pairs 20 distinct_t [2]
+projective_or_field_collision_found False
+degree_two_fiber_points ['+sqrt(t)', '-sqrt(t)']
+degree_two_fiber_distinct_fields 1
+class_01_mod2_fixed_w 1
+class_00_mod2_fixed_2primary_w 8
+floor_all_large_H_constant_loss_at_most 4
+C0_raw_branch_sextic_coefficients [2576, 8392, 11729, 8878, 3641, 640, 0]
+C0_raw_branch_coefficient_L1_bound 35856
+raw_discriminant_bound_template abs(Disc(Q(sqrt(t)))) <= 4*35856*H^6
+SOURCE_CORRECTION_CHECKS_PASS
+
+Conditional Lean replay
+-----------------------
+
+$ git diff --quiet f4760f9e864fc857d8590f474163475bd9cbc912 HEAD -- mathematics/formal/NoLogSourceBridge.lean
+exit 0
+
+$ git diff --quiet 4371fcb4ede90c2e981b634d847b8b04c3cd41b3 HEAD -- mathematics/formal/NoLogInference.lean
+exit 0
+
+$ shasum -a 256 mathematics/formal/NoLogSourceBridge.lean mathematics/formal/NoLogInference.lean
+a2f7350f7b474c6675db8b4c63eaeb5633e53f0ee2e327bf1a4b45b8b11f19e8  mathematics/formal/NoLogSourceBridge.lean
+f4d7c0ecdac058a7b351eecea2ddb1513707d9584be954fbf6c20af974d6d564  mathematics/formal/NoLogInference.lean
+
+$ lean -q -t 0 mathematics/formal/NoLogSourceBridge.lean
+exit 0, no output
+
+$ lean -q -t 0 mathematics/formal/NoLogInference.lean
+exit 0, no output
+
+$ rg -n -i '\b(sorry|admit|axiom)\b' mathematics/formal/NoLogSourceBridge.lean mathematics/formal/NoLogInference.lean
+exit 1, no matches (expected)
+
+lean_replay_pass_no_forbidden_tokens
+
+Evidence balance
+----------------
+
+PASS: AnalyticBridge fixed-data, scaled-count, thin deletion, same-family,
+projective injection, sign, distinct-field, all-H, H^6 and selector interfaces.
+PASS: BLT Theorem 2.1 sample coefficients and the forward C_even -> C0 curve
+identity.
+FAIL: the displayed/printed inverse y-map; exact composition returns y/8.
+
+Required repair
+---------------
+
+1. Change inverse coefficient 1024/2187 to 8192/2187 in the proof,
+   reconstruction and replay.
+2. Add exact forward curve-identity and two-coordinate composition assertions.
+3. Rerun this terminal review at the repaired frozen commit.
+
+Final replay disposition: changes_requested
