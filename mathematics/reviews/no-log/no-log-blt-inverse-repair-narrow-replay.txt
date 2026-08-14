@@ -1,0 +1,92 @@
+BLT C_even <-> C0 inverse repair: frozen narrow replay
+date: 2026-08-14 Asia/Shanghai
+target: 72f288cd34b341210ead2fc529641530a168433f
+parent: a39641d52ec93c56f1dfbddb9ef206196c6e6b43
+
+INDEPENDENT DERIVATION (PARI/GP 2.17.4; no import of reviewed Python)
+command:
+  gp -q with exact rational definitions of P, f0,
+  forwardX=2*(1-2*x)/(5*x-1), inverseX=(X+2)/(5*X+4)
+observed:
+  curve_residual=0
+  inverse_x_after_forward=0
+  forward_x_after_inverse=0
+  new_inverse_y_after_forward_scale=1
+  new_forward_y_after_inverse_scale=1
+  old_1024_scale=1/8
+status: passed
+
+BLT REPLAY
+command:
+  python3 mathematics/worker/no-log-blt-c0-rank-replay.py
+exit: 0
+stdout:
+  equation_2_3 -3125/2187
+  sample_coefficients 2048/243 -10240/531441 20480/59049 182272/177147 31129600/531441
+  odd_primitive_coefficients [1900000, 2280000, 1173375, 330700, 64860, 9216]
+  odd_factor 4194304/16142520375
+  affine_X 25/6 10/3
+  normalizer 108/1953125
+  square_ratio 16384000000/3486784401 = 128000/59049 ^2
+  c0_coefficients [2576, 8392, 11729, 8878, 3641, 640]
+  forward_x0 2*(1-2*x)/(5*x-1)
+  forward_y0 59049*y/(1024*(5*x-1)^3)
+  inverse_x (x0+2)/(5*x0+4)
+  inverse_y 8192*y0/(2187*(5*x0+4)^3)
+  forward_curve_identity coefficientwise exact
+  inverse_x_composition exact
+  inverse_y_composition_scale 1
+  rejected_inverse_y_1024_scale 1/8
+  PASS
+status: passed
+
+ROUTE AUDIT
+command:
+  python3 mathematics/worker/verify-route-audit.py
+exit: 0
+stdout:
+  C0 factor identity: True; coefficients=[2576, 8392, 11729, 8878, 3641, 640]
+  Byeon Lemma 4.2 degree: 8
+  gcd(Byeon m, m') over F_7: [1]
+  gcd(C0 f, f') over F_7: [1]
+  gcd(Byeon quadratic, sextic) over F_3: [1]
+status: passed
+
+CONDITIONAL LEAN REPLAY
+command:
+  lean -q -t 0 mathematics/formal/NoLogSourceBridge.lean
+exit: 0
+stdout: empty
+command:
+  lean -q -t 0 mathematics/formal/NoLogInference.lean
+exit: 0
+stdout: empty
+status: passed (conditional files only; not an unconditional NO-LOG certificate)
+
+REPAIR DIFF BOUNDARY
+command:
+  git diff --check a39641d52ec93c56f1dfbddb9ef206196c6e6b43 72f288cd34b341210ead2fc529641530a168433f
+exit: 0
+changed files:
+  mathematics/problems/no-log-candidate-complete-proof.md
+  mathematics/worker/no-log-blt-c0-rank-reconstruction.md
+  mathematics/worker/no-log-blt-c0-rank-replay.py
+numstat:
+  22  2  mathematics/problems/no-log-candidate-complete-proof.md
+  27  3  mathematics/worker/no-log-blt-c0-rank-reconstruction.md
+  41  7  mathematics/worker/no-log-blt-c0-rank-replay.py
+status: passed; exactly three repair files; no theorem-scope strengthening found
+
+FROZEN SHA-256
+  302dc3be04ecc7df3b32c4a6a437daa273afc42b88a98415ab502105d5580718  mathematics/problems/no-log-candidate-complete-proof.md
+  263b7f65068e95c96431834ae0bffc54a0ec5a2b4d1c488493e12cf28ccd5652  mathematics/worker/no-log-blt-c0-rank-reconstruction.md
+  f936ec90429ab96ca32b0cbeafa8c8913277612b75ad0768a9316937be821446  mathematics/worker/no-log-blt-c0-rank-replay.py
+  f689861c7bd94243837dbebf7b28edd258c832095309e38ebc850f7ac5ba9d9e  mathematics/worker/verify-route-audit.py
+  a2f7350f7b474c6675db8b4c63eaeb5633e53f0ee2e327bf1a4b45b8b11f19e8  mathematics/formal/NoLogSourceBridge.lean
+  f4d7c0ecdac058a7b351eecea2ddb1513707d9584be954fbf6c20af974d6d564  mathematics/formal/NoLogInference.lean
+
+FALSIFICATION OUTCOME
+  old inverse-y numerator 1024: refuted exactly (composition scale 1/8)
+  repaired numerator 8192: survived exact algebraic and regression checks
+  novelty search: not run by assignment
+  NO-LOG theorem scope: unchanged; remains candidate/conditional
