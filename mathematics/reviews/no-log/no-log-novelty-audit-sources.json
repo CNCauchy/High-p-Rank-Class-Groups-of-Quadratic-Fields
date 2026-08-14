@@ -1,0 +1,291 @@
+{
+  "schema": "deepscientist.math-novelty-audit.v1",
+  "asOf": "2026-08-14",
+  "disposition": "scoped_not_found",
+  "absoluteNoveltyClaim": false,
+  "target": {
+    "id": "NO-LOG",
+    "statementHash": "234b34d918c1ce566f2aac5b9ad9f78e9c8abdb89918d4d97fecac8078a806b0",
+    "normalized": "EXISTS c IN R_{>0} AND X_0 IN R_{>1} SUCH THAT FOR ALL X IN R WITH X >= X_0, N_5,2^-(X) >= c * X^(1/3), WHERE N_5,2^-(X) IS THE NUMBER OF Q-ISOMORPHISM CLASSES OF FIELDS K WITH [K:Q] = 2, K HAS NO REAL EMBEDDING, |Disc(K)| <= X, AND dim_F5(Cl(K)/5Cl(K)) >= 2.",
+    "coordinates": {
+      "fieldType": "imaginary quadratic fields over Q, counted up to Q-isomorphism",
+      "height": "absolute field discriminant <= X",
+      "classGroupCondition": "dim_F5(Cl(K)/5Cl(K)) >= 2",
+      "conditionality": "unconditional",
+      "lowerBound": "c * X^(1/3) for every sufficiently large X",
+      "logarithmicLoss": "none"
+    },
+    "equivalentNotation": [
+      {
+        "notation": "N^-(5^2;X)",
+        "source": "Bartz-Levin-Thamminana",
+        "explanation": "The superscript 5^2 encodes (m,r)=(5,2) in N^-(m^r;X), not 25-rank."
+      },
+      {
+        "notation": "Cl(K) contains (Z/5Z)^2",
+        "explanation": "Equivalent to 5-rank at least 2 for a finite abelian class group."
+      }
+    ]
+  },
+  "teamEvidence": {
+    "includedLanes": [
+      {
+        "lane": "A",
+        "role": "exact theorem and notation; retained primary-source snapshots",
+        "counted": true,
+        "limitations": "No complete raw query transcript was retained in the terminal task receipt."
+      },
+      {
+        "lane": "B",
+        "role": "citation descendants and current arXiv corpus",
+        "counted": true,
+        "reportedDatabases": [
+          "OpenAlex",
+          "Semantic Scholar",
+          "Crossref",
+          "arXiv API"
+        ],
+        "reportedOutcome": "No unconditional X^(1/3) no-log result was found in the audited corpus.",
+        "limitations": "Raw responses, exact query strings, hit counts, and some item-level theorem anchors were not retained."
+      }
+    ],
+    "excludedLanes": [
+      {
+        "lane": "C",
+        "status": "runtime-incomplete",
+        "counted": false,
+        "reason": "The first round recorded BLT X^(1/3)/(log X)^2, Byeon X^(1/4), and generic KL X^(1/5)/(log X)^2, but three continuation attempts failed before an auditable second-round source table was returned."
+      }
+    ]
+  },
+  "databases": [
+    {
+      "name": "OpenAlex",
+      "endpoint": "https://api.openalex.org/works",
+      "asOf": "2026-08-14",
+      "scope": "BLT/KL identities, authors, citation descendants, and target-term combinations",
+      "rawReceiptRetained": false
+    },
+    {
+      "name": "Semantic Scholar",
+      "endpoint": "https://api.semanticscholar.org/graph/v1/paper/search",
+      "asOf": "2026-08-14",
+      "scope": "BLT/KL citation descendants and adjacent works",
+      "rawReceiptRetained": false
+    },
+    {
+      "name": "Crossref",
+      "endpoint": "https://api.crossref.org/works",
+      "asOf": "2026-08-14",
+      "scope": "title, author, DOI, and publication metadata",
+      "rawReceiptRetained": false
+    },
+    {
+      "name": "arXiv",
+      "endpoint": "https://export.arxiv.org/api/query",
+      "asOf": "2026-08-14",
+      "scope": "current math.NT title/abstract terms and related open full texts",
+      "rawReceiptRetained": false
+    }
+  ],
+  "queryConcepts": [
+    "imaginary quadratic field",
+    "5-rank",
+    "noncyclic 5-class group",
+    "rank at least 2",
+    "N^-(5^2;X)",
+    "X^(1/3)",
+    "log-free",
+    "no logarithmic loss",
+    "Bartz Levin Thamminana",
+    "Kulkarni Levin"
+  ],
+  "directPriorArt": [
+    {
+      "id": "BLT-2025",
+      "authors": [
+        "Kollin Bartz",
+        "Aaron Levin",
+        "Aman Dhruva Thamminana"
+      ],
+      "title": "Counting imaginary quadratic fields with an ideal class group of 5-rank at least 2",
+      "venue": "The Ramanujan Journal 68 (2025), article 26",
+      "doi": "10.1007/s11139-025-01184-6",
+      "urls": [
+        "https://doi.org/10.1007/s11139-025-01184-6",
+        "https://arxiv.org/abs/2502.00845"
+      ],
+      "localSha256": "1b63f04fa1daad0c16a76474bfdd91f7b8ffab01bfd1c55a550b2db75b82539b",
+      "theorem": "Theorem 1.3",
+      "result": "N^-(5^2;X) >> X^(1/3)/(log X)^2",
+      "comparison": {
+        "object": "same",
+        "sign": "same",
+        "rank": "same",
+        "exponent": "same",
+        "conditionality": "same",
+        "logarithmicLoss": "strictly weaker"
+      },
+      "verdict": "closest_prior_art_weaker_not_target",
+      "evidenceGrade": "primary_full_text"
+    },
+    {
+      "id": "BYEON-2009",
+      "authors": [
+        "Dongho Byeon"
+      ],
+      "title": "Quadratic fields with noncyclic 5- or 7-class groups",
+      "venue": "The Ramanujan Journal 19 (2009), 71-77",
+      "doi": "10.1007/s11139-008-9129-x",
+      "urls": [
+        "https://doi.org/10.1007/s11139-008-9129-x"
+      ],
+      "localSha256": "0b135b2651241d21d7b8f6bce9bf995d4f1fc4db1762bc64defb54bd014ee3cd",
+      "theorem": "Theorem 1.1, g=5 and imaginary specialization",
+      "result": "N^-_{5,2}(X) >> X^(1/4)",
+      "comparison": {
+        "object": "same after finite-abelian-group equivalence",
+        "sign": "same",
+        "rank": "same",
+        "exponent": "strictly weaker",
+        "conditionality": "same",
+        "logarithmicLoss": "none"
+      },
+      "verdict": "prior_weaker_not_target",
+      "evidenceGrade": "primary_full_text"
+    },
+    {
+      "id": "KULKARNI-LEVIN-2022",
+      "authors": [
+        "Kaivalya R. Kulkarni",
+        "Aaron Levin"
+      ],
+      "title": "Hilbert's Irreducibility Theorem and Ideal Class Groups of Quadratic Fields",
+      "venue": "Acta Arithmetica 205 (2022), 371-380",
+      "doi": "10.4064/aa211224-22-9",
+      "urls": [
+        "https://doi.org/10.4064/aa211224-22-9",
+        "https://arxiv.org/abs/2111.15582"
+      ],
+      "localSha256": "26a9e645b55d70a253be2017cc8d656be188ed9c02350c21884286c60b015aae",
+      "theorem": "Corollary 1.4 and Theorem 1.3",
+      "result": "N^-(m^2;X) >> X^(1/m)/(log X)^2; curve specializations retain (log X)^-2",
+      "comparison": {
+        "object": "general framework containing the target setting",
+        "sign": "includes imaginary",
+        "rank": "rank 2 in Corollary 1.4",
+        "exponent": "m=5 generic exponent 1/5, not 1/3",
+        "conditionality": "same",
+        "logarithmicLoss": "strictly weaker"
+      },
+      "verdict": "method_prior_art_weaker_not_target",
+      "evidenceGrade": "primary_full_text"
+    },
+    {
+      "id": "CHATTOPADHYAY-SAIKIA-2023",
+      "authors": [
+        "Jaitra Chattopadhyay",
+        "Anupam Saikia"
+      ],
+      "title": "On the p-ranks of the ideal class groups of imaginary quadratic fields",
+      "venue": "The Ramanujan Journal 62 (2023), 571-581",
+      "doi": null,
+      "urls": [
+        "https://arxiv.org/abs/2112.00472"
+      ],
+      "retainedSha256": "a2680cfc0faedef55955a37da4e76d9866e6bfc83d1ffe0c5d85918706f368f5",
+      "theorem": "Theorem 1",
+      "result": "Assuming abc, N_p^2(X) >> X^(1/(p-1)-epsilon); p=5 gives X^(1/4-epsilon)",
+      "comparison": {
+        "object": "same for p=5",
+        "sign": "same",
+        "rank": "same",
+        "exponent": "strictly weaker",
+        "conditionality": "abc-conditional",
+        "logarithmicLoss": "not the decisive mismatch"
+      },
+      "verdict": "conditional_and_weaker_not_target",
+      "evidenceGrade": "primary_full_text"
+    }
+  ],
+  "namedAdjacentItems": [
+    {
+      "label": "Ouyang-Song-Zhang",
+      "identity": null,
+      "doi": null,
+      "urls": [],
+      "laneBVerdict": "not_supporting_in_audited_scope",
+      "countedAsExactPriorArt": false,
+      "evidenceGrade": "team_lane_summary_only",
+      "limitation": "The retained terminal receipt does not contain a unique title, DOI, theorem number, or source quotation; no bibliographic identity is guessed here."
+    },
+    {
+      "label": "Hoque-Kotyada",
+      "identity": null,
+      "doi": null,
+      "urls": [],
+      "laneBVerdict": "not_supporting_in_audited_scope",
+      "countedAsExactPriorArt": false,
+      "evidenceGrade": "team_lane_summary_only",
+      "limitation": "The retained terminal receipt does not contain a unique title, DOI, theorem number, or source quotation; no bibliographic identity is guessed here."
+    },
+    {
+      "label": "Kim",
+      "identity": null,
+      "doi": null,
+      "urls": [],
+      "laneBVerdict": "not_supporting_in_audited_scope",
+      "countedAsExactPriorArt": false,
+      "evidenceGrade": "team_lane_summary_plus_failed_publisher_retrieval",
+      "limitation": "Retained publisher requests were anti-bot pages and cannot identify or anchor a theorem; no bibliographic identity is guessed here."
+    },
+    {
+      "label": "Bagshaw",
+      "identity": null,
+      "doi": null,
+      "urls": [],
+      "laneBVerdict": "not_supporting_in_audited_scope",
+      "countedAsExactPriorArt": false,
+      "evidenceGrade": "team_lane_summary_only",
+      "limitation": "The retained terminal receipt does not contain a unique title, DOI, theorem number, or source quotation; no bibliographic identity is guessed here."
+    }
+  ],
+  "evidenceBalance": {
+    "supportsScopedNotFound": [
+      "Four closest direct sources are fixed by full text and stable identifiers and are strictly weaker or conditional.",
+      "Lane B reported checking four open databases, citation descendants, current arXiv records, and adjacent primary full texts without an exact five-coordinate match.",
+      "The target object and its equivalent notations were normalized before comparison."
+    ],
+    "preventsAbsoluteNoveltyClaim": [
+      "A negative search is not a proof of global nonexistence.",
+      "Lane C is runtime-incomplete and is excluded from the evidence.",
+      "Raw query responses, exact query strings, hit counts, and several item-level anchors were not retained.",
+      "MathSciNet, zbMATH, Web of Science, Scopus, theses, nonpublic manuscripts, and indexing-lagged works were not exhaustively covered.",
+      "The NO-LOG theorem remains a human proof candidate and is not Lean Verified."
+    ]
+  },
+  "falsification": {
+    "hypothesis": "A prior source in the audited corpus proves the same imaginary-quadratic, discriminant-bounded, 5-rank-at-least-2 count unconditionally with lower bound X^(1/3) and no logarithmic loss.",
+    "decisiveFailureSignal": "A primary theorem matching all five target coordinates.",
+    "observed": "No such theorem was found in the retained A/B scope.",
+    "outcome": "not_found_within_scope",
+    "globalNonexistenceProved": false,
+    "laneCCounted": false
+  },
+  "safeWording": {
+    "zh": "据我们截至 2026 年 8 月 14 日对 OpenAlex、Semantic Scholar、Crossref、arXiv 及所列直接先例的有范围检索，尚未发现文献明确证明虚二次域 5-rank 至少 2 的无对数下界 N^-_{5,2}(X) >> X^(1/3)。现有最接近的无条件结果是 Bartz-Levin-Thamminana 的 X^(1/3)/(log X)^2 下界。此陈述是有范围的‘据我们所知’，不是完备或绝对首创主张。",
+    "forbidden": [
+      "我们首次证明",
+      "此前无人证明",
+      "这是绝对新的",
+      "完整文献中不存在该结果"
+    ]
+  },
+  "replayPointers": [
+    "mathematics/worker/formalization-intake.md",
+    "mathematics/worker/formalization-intake.json",
+    "mathematics/worker/source-consistency-review.md",
+    "mathematics/worker/no-log-kl-blt-lead-source-audit.md",
+    "mathematics/problems/no-log-candidate-complete-proof.md"
+  ]
+}
