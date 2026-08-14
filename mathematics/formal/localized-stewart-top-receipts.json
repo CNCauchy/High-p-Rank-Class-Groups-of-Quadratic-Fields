@@ -1,0 +1,76 @@
+{
+  "schema": "deepscientist.mathematics.named-theorem-receipt-batch.v1",
+  "status": "kernel_verified",
+  "proofPath": "mathematics/formal/LocalizedStewartTop.lean",
+  "proofHash": "d5aaeaf5c160234d58b8423343e6b61456f6cbe6bf4f74fe1de6cb7faef0cbe2",
+  "proofBytes": 4673,
+  "targetCommit": "5398605f797ef5fd3e1af49503e75aca5f3eb977",
+  "sessionId": "f90ba0e1-1313-411b-bd08-b89a68673451",
+  "source": {
+    "tool": "lean_workspace",
+    "action": "certify",
+    "runId": "sci_run_mssy16na_444ace",
+    "reportTracePath": "mathematics/report-traces/verification-b57b9196e8978175f5f1.json"
+  },
+  "results": [
+    {
+      "receiptId": "lean-153b0ef7bcac3ee54e5d2962",
+      "checkId": "fixed_square",
+      "theoremName": "LocalizedStewartTop.fixed_square_preserves_distinct_values",
+      "statementHash": "c21a98ba4a4fe8ee639ba5d2a4d3449f642d4f9654092521353865e46ac45c1c",
+      "theoremDeclarationHash": "6485da3c48afbc76436af16c37da3726f5ff84ccb320949ca87cb91ac188fabe",
+      "goalsRemaining": 0,
+      "sorryCount": 0,
+      "admitCount": 0,
+      "axioms": []
+    },
+    {
+      "receiptId": "lean-805642624cc0a8a09f254e84",
+      "checkId": "natural_box",
+      "theoremName": "LocalizedStewartTop.natural_box_lower_bound_of_source",
+      "statementHash": "f5abb5a7f854286e2ee558d05ce79578220a428cb0aad948e63c086f77aa46fe",
+      "theoremDeclarationHash": "45ed9cfeb9c5091c25736543136d2a25dafd036fb124f9919d6765d470475c4f",
+      "goalsRemaining": 0,
+      "sorryCount": 0,
+      "admitCount": 0,
+      "axioms": []
+    },
+    {
+      "receiptId": "lean-5fc9da5de26e8e5d7db3aa56",
+      "checkId": "floor_bound",
+      "theoremName": "LocalizedStewartTop.numerator_le_twice_denominator_floor",
+      "statementHash": "a7b45ac37ec11f25dbf3020ef9028c3e7c430a25f688a68bfa1c6ce55b2d8ff1",
+      "theoremDeclarationHash": "47744afa7d2240c52ff9b2bb43a21875f47adbf495faa7d5a4e3ab7ca58b3868",
+      "goalsRemaining": 0,
+      "sorryCount": 0,
+      "admitCount": 0,
+      "axioms": []
+    },
+    {
+      "receiptId": "lean-94f3773a280e819ddcf2d735",
+      "checkId": "rational_transfer",
+      "theoremName": "LocalizedStewartTop.rational_box_lower_bound_of_integer_boxes",
+      "statementHash": "d5ad82e253fc763c383984b8aa6510f392ce4a15bd9d8ddf67330aee41a88c5f",
+      "theoremDeclarationHash": "1ffb6ee59c228d1f61844142166d8152f50727cd9bc9b8e2c252b012b9e28aa8",
+      "goalsRemaining": 0,
+      "sorryCount": 0,
+      "admitCount": 0,
+      "axioms": []
+    }
+  ],
+  "scope": {
+    "certifies": [
+      "Cancellation of a common nonzero fixed square, hence preservation of distinct normalized squarefree values",
+      "Packaging of an assumed uniform natural-height quadratic lower bound",
+      "The denominator-cleared floor estimate used to pass from integer to rational heights",
+      "The rational-height lower-bound transfer with the constant loss made explicit"
+    ],
+    "doesNotCertify": [
+      "The Stewart-Top squarefree-value sieve",
+      "The uniform Thue-equation representation bound",
+      "The existence of the positive-box lower-bound constant",
+      "Proposition 4.1 end to end as an analytic theorem",
+      "Any later class-group or field-counting conclusion"
+    ]
+  }
+}

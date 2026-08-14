@@ -78,3 +78,11 @@ density, and Stewart's Thue-equation bound are not formalized; they remain
 external source inputs. Consequently this review does **not** label the full
 Proposition 4.1 as Lean Verified. A kernel receipt for the four named bridge
 theorems certifies only these separable arithmetic consequences.
+
+The batch certification at target commit
+`5398605f797ef5fd3e1af49503e75aca5f3eb977` returned four
+`kernel_verified` receipts, with zero remaining goals, zero `sorry`/`admit`,
+and no axioms. The immutable receipt manifest is
+`mathematics/formal/localized-stewart-top-receipts.json`; its content-addressed
+verification trace is
+`mathematics/report-traces/verification-b57b9196e8978175f5f1.json`.
