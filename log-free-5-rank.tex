@@ -1,0 +1,560 @@
+\documentclass[11pt,reqno]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=blue!55!black,
+  urlcolor=blue!55!black,
+  pdftitle={A log-free lower bound for imaginary quadratic fields of 5-rank at least two},
+  pdfauthor={Hao Zhang}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\Disc}{\operatorname{Disc}}
+\newcommand{\Jac}{\operatorname{Jac}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\Ht}{\operatorname{H}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\NoLogCount}{N^{-}_{5,2}}
+
+\title[A log-free lower bound for quadratic fields]{A log-free lower bound for imaginary quadratic fields of 5-rank at least two}
+\author{Hao Zhang}
+\date{Research manuscript draft, 14 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let \(\NoLogCount(X)\) denote the number of imaginary quadratic fields
+\(K\), counted up to \(\Q\)-isomorphism, for which
+\(\lvert\Disc(K)\rvert\leq X\) and
+\(\dim_{\F_5}\Cl(K)/5\Cl(K)\geq 2\).  Bartz, Levin, and Thamminana
+proved the lower bound
+\(\NoLogCount(X)\gg X^{1/3}/(\log X)^2\).  We present a complete
+human-readable proof candidate for the log-free estimate
+\[
+  \NoLogCount(X)\gg X^{1/3}.
+\]
+The argument combines their explicit genus-two curve with the strong
+power-free-value theorem of Stewart--Top, rather than the logarithmically
+weaker variant used in the Hilbert-irreducibility framework of
+Kulkarni--Levin.  The main points are to preserve one positive congruence
+cone, extract bounded witnesses for distinct squarefree values, delete a
+thin set without losing the quadratic main term, and identify the displayed
+genus-two curve with the model to which the torsion theorem applies.  We give
+the required endpoint-avoidance and square-class injection lemmas, an exact
+rational isomorphism of the two genus-two models, and a reproducibility
+statement.  The full analytic argument has undergone independent adversarial
+review, but has not been formalized end to end in a proof assistant; this
+document should therefore be treated as a pre-submission research draft.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a positive integer \(m\) and a finite abelian group \(A\), write
+\[
+  \rk_m A=\max\{r:(\Z/m\Z)^r\hookrightarrow A\}.
+\]
+When \(m=p\) is prime, this is
+\(\dim_{\F_p}(A/pA)\).  We study the counting function
+\begin{equation}\label{eq:counting-function}
+  \NoLogCount(X)
+  =\#\left\{
+  \begin{array}{c}
+  K/\Q\text{ imaginary quadratic, up to }\Q\text{-isomorphism}:\\
+  |\Disc(K)|\leq X,\quad \rk_5\Cl(K)\geq 2
+  \end{array}
+  \right\}.
+\end{equation}
+
+Byeon proved the unconditional estimate
+\(\NoLogCount(X)\gg X^{1/4}\) \cite{Byeon2009}; an earlier result gives a
+weaker exponent in greater generality \cite{Byeon2006}.  Kulkarni and Levin
+developed a Hilbert-irreducibility method that converts rational torsion on
+hyperelliptic Jacobians into quantitative class-group constructions
+\cite{KulkarniLevin2022}.  Bartz, Levin, and Thamminana applied this framework
+to an explicit genus-two curve and obtained
+\begin{equation}\label{eq:blt-bound}
+  \NoLogCount(X)\gg \frac{X^{1/3}}{(\log X)^2}
+  \qquad\text{\cite[Theorem~1.3]{BartzLevinThamminana2025}}.
+\end{equation}
+Conditional results of a different shape are known; for example,
+Chattopadhyay and Saikia obtain, assuming the \(abc\)-conjecture, an exponent
+\(1/4-\varepsilon\) when \(p=5\) \cite{ChattopadhyaySaikia2023}.
+
+The purpose of this paper is to remove the logarithmic loss in
+\eqref{eq:blt-bound} without changing the genus-two input.
+
+\begin{theorem}\label{thm:main}
+There exist constants \(c>0\) and \(X_0>1\) such that, for every
+\(X\geq X_0\),
+\[
+  \NoLogCount(X)\geq cX^{1/3}.
+\]
+\end{theorem}
+
+The logarithmic factor in \eqref{eq:blt-bound} comes from the power-free-value
+estimate used in the general Kulkarni--Levin construction.  For the particular
+binary sextic arising here, the stronger theorem of Stewart and Top
+\cite[Theorem~1]{StewartTop1995} applies.  Its proof produces
+\(\gg H^2\) distinct squarefree values from a fixed positive box of side
+\(H\), whereas the relevant thin set contains only \(O(H)\) rational
+parameters of comparable height.  The difference remains quadratic.
+
+There are three bookkeeping issues that must be resolved before this idea
+becomes a proof.  First, a projective change of variable in the
+Stewart--Top proof may change the positive cone; we avoid it by choosing the
+Kulkarni--Levin coordinate so that both endpoint coefficients are nonzero.
+Second, the thin-set estimate counts rational parameters rather than binary
+form values; even homogeneity gives the required injection.  Third, the
+genus-two model in the torsion construction must be identified with the
+displayed curve by an exact rational map.  These points are treated in
+\Cref{sec:curve,sec:localized,sec:main-proof}.
+
+To the best of our knowledge within a search of OpenAlex, Semantic Scholar,
+Crossref, arXiv, and the direct citation chain completed on 14 August 2026,
+no earlier source states the unconditional log-free estimate in
+\Cref{thm:main}.  The closest unconditional result with the same exponent is
+\eqref{eq:blt-bound}.  This is a scoped literature statement, not a claim that
+all indexed and unindexed literature has been exhausted.
+
+\section{The fixed genus-two curve}\label{sec:curve}
+
+Bartz, Levin, and Thamminana exhibit the curve
+\begin{equation}\label{eq:C0}
+  C_0:\quad y^2=f_0(x)
+  =(5x+7)(128x^4+549x^3+1007x^2+936x+368)
+\end{equation}
+and obtain the needed rational \(5\)-torsion input from their
+Theorem~2.1 \cite[pp.~4--7]{BartzLevinThamminana2025}.  The following form of
+that input is all that we use.
+
+\begin{proposition}\label{prop:C0-rank}
+The curve \(C_0\) has genus two, and
+\[
+  \rk_5\Jac(C_0)(\Q)_{\mathrm{tors}}\geq 2.
+\]
+Moreover, after the change of variables \(u=640x\), \(v=640^2y\), it has the
+monic odd-degree model
+\begin{equation}\label{eq:g-model}
+\begin{aligned}
+  v^2=g(u)=(u+896)\bigl(&u^4+2745u^3+3222400u^2\\
+  &+1916928000u+482344960000\bigr).
+\end{aligned}
+\end{equation}
+The associated projective branch form has irreducible-factor degrees
+\(1,1,4\) over \(\Q\).
+\end{proposition}
+
+\begin{proof}
+The identity \(g(u)=640^4f_0(u/640)\) is immediate by expansion.  The quartic
+factor in \eqref{eq:g-model} is irreducible over \(\Q\), and \(g\) is
+separable.  Together with the branch point at infinity, this gives factor
+degrees \(1,1,4\).
+
+For the torsion assertion, substitute
+\((t,u,z)=(2/3,-1/3,25)\) into the coefficient formulas of
+\cite[Theorem~2.1]{BartzLevinThamminana2025}.  The resulting even model
+\(C_{\mathrm{even}}:y^2=P(x)\) is mapped to \(C_0\) by
+\begin{equation}\label{eq:forward-map}
+  x_0=\frac{2(1-2x)}{5x-1},\qquad
+  y_0=\frac{59049y}{1024(5x-1)^3},
+\end{equation}
+with inverse
+\begin{equation}\label{eq:inverse-map}
+  x=\frac{x_0+2}{5x_0+4},\qquad
+  y=\frac{8192y_0}{2187(5x_0+4)^3}.
+\end{equation}
+The exact polynomial identity and the two coordinate compositions are recorded
+in \Cref{app:model}.  Thus the theorem-level torsion conclusion for the even
+model applies to \(C_0\).  The stronger reported computation of the entire
+torsion subgroup is unnecessary here.
+\end{proof}
+
+\section{Two elementary bridge lemmas}\label{sec:bridge}
+
+The first lemma lets us preserve the positive cone in the later
+Stewart--Top count.
+
+\begin{lemma}[Finite endpoint avoidance]\label{lem:endpoint}
+Fix the bad-prime data \(M_0\), a shift \(N_0/M_0\), and the polynomial
+\(g\) in \eqref{eq:g-model}.  In the proof of
+\cite[Lemma~3.1]{KulkarniLevin2022}, the integer \(N_1\) may be chosen
+sufficiently large and so that
+\begin{equation}\label{eq:endpoint-avoid}
+  g\!\left(-\frac{N_0}{M_0}+\frac1{N_1}\right)
+  g\!\left(-\frac{N_0}{M_0}-\frac1{N_1}\right)\neq 0.
+\end{equation}
+For this choice, the transformed projective branch form has nonzero leading
+and trailing coefficients.
+\end{lemma}
+
+\begin{proof}
+The construction of Kulkarni--Levin permits any sufficiently large positive
+integer \(N_1\).  Each equality obtained by setting one factor in
+\eqref{eq:endpoint-avoid} equal to zero excludes only finitely many such
+integers, because \(g\) has finitely many roots.  The two values in
+\eqref{eq:endpoint-avoid} are precisely the images of the projective endpoints
+under the inverse M\"obius transformation used below.  Their nonvanishing is
+equivalent to the two endpoint coefficients being nonzero.
+\end{proof}
+
+\begin{lemma}[Even-form square-class injection]\label{lem:injection}
+Let \(F\in\Z[X,Y]\) be homogeneous of even degree six, and fix
+\(w\in\Z\setminus\{0\}\).  Suppose
+\[
+  F(a_i,b_i)=t_iw^2\qquad(i=1,2),
+\]
+where \(t_1,t_2\) are signed squarefree integers and \(b_1b_2\neq0\).  If
+\(a_1/b_1=a_2/b_2\), then \(t_1=t_2\).  The same conclusion holds after a
+fixed invertible fractional-linear transformation of the ratios.
+\end{lemma}
+
+\begin{proof}
+Equality of the ratios gives
+\((a_2,b_2)=\lambda(a_1,b_1)\) for some \(\lambda\in\Q^\times\).  Hence
+\[
+  \frac{t_2}{t_1}
+  =\frac{F(a_2,b_2)}{F(a_1,b_1)}
+  =\lambda^6=(\lambda^3)^2.
+\]
+Two signed squarefree integers representing the same element of
+\(\Q^\times/\Q^{\times2}\) are equal.  An invertible fractional-linear
+transformation preserves equality of ratios.
+\end{proof}
+
+\section{A localized log-free squarefree-value proposition}\label{sec:localized}
+
+We isolate the exact consequence of Stewart--Top needed in the proof.  The
+statement includes the bounded positive witnesses that are present in the
+proof of their theorem, although not displayed in the definition of their
+unbounded counting function.
+
+\begin{proposition}\label{prop:localized-ST}
+Let \(F\in\Z[X,Y]\) be a squarefree binary form of degree \(r=6\), with
+nonzero leading and trailing coefficients.  Suppose the largest degree of an
+irreducible factor over \(\Q\) is \(m\leq 5\).  Fix integers \(A,B,M\), with
+\(M\geq1\), and let \(w\geq1\) be maximal such that
+\[
+  w^2\mid F(a,b)
+  \quad\text{whenever}\quad
+  a\equiv A\pmod M,\quad b\equiv B\pmod M.
+\]
+Then there are constants \(c_0>0\) and \(H_0\geq1\), depending only on the
+fixed data, such that every real \(H\geq H_0\) admits at least \(c_0H^2\)
+distinct signed squarefree integers \(t\) for which
+\[
+  F(a,b)=tw^2
+\]
+has a solution with
+\(1\leq a,b\leq H\),
+\(a\equiv A\pmod M\), and
+\(b\equiv B\pmod M\).
+\end{proposition}
+
+\begin{proof}
+Apply \cite[Theorem~1]{StewartTop1995} with \(k=2\).  Its hypothesis on the
+factor degrees is \(m\leq2k+1=5\).  The bounded-witness conclusion follows
+from the proof: the set constructed in
+\cite[pp.~951--952]{StewartTop1995} lies in the positive box
+\(1\leq a,b\leq H\) and in the fixed residue class.  Equation~(10) on
+p.~953 gives \(\gg H^2\) eligible pairs.  Equations~(11)--(15), together with
+the uniform Thue-equation estimate of \cite[Corollary~1]{Stewart1991}, bound
+the number of primitive representations of any one value by a constant
+depending only on the fixed form and residue data.  The paragraph following
+(15) therefore produces \(\gg H^2\) distinct values, not merely pairs.
+
+The cited proof is first written for sufficiently large integral box
+parameters.  For real \(H\), use \(\lfloor H\rfloor\geq H/2\) after enlarging
+\(H_0\), and shrink the constant by a factor of four.
+\end{proof}
+
+\begin{remark}\label{rem:source-bookkeeping}
+The proof of Proposition~\ref{prop:localized-ST} uses the distinct-value set obtained
+after the representation-multiplicity estimate, rather than identifying it
+with the earlier pair set.  Also, a preliminary \(\SL_2(\Z)\) change of
+variables in the general proof is unnecessary once the two endpoint
+coefficients are nonzero.  This is why Lemma~\ref{lem:endpoint} is imposed before
+the final congruence class is fixed.
+\end{remark}
+
+\section{The class-group specialization input}\label{sec:KL}
+
+We use the following specialized form of the Kulkarni--Levin construction.
+It is a direct combination of their local-approximation lemma, thin-set height
+bound, specialization theorem, and the proof of their imaginary quadratic
+case \cite[Lemmas~3.1--3.2, Theorems~1.3 and~4.1]{KulkarniLevin2022}.
+
+Fix a sufficiently large positive integer \(N_0\), coprime to the product
+\(M_0\) of the bad primes of \(C_0\), such that
+\begin{equation}\label{eq:negative-neighborhood}
+  g(u)<0\qquad\text{if}\qquad
+  \left|u+\frac{N_0}{M_0}\right|<1.
+\end{equation}
+This is possible because \(g\) is monic of odd degree.  Put
+\(\phi(P)=u(P)+N_0/M_0\).  The specialization theorem supplies a fixed thin
+set \(\Omega\subset\Q\) outside which the relevant torsion classes specialize
+to ideal classes.
+
+Choose \(N_1\) as in Lemma~\ref{lem:endpoint} and define
+\begin{equation}\label{eq:mobius}
+  \psi(\alpha)=\frac{1-N_1\alpha}{1+N_1\alpha},
+  \qquad
+  \tau(q)=\psi^{-1}(q)=\frac{1-q}{N_1(1+q)}.
+\end{equation}
+The proof of \cite[Lemma~3.1]{KulkarniLevin2022} then gives fixed integers
+\(A,B,M\)---one may take \(A=B=1\)---such that positive integers in this
+single residue class satisfy all prescribed local conditions.  The
+composition order is
+\begin{equation}\label{eq:composition-order}
+  q=(\psi\circ\phi)(P)=a/b,
+  \qquad
+  \phi(P)=\tau(a/b),
+  \qquad
+  u(P)=\tau(a/b)-N_0/M_0.
+\end{equation}
+
+After clearing fixed denominators and removing fixed square factors, the
+branch equation can be written
+\begin{equation}\label{eq:binary-form-identity}
+  g\!\left(\tau(X/Y)-\frac{N_0}{M_0}\right)
+  =F(X,Y)R(X,Y)^2,
+\end{equation}
+where \(F\in\Z[X,Y]\) is a squarefree binary sextic and
+\(R\in\Q(X,Y)\).  The projective change of coordinate preserves separability
+and factor degrees, so \(F\) has factor-degree pattern \(1,1,4\).  By
+Lemma~\ref{lem:endpoint}, its leading and trailing coefficients are nonzero.
+
+For the final residue class define \(w\) to be the maximal positive integer
+whose square divides every value in that class, exactly as in
+\cite[p.~948]{StewartTop1995}.  All of
+\(N_0,M_0,N_1,A,B,M,F,w,\Omega\) are now fixed; none depends on the later
+height parameter.
+
+\section{Proof of the main theorem}\label{sec:main-proof}
+
+\begin{proof}[Proof of \Cref{thm:main}]
+Apply Proposition~\ref{prop:localized-ST} to the binary sextic \(F\) from
+\eqref{eq:binary-form-identity}.  There are \(\gg H^2\) distinct signed
+squarefree integers \(t\), each with a chosen witness \((a_t,b_t)\) in the
+same positive box and residue class, such that
+\begin{equation}\label{eq:Ftw}
+  F(a_t,b_t)=t w^2.
+\end{equation}
+The constants are uniform for every sufficiently large \(H\).
+
+For each \(t\), set \(q_t=\tau(a_t/b_t)\).  A fixed fractional-linear map
+distorts multiplicative height by only a fixed constant, hence
+\begin{equation}\label{eq:height-distortion}
+  \Ht(q_t)\ll H.
+\end{equation}
+By Lemma~\ref{lem:injection}, the map \(t\mapsto q_t\) is injective.  The thin-set
+bound \cite[Lemma~3.2]{KulkarniLevin2022} therefore shows that only \(O(H)\)
+of the chosen parameters belong to \(\Omega\).  Removing them leaves
+\begin{equation}\label{eq:after-deletion}
+  \gg H^2-O(H)\gg H^2
+\end{equation}
+distinct squarefree values.
+
+For a surviving value, the fixed real neighborhood
+\eqref{eq:negative-neighborhood} and
+\eqref{eq:binary-form-identity} imply \(t<0\), since the omitted factors and
+\(w^2\) are squares.  The field computation in the proof of
+\cite[Theorem~1.2, equations~(3.1)--(3.2)]{KulkarniLevin2022} gives
+\begin{equation}\label{eq:field-identification}
+  \Q(P_t)=\Q(\sqrt{F(a_t,b_t)})=\Q(\sqrt t).
+\end{equation}
+The local choices and the specialization theorem, together with
+Proposition~\ref{prop:C0-rank}, yield
+\begin{equation}\label{eq:rank-conclusion}
+  \rk_5\Cl(\Q(\sqrt t))
+  \geq \rk_5\Jac(C_0)(\Q)_{\mathrm{tors}}
+  \geq2.
+\end{equation}
+Distinct signed squarefree \(t\)'s give distinct quadratic fields.  In
+particular, the two conjugate points over one rational parameter are not
+double-counted: the argument counts squarefree values \(t\), not geometric
+points.
+
+Since \(F\) is fixed and has degree six, there is a constant \(C_F>0\) such
+that
+\[
+  |F(a,b)|\leq C_FH^6
+  \qquad(1\leq a,b\leq H).
+\]
+The fundamental discriminant of \(\Q(\sqrt t)\) has absolute value at most
+\(4|t|\).  From \eqref{eq:Ftw} we obtain a fixed \(C_\Delta>0\) with
+\begin{equation}\label{eq:disc-height}
+  |\Disc(\Q(\sqrt t))|\leq C_\Delta H^6.
+\end{equation}
+Given sufficiently large \(X\), take
+\[
+  H=\left\lfloor (X/C_\Delta)^{1/6}\right\rfloor.
+\]
+Then \(H\gg X^{1/6}\), all the surviving fields satisfy the discriminant
+cutoff \(X\), and their number is \(\gg H^2\gg X^{1/3}\).  This proves the
+stated estimate.
+\end{proof}
+
+\section{Quantifiers, dependencies, and scope}\label{sec:scope}
+
+The order of choices in the proof is
+\begin{equation}\label{eq:quantifier-order}
+\begin{aligned}
+  C_0
+  &\Longrightarrow(S,M_0,N_0,\phi,\Omega)
+  \Longrightarrow N_1\\
+  &\Longrightarrow(A,B,M,F,w,c_0,H_0,C_\Delta)\\
+  &\Longrightarrow \forall H\geq H_0
+  \Longrightarrow \forall X\geq X_0.
+\end{aligned}
+\end{equation}
+Thus the residue class, the class-wise fixed square divisor, the thin set, all
+exceptional sets, and every implied constant are selected before \(H\) and
+\(X\).  This prevents a variable local condition or a height-dependent square
+factor from being hidden in the Vinogradov symbol.
+
+Three source-level bookkeeping points are worth recording.
+\begin{enumerate}[label=(\roman*)]
+  \item If a binary form is precomposed with a matrix \(L\), the residue class
+  preserving the original values is transported by \(L^{-1}\).  In the
+  present argument the optional change is not used, because
+  Lemma~\ref{lem:endpoint} makes both endpoint coefficients nonzero.
+  \item The pair set in the proof of \cite[Theorem~1]{StewartTop1995} is not
+  itself the distinct-value set.  The passage to distinct values occurs only
+  after the representation-multiplicity estimates (11)--(15).
+  \item Two conjugate points can generate the same quadratic field.  Counting
+  distinct signed squarefree values \(t\) removes this multiplicity.
+\end{enumerate}
+These observations do not change the exponent, but they are needed to keep the
+objects being counted aligned throughout the proof.
+
+\section{Related work and novelty boundary}\label{sec:related}
+
+The result closest to \Cref{thm:main} is the unconditional estimate
+\eqref{eq:blt-bound}.  Byeon's \(X^{1/4}\) theorem is log-free but has a
+smaller exponent \cite{Byeon2009}.  The general Kulkarni--Levin corollary for
+\(m=5\) has exponent \(1/5\) and a \((\log X)^{-2}\) factor
+\cite[Corollary~1.4]{KulkarniLevin2022}.  The conditional result of
+Chattopadhyay--Saikia has exponent \(1/4-\varepsilon\) for \(p=5\)
+\cite{ChattopadhyaySaikia2023}.
+
+The scoped search supporting this comparison included the exact notations
+\(\NoLogCount(X)\) and \(N^-(5^2;X)\), equivalent finite-abelian-group
+formulations, citation descendants of the principal sources, and current
+records in OpenAlex, Semantic Scholar, Crossref, and arXiv through 14 August
+2026.  It did not exhaust subscription databases, nonpublic manuscripts,
+unindexed theses, non-English literature, or work affected by indexing lag.
+Accordingly, the appropriate scholarly formulation is ``to the best of our
+knowledge within the stated search scope,'' rather than an absolute priority
+claim.
+
+\section{Verification and reproducibility}\label{sec:reproducibility}
+
+The proof was assembled from frozen versions of the four principal sources
+\cite{BartzLevinThamminana2025,KulkarniLevin2022,StewartTop1995,Stewart1991}
+and subjected to independent adversarial review.  Exact rational arithmetic
+checks the model identity in Proposition~\ref{prop:C0-rank}, the forward curve identity,
+both coordinate compositions, and the rejection of the incorrect inverse
+coefficient \(1024\), which would return \(y/8\) instead of \(y\).
+
+In the accompanying project, the principal replay commands are
+\begin{verbatim}
+python3 mathematics/worker/no-log-blt-c0-rank-replay.py
+python3 mathematics/worker/verify-route-audit.py
+lean -q -t 0 mathematics/formal/NoLogSourceBridge.lean
+lean -q -t 0 mathematics/formal/NoLogInference.lean
+\end{verbatim}
+The two Lean files certify only the final conditional numerical assembly and
+elementary algebraic components.  They do not formalize the Stewart--Top,
+Kulkarni--Levin, or Bartz--Levin--Thamminana inputs, nor the full unconditional
+analytic bridge.  The complete theorem is therefore not claimed here as an
+end-to-end machine-verified result.  The manuscript source and checks are bound
+to project commit
+\texttt{c9ca34210ee58d01c1f6fc5cd97f969534dbaa70} before the manuscript
+commit itself.
+
+\section*{AI assistance disclosure}
+
+DeepScientist, an AI-assisted research system, was used for structured
+literature discovery, extraction of proof obligations, symbolic-algebra
+replay, adversarial consistency checking, and preparation of the initial
+LaTeX draft.  DeepScientist is not an author.  Hao Zhang is the sole author,
+retains responsibility for every mathematical statement and citation, and
+should complete the conventional final human source and proof review required
+by the intended journal before submission.
+
+\section*{Acknowledgements}
+
+The author thanks the authors of the cited works for making the constructions
+and source materials on which this argument builds available.
+
+\appendix
+
+\section{Exact identification of the two genus-two models}\label{app:model}
+
+For the sample \((t,u,z)=(2/3,-1/3,25)\) in
+\cite[Section~2]{BartzLevinThamminana2025}, exact substitution gives
+\[
+\begin{aligned}
+  a&=\frac{2048}{243},
+  &a_0&=-\frac{10240}{531441},
+  &a_2&=\frac{20480}{59049},\\
+  a_4&=\frac{182272}{177147},
+  &a_6&=\frac{31129600}{531441}.
+\end{aligned}
+\]
+Let
+\[
+  P(x)=a(a_6x^6+a_4x^4+a_2x^2+a_0).
+\]
+Writing \(D=5x-1\) and \(N=2(1-2x)\), the forward map
+\eqref{eq:forward-map} is certified by the coefficientwise identity
+\begin{equation}\label{eq:forward-identity}
+  1024^2D^6 f_0(N/D)=59049^2P(x).
+\end{equation}
+Moreover,
+\[
+  5x_0+4=\frac6D,
+  \qquad
+  \frac{x_0+2}{5x_0+4}=x,
+\]
+and the \(y\)-coordinate composition factor is
+\[
+  \frac{8192}{2187(5x_0+4)^3}
+  \frac{59049}{1024D^3}=1.
+\]
+The old numerator \(1024\) in the first factor would give \(1/8\), so the
+coefficient \(8192\) in \eqref{eq:inverse-map} is forced.  These are rational
+function identities on the dense affine opens where the denominators are
+nonzero; the induced maps extend to the smooth projective curves.
+
+\bibliographystyle{amsplain}
+\bibliography{log-free-5-rank}
+
+\end{document}
