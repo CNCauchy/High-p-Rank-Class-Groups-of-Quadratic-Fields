@@ -76,10 +76,30 @@ with inverse
 
 \[
 x=\frac{x_0+2}{5x_0+4},\qquad
-y=\frac{1024y_0}{2187(5x_0+4)^3}.
+y=\frac{8192y_0}{2187(5x_0+4)^3}.
 \]
 
-Coefficient-by-coefficient verification is recorded in
+Writing `f_0` for the displayed quintic of `C0`, the replay checks the exact
+cleared-denominator identity
+
+\[
+1024^2(5x-1)^6
+f_0\!\left(\frac{2(1-2x)}{5x-1}\right)=59049^2P(x)
+\]
+
+coefficient by coefficient. It also checks
+
+\[
+5x_0+4=\frac6{5x-1},\qquad
+\frac{x_0+2}{5x_0+4}=x,
+\qquad
+\frac{8192}{2187(5x_0+4)^3}
+\frac{59049}{1024(5x-1)^3}=1.
+\]
+
+Thus both coordinate formulas compose exactly; the former inverse numerator
+`1024` would give the last scalar as `1/8`. The coefficient and composition
+verification is recorded in
 `mathematics/worker/no-log-blt-c0-rank-replay.py`. Therefore the theorem-level
 5-rank conclusion for `C_even` applies to the displayed `C0`.
 

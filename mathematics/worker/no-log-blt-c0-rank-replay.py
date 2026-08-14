@@ -132,12 +132,42 @@ assert square_ratio == Q(128000, 59049) ** 2
 
 # Explicit birational maps between C_even and C0.
 # x0=2(1-2x)/(5x-1), y0=59049*y/(1024(5x-1)^3).
-# Inverse: x=(x0+2)/(5x0+4), y=1024*y0/(2187(5x0+4)^3).
-for x in (Q(0), Q(2, 5), Q(3, 2), Q(-2)):
-    if 5*x != 1:
-        x0 = 2*(1-2*x)/(5*x-1)
-        if 5*x0 != -4:
-            assert (x0+2)/(5*x0+4) == x
+# Inverse: x=(x0+2)/(5x0+4), y=8192*y0/(2187(5x0+4)^3).
+# Clear all denominators and compare the forward curve equation coefficientwise:
+#   1024^2*D^6*f0(N/D) = 59049^2*P(x),
+# where N=2(1-2x), D=5x-1, and f0 is the C0 quintic.
+N = [Q(2), Q(-4)]
+D = [Q(-1), Q(5)]
+forward_c0_numerator = [Q(0)] * 7
+for degree, coefficient in enumerate(c0):
+    term = mul(power(N, degree), power(D, 6-degree))
+    forward_c0_numerator = add(
+        forward_c0_numerator,
+        [Q(coefficient) * value for value in term],
+    )
+assert [Q(1024**2) * value for value in forward_c0_numerator] == [
+    Q(59049**2) * value for value in P
+]
+
+# Compose inverse x with forward x exactly. The numerator is 6*x and the
+# denominator is 6, not merely equal at a finite sample of points.
+inverse_x_numerator = add(N, [2 * value for value in D])
+inverse_x_denominator = add(
+    [5 * value for value in N],
+    [4 * value for value in D],
+)
+assert inverse_x_numerator == [Q(0), Q(6)]
+assert inverse_x_denominator == [Q(6), Q(0)]
+
+# Since 5*x0+4=6/D, all x-dependent factors cancel in inverse_y(forward_y(y)).
+inverse_y_composition_scale = (
+    Q(8192, 2187) * Q(59049, 1024) / Q(6**3)
+)
+old_inverse_y_composition_scale = (
+    Q(1024, 2187) * Q(59049, 1024) / Q(6**3)
+)
+assert inverse_y_composition_scale == 1
+assert old_inverse_y_composition_scale == Q(1, 8)
 
 print("equation_2_3", lhs)
 print("sample_coefficients", *(str(x) for x in expected))
@@ -150,5 +180,9 @@ print("c0_coefficients", c0)
 print("forward_x0", "2*(1-2*x)/(5*x-1)")
 print("forward_y0", "59049*y/(1024*(5*x-1)^3)")
 print("inverse_x", "(x0+2)/(5*x0+4)")
-print("inverse_y", "1024*y0/(2187*(5*x0+4)^3)")
+print("inverse_y", "8192*y0/(2187*(5*x0+4)^3)")
+print("forward_curve_identity", "coefficientwise exact")
+print("inverse_x_composition", "exact")
+print("inverse_y_composition_scale", inverse_y_composition_scale)
+print("rejected_inverse_y_1024_scale", old_inverse_y_composition_scale)
 print("PASS")
